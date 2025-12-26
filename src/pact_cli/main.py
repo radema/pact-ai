@@ -1,6 +1,7 @@
 
 import typer
 from pact_cli.commands.init import init
+from pact_cli.commands import new
 
 app = typer.Typer(
     name="pact",
@@ -10,6 +11,7 @@ app = typer.Typer(
 
 # Register commands
 app.command(name="init")(init)
+app.command(name="new")(new.new)
 
 @app.command()
 def version():

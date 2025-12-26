@@ -12,6 +12,6 @@ wheels/
 # PACT config
 .pacts
 !.pacts/bolts
-
+!.pacts/active_context.md
 # Antigravity
 .agent

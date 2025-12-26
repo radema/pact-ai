@@ -12,3 +12,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Core CLI**: Implementation of `pact init` command using Typer.
 - **Protocol**: Default templates for `agents.yaml` (Senior Roles) and `models.yaml`.
 - **Manifesto**: `PACT_MANIFESTO.md` generation.
+- **Task Lifecycle**: Implementation of `pact new` command.
+- **Context Management**: Automatic updates to `.pacts/active_context.md`.

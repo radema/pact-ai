@@ -72,3 +72,23 @@ MANIFESTO_CONTENT = """# PACT_MANIFESTO.md
 
 > "Standardization brings freedom."
 """
+
+REQUEST_TEMPLATE = """# Feature Request: {bolt_name}
+
+**Status:** PENDING
+
+## Instructions
+Describe your feature request here. The Spec Writer will use this to generate the specifications.
+"""
+
+CONTEXT_TEMPLATE = """# Active Context
+
+**Current Bolt:** {bolt_name}
+**Path:** .pacts/bolts/{bolt_name}
+**Started:** {timestamp}
+
+## Instructions for Agent
+You are currently working on the Bolt listed above.
+1. Read the `01_request.md` in the target directory.
+2. If strictly following PACT, do not edit code until `03_plan.md` is sealed.
+"""

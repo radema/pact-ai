@@ -29,7 +29,20 @@ This creates the `.pacts/` directory structure:
 * `config/models.yaml`: Configures LLM providers.
 * `bolts/`: The home for your Features (Units of Work).
 
-## 🛠️ The Workflow
+### Task Lifecycle
+
+Start a new "Bolt" (Unit of Work):
+
+```bash
+uv run pact new feature-login
+```
+
+This:
+
+1. Creates `.pacts/bolts/feature-login/`.
+2. Updates `.pacts/active_context.md` (The Pointer).
+
+### The Workflow
 
 1. **Request**: Create a `01_request.md` in a new bolt folder.
 2. **Specs**: The Spec Writer defines `02_specs.md`.
