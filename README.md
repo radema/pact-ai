@@ -47,7 +47,8 @@ This:
 1. **Request**: Create a `01_request.md` in a new bolt folder.
 2. **Specs**: The Spec Writer defines `02_specs.md`.
 3. **Plan**: The Architect defines `03_plan.md`.
-4. **Seal**: Lock the files (Coming Soon).
+4. **Seal**: Lock your artifacts with `pact seal [specs|plan|mrp]`.
+    * Verify integrity anytime with `pact seal verify`.
 5. **Code**: The Developer executes the plan.
 6. **MRP**: QA verifies the output.
 

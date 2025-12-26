@@ -14,3 +14,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Manifesto**: `PACT_MANIFESTO.md` generation.
 - **Task Lifecycle**: Implementation of `pact new` command.
 - **Context Management**: Automatic updates to `.pacts/active_context.md`.
+- **Integrity**: Implementation of `pact seal` (hashing and locking) + `verify` and `status`.
