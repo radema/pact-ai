@@ -1,0 +1,79 @@
+PACT CLI Feature Audit Log (Steps 325-382)
+===========================================
+
+[Step 325] Refactoring: Remove redundant new.py
+----------------------------------------------
+$ rm src/pact_cli/commands/new.py
+(Success)
+
+[Step 335] New Feature: seal req
+--------------------------------
+$ uv run pact seal req
+╭────────────────────── PACT Seal ──────────────────────╮
+│ Sealed req!                                           │
+│ Hash: b0e0c3539f82...                                 │
+╰───────────────────────────────────────────────────────╯
+
+[Step 338] Feature Validation: Sequence Enforcement (EXPECTED FAIL)
+-------------------------------------------------------------------
+$ uv run pact status && uv run pact verify
+           Seal Status: feature-bolt-commands
+┏━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Artifact ┃ Sealed At                  ┃ Hash (Prefix) ┃
+┡━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ req      │ 2025-12-27T22:13:26.941785 │ b0e0c353      │
+│ specs    │ 2025-12-27T22:08:06.633260 │ 8bdae32e      │
+│ plan     │ 2025-12-27T22:08:06.772790 │ 17a2f7df      │
+│ mrp      │ -                          │ -             │
+└──────────┴────────────────────────────┴───────────────┘
+      Verification:
+  feature-bolt-commands
+┏━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Artifact ┃ Status     ┃
+┡━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ req      │ PASS       │
+│ specs    │ PASS       │
+│ plan     │ PASS       │
+│ mrp      │ Not Sealed │
+└──────────┴────────────┘
+Sequence Error: 01_request.md was sealed AFTER 02_specs.md.
+
+[Step 341] Fix: Reseal in order
+-------------------------------
+$ uv run pact seal specs && uv run pact seal plan && uv run pact verify
+(Sealing...)
+Success: All artifacts verified and sequence is correct.
+
+[Step 344] Lifecycle: New Bolt (Consolidated under lifecycle)
+------------------------------------------------------------
+$ uv run pact new dummy-bolt
+╭────────────────── Bolt: dummy-bolt ───────────────────╮
+│ Bolt Started!                                         │
+╰───────────────────────────────────────────────────────╯
+
+[Step 350] Lifecycle: Checkout
+------------------------------
+$ uv run pact checkout feature-bolt-commands
+╭──────────────────── pact checkout ────────────────────╮
+│ Switched to bolt: feature-bolt-commands               │
+╰───────────────────────────────────────────────────────╯
+
+[Step 353] Lifecycle: Delete (Targeting dummy-bolt)
+---------------------------------------------------
+$ uv run pact delete dummy-bolt --force
+Success: Bolt 'dummy-bolt' deleted.
+
+[Step 379] Lifecycle: Archive (Prerequisite: Full Verification)
+---------------------------------------------------------------
+$ uv run pact archive chore-repo
+Verifying bolt 'chore-repo' before archival...
+...
+Success: All artifacts verified and sequence is correct.
+Success! Bolt 'chore-repo' moved to archive.
+
+[Step 382] Auditing Final State
+-------------------------------
+$ uv run pact status -b feature-bolt-commands
+(Logs saved to status-log.txt)
+$ uv run pact verify -b feature-bolt-commands
+(Logs saved to verify-log.txt)
