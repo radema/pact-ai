@@ -54,4 +54,11 @@ This:
 
 ## 🤝 Contributing
 
-See `docs/DEV_GUIDELINES.md` for development instructions.
+See `CONTRIBUTING.md` for development instructions.
+
+## 📄 License
+
+PACT-AI is dual-licensed under the **MIT License** and the **Apache License 2.0**.
+
+* See [LICENSE-MIT](LICENSE-MIT) for details.
+* See [LICENSE-APACHE](LICENSE-APACHE) for details.
