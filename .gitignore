@@ -5,14 +5,13 @@ build/
 dist/
 wheels/
 *.egg-info
-
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
 # Virtual environments
 .venv
 
 # PACT config
-.pacts/
-!.pacts/bolts/*
-!.pacts/archive/*
-!.pacts/active_context.md
+.pacts/config
 # Antigravity
 .agent
