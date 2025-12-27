@@ -1,7 +1,9 @@
 import typer
 from pact_cli.commands.init import init
-from pact_cli.commands import new
 from pact_cli.commands import seal
+from pact_cli.commands import status
+from pact_cli.commands import verify
+from pact_cli.commands import lifecycle
 
 app = typer.Typer(
     name="pact",
@@ -11,8 +13,13 @@ app = typer.Typer(
 
 # Register commands
 app.command(name="init")(init)
-app.command(name="new")(new.new)
+app.command(name="new")(lifecycle.new)
 app.command(name="seal")(seal.seal)
+app.command(name="status")(status.status)
+app.command(name="verify")(verify.verify)
+app.command(name="checkout")(lifecycle.checkout)
+app.command(name="delete")(lifecycle.delete)
+app.command(name="archive")(lifecycle.archive)
 
 
 @app.command()  # type: ignore[misc]

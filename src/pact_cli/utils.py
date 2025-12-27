@@ -7,9 +7,14 @@ from rich.console import Console
 console = Console()
 
 
+def get_pact_root() -> Path:
+    """Returns the Path to the .pacts directory."""
+    return Path(".pacts")
+
+
 def ensure_pact_root() -> Path:
-    """
-    Checks if the current directory has a .pacts/ folder.
+    """Checks if the current directory has a .pacts/ folder.
+
     Returns the Path to the current directory if true.
     Raises typer.Exit(1) if false.
     """
@@ -76,3 +81,21 @@ def get_active_bolt_path() -> Path:
         raise typer.Exit(code=1)
 
     return bolt_path
+
+
+def get_active_bolt_name() -> str:
+    """Reads .pacts/active_context.md to find the current bolt name."""
+    ctx_file = Path(".pacts/active_context.md")
+    if not ctx_file.exists():
+        console.print("[bold red]Error:[/bold red] No active context found.")
+        raise typer.Exit(code=1)
+
+    content = ctx_file.read_text(encoding="utf-8")
+    match = re.search(r"\*\*Current Bolt:\*\* (.*)", content)
+    if not match:
+        console.print(
+            "[bold red]Error:[/bold red] Could not parse Active Bolt Name from context."
+        )
+        raise typer.Exit(code=1)
+
+    return match.group(1).strip()
