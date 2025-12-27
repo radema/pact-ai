@@ -10,8 +10,9 @@ wheels/
 .venv
 
 # PACT config
-.pacts
-!.pacts/bolts
+.pacts/
+!.pacts/bolts/*
+!.pacts/archive/*
 !.pacts/active_context.md
 # Antigravity
 .agent
