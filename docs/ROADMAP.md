@@ -10,19 +10,19 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [x] Implement pact new (bolt creation) and pact seal (integrity locking).
 
-[ ] Refactor `pact seal status` and `pact seal verify` for better error reporting and robustness.
+[x] Refactor `pact seal status` and `pact seal verify` for better error reporting and robustness.
 
-[ ] Add 'req' as a valid target to 'pact seal'
+[x] Add 'req' as a valid target to 'pact seal'
 
 [ ] Implement `pact edit agents`-like feature set to enable read, creation, editing, and deletion of the agents configuration.
 
-[ ] Implement pact checkout `<bolt-name>` (Context switching).
+[x] Implement pact checkout `<bolt-name>` (Context switching).
 
-[ ] Implement pact archive `<bolt-name>` (Move fully sealed bolts to archive).
+[x] Implement pact archive `<bolt-name>` (Move fully sealed bolts to archive).
 
-[ ] Implement pact delete `<bolt-name>` (Cleanup).
+[x] Implement pact delete `<bolt-name>` (Cleanup).
 
-[ ] Implement "Sequence Verification" (Ensure Specs locked -> Plan locked -> MRP locked). Make approval process an Hard constraint.
+[x] Implement "Sequence Verification" (Ensure Specs locked -> Plan locked -> MRP locked). Make approval process an Hard constraint.
 
 [x] Add `LICENSE` and `CONTRIBUTING.md` guides (git/uv style).
 
