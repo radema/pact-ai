@@ -1,4 +1,3 @@
-
 import os
 import typer
 from rich.console import Console
@@ -7,16 +6,26 @@ from pact_cli.core import content
 
 console = Console()
 
-def init():
-    """
-    Initialize the PACT governance layer in the current directory.
+
+def init() -> None:
+    """Initialize the PACT governance layer in the current directory.
+
     Creates the .pacts/ directory structure and default configuration files.
+    This includes config/agents.yaml, config/models.yaml, and PACT_MANIFESTO.md.
+
+    Usage:
+        $ pact init
     """
     base_dir = ".pacts"
-    
+
     # 1. Check Pre-condition
     if os.path.exists(base_dir):
-        console.print(Panel("[bold red]Error:[/bold red] PACT is already initialized in this directory.", title="Initialization Failed"))
+        console.print(
+            Panel(
+                "[bold red]Error:[/bold red] PACT is already initialized in this directory.",
+                title="Initialization Failed",
+            )
+        )
         raise typer.Exit(code=1)
 
     try:
@@ -28,7 +37,7 @@ def init():
         # 3. Create Configuration Files
         with open(os.path.join(base_dir, "config", "agents.yaml"), "w") as f:
             f.write(content.DEFAULT_AGENTS_YAML)
-        
+
         with open(os.path.join(base_dir, "config", "models.yaml"), "w") as f:
             f.write(content.DEFAULT_MODELS_YAML)
 
@@ -37,8 +46,15 @@ def init():
             f.write(content.MANIFESTO_CONTENT)
 
         # 5. Success Message
-        console.print(Panel(f"[bold green]Success![/bold green] PACT initialized at [blue]{os.path.abspath(base_dir)}[/blue]\n\nCreated:\n- .pacts/config/agents.yaml\n- .pacts/config/models.yaml\n- PACT_MANIFESTO.md", title="PACT Protocol"))
+        console.print(
+            Panel(
+                f"[bold green]Success![/bold green] PACT initialized at [blue]{os.path.abspath(base_dir)}[/blue]\n\nCreated:\n- .pacts/config/agents.yaml\n- .pacts/config/models.yaml\n- PACT_MANIFESTO.md",
+                title="PACT Protocol",
+            )
+        )
 
     except Exception as e:
-        console.print(f"[bold red]An error occurred during initialization:[/bold red] {e}")
+        console.print(
+            f"[bold red]An error occurred during initialization:[/bold red] {e}"
+        )
         raise typer.Exit(code=1)
