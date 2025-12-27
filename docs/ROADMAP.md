@@ -24,9 +24,9 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [ ] Implement "Sequence Verification" (Ensure Specs locked -> Plan locked -> MRP locked). Make approval process an Hard constraint.
 
-[ ] Add `LICENSE` and `CONTRIBUTING.md` guides (git/uv style).
+[x] Add `LICENSE` and `CONTRIBUTING.md` guides (git/uv style).
 
-[ ] Setup pre-commit hooks and GitHub Actions for CI.
+[x] Setup pre-commit hooks and GitHub Actions for CI.
 
 [ ] Update `developer` and `qa_engineer` descriptions to integrate tests effectively.
 
