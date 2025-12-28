@@ -14,7 +14,7 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [x] Add 'req' as a valid target to 'pact seal'
 
-[ ] Implement `pact edit agents`-like feature set to enable read, creation, editing, and deletion of the agents configuration.
+[ ] Implement `pact agents`-like feature set to enable read of the agents configuration.
 
 [x] Implement pact checkout `<bolt-name>` (Context switching).
 
@@ -44,7 +44,7 @@ Goal: Full support for the 5-Agent Roster and MRP.
 
 [ ] Enhance MPR: add MPR guidelines and an MPR trust score.
 
-[ ] Redesign agents.yaml to be more atomic (one file per agent).
+[ ] Redesign agents.yaml to be more atomic (one file per agent) and add pact agents commands to enable creation, editing, and deletion of the agents configuration.
 
 ## Phase 3: The Ecosystem (v0.3)
 
