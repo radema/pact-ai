@@ -100,7 +100,7 @@ def verify(
         for i in range(len(active_times) - 1):
             if active_times[i][1] > active_times[i + 1][1]:
                 console.print(
-                    f"[bold red]Sequence Error:[/bold red] {active_times[i][0]} was sealed AFTER {active_times[i+1][0]}."
+                    f"[bold red]Sequence Error:[/bold red] {active_times[i][0]} was sealed AFTER {active_times[i + 1][0]}."
                 )
                 valid_sequence = False
 

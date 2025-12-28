@@ -1,8 +1,8 @@
 # Active Context
 
-**Current Bolt:** dummy-bolt
-**Path:** .pacts/bolts/dummy-bolt
-**Started:** 2025-12-27 23:11:57
+**Current Bolt:** feature-agents
+**Path:** .pacts/bolts/feature-agents
+**Started:** 2025-12-28 22:46:02
 
 ## Instructions for Agent
 You are currently working on the Bolt listed above.
