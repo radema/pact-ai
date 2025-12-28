@@ -1,4 +1,65 @@
-DEFAULT_AGENTS_YAML = """agents:
+# Specifications: Agent Configuration & Testing Infrastructure
+
+**Status:** DRAFT
+**Bolt:** `feature-agents`
+
+## User Stories
+
+### US 1: View Agent Roster
+
+**As a** User
+**I want to** list the currently active agents via the CLI
+**So that** I understand the roles and responsibilities assigned to my project.
+
+**Acceptance Criteria:**
+
+- [ ] Command `pact agents` is available.
+- [ ] The command reads `agents.yaml` from the active bolt directory (if it exists) or falls back to `.pacts/config/agents.yaml`.
+- [ ] Output displays a table or formatted list containing:
+  - Agent Name (key)
+  - Role
+  - Goal (shortened if necessary)
+- [ ] Does not support editing (read-only for Phase 1).
+
+### US 2: Update Default Agent Personas
+
+**As a** Project Lead
+**I want** the default agent personas to strictly enforce the PACT methodology and specific operational constraints
+**So that** every agent acts as a guardrail for the process.
+
+**Acceptance Criteria:**
+
+- [ ] The `DEFAULT_AGENTS_YAML` in `src/pact_cli/core/content.py` is updated.
+- [ ] All 5 core agents (`spec_writer`, `architect`, `developer`, `doc_writer`, `qa_engineer`) are updated.
+- [ ] Constraints from the Reference Configuration are applied verbatim:
+  - `spec_writer` seals requests/specs.
+  - `architect` seals plans.
+  - `developer` practices TDD/pytest.
+  - `doc_writer` maintains context and changelog.
+  - `qa_engineer` acts as gatekeeper.
+- [ ] The exact content for the agents must match the Reference Configuration below.
+
+### US 3: Integrated CI/CD Testing
+
+**As a** QA Engineer
+**I want** the CI pipeline to automatically run the test suite
+**So that** broken code is never merged to the main branch.
+
+**Acceptance Criteria:**
+
+- [ ] A `pytest` test suite is initialized for the PACT CLI itself (tests/ folder).
+- [ ] New tests cover:
+  - `pact agents` command execution.
+  - `agents.yaml` loading logic.
+  - General `pact_cli` scripts and core functionality.
+- [ ] GitHub Actions workflow (e.g., `.github/workflows/ci.yml` or `test.yml`) executes `pytest`.
+
+## Reference Configuration
+
+**Target:** `src/pact_cli/core/content.py` -> `DEFAULT_AGENTS_YAML`
+
+```yaml
+agents:
   spec_writer:
     role: "Senior Product Owner"
     goal: "Transform vague inputs into rigorous, unambiguous functional specifications."
@@ -9,7 +70,7 @@ DEFAULT_AGENTS_YAML = """agents:
       You refuse to discuss code implementation; you focus purely on behavior and constraints.
       You ensure `01_request.md` is sealed before starting.
       You output strict Markdown with clear 'User Stories', 'Acceptance Criteria', and 'Constraints'.
-      If allowed, you must seal `02_specs.md` once the user approves the specifications.
+      You must seal `02_specs.md` once the user approves the specifications.
 
   architect:
     role: "Chief Domain Architect"
@@ -40,7 +101,7 @@ DEFAULT_AGENTS_YAML = """agents:
       You ensure every public method has a docstring and the README reflects the current state.
       You are responsible for maintaining the 'Context Window' cleanliness for future AI agents by summarizing changes.
       You update the CHANGELOG.md following Semantic Versioning standards.
-      You generate the `mrp/summary.md` report with related assets, including an 'MPR Trust Score' based on coverage, spec compliance, and linting quality.
+      You generate the `mrp/summary.md` report with related assets. If tests fail or docs are missing, you block the merge.
       You specify in the summary.md if there have been comprimises during plan o development phase, breaking changes or other relevant information.
 
   qa_engineer:
@@ -52,49 +113,4 @@ DEFAULT_AGENTS_YAML = """agents:
       You check for edge cases, security vulnerabilities, and logic errors.
       You execute the related tests written by the developer and eventually integrate them with edge cases.
       You add tests logs and evidence in 'mrp/' folder.
-"""
-
-DEFAULT_MODELS_YAML = """models:
-  gpt4_turbo:
-    provider: "openai"
-    base_url: "https://api.openai.com/v1"
-    api_key: "${OPENAI_API_KEY}"
-    model_name: "gpt-4-turbo"
-
-  local_mistral:
-    provider: "openai_compatible"
-    base_url: "http://localhost:11434/v1"
-    model_name: "mistral"
-"""
-
-MANIFESTO_CONTENT = """# PACT_MANIFESTO.md
-
-## Protocol for Agent Control & Trust
-
-1. **Protocol over Platform**: PACT is a local governance layer defined by the `.pacts/` directory structure.
-2. **No Action Without Seal**: Execution is cryptographically blocked until the Blueprint (`02_specs.md`) is approved.
-3. **Separation of Concerns**: We separate Infrastructure (`models.yaml`) from Intellect (`agents.yaml`).
-4. **Filesystem Sovereignty**: The filesystem is the single source of truth.
-
-> "Standardization brings freedom."
-"""
-
-REQUEST_TEMPLATE = """# Feature Request: {bolt_name}
-
-**Status:** PENDING
-
-## Instructions
-Describe your feature request here. The Spec Writer will use this to generate the specifications.
-"""
-
-CONTEXT_TEMPLATE = """# Active Context
-
-**Current Bolt:** {bolt_name}
-**Path:** .pacts/bolts/{bolt_name}
-**Started:** {timestamp}
-
-## Instructions for Agent
-You are currently working on the Bolt listed above.
-1. Read the `01_request.md` in the target directory.
-2. If strictly following PACT, do not edit code until `03_plan.md` is sealed.
-"""
+```

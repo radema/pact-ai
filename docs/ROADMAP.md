@@ -14,7 +14,7 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [x] Add 'req' as a valid target to 'pact seal'
 
-[ ] Implement `pact edit agents`-like feature set to enable read, creation, editing, and deletion of the agents configuration.
+[x] Implement `pact agents`-like feature set to enable read of the agents configuration.
 
 [x] Implement pact checkout `<bolt-name>` (Context switching).
 
@@ -28,11 +28,13 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [x] Setup pre-commit hooks and GitHub Actions for CI.
 
-[ ] Update `developer` and `qa_engineer` descriptions to integrate tests effectively.
+[x] Update `developer` and `qa_engineer` descriptions to integrate tests effectively.
 
-[ ] Add tests for CI
+[x] Add tests for CI
 
-[ ] Publish to PyPI.
+[ ] Publish to PyPI + Add Release pipeline to GitHub Actions
+
+[ ] Add automated Documentation generation
 
 ## Phase 2: The SE 3.0 Workflow (v0.2)
 
@@ -40,11 +42,11 @@ Goal: Full support for the 5-Agent Roster and MRP.
 
 [ ] Add pact mrp command validation.
 
-[ ] Add "Multi-Lock" support (Locking specs AND plans separately).
+[ ] Implement a Trinity-lock system.
 
 [ ] Enhance MPR: add MPR guidelines and an MPR trust score.
 
-[ ] Redesign agents.yaml to be more atomic (one file per agent).
+[ ] Redesign agents.yaml to be more atomic (one file per agent) and add pact agents commands to enable creation, editing, and deletion of the agents configuration.
 
 ## Phase 3: The Ecosystem (v0.3)
 
