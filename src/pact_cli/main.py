@@ -4,6 +4,7 @@ from pact_cli.commands import seal
 from pact_cli.commands import status
 from pact_cli.commands import verify
 from pact_cli.commands import lifecycle
+from pact_cli.commands import agents
 
 app = typer.Typer(
     name="pact",
@@ -20,6 +21,7 @@ app.command(name="verify")(verify.verify)
 app.command(name="checkout")(lifecycle.checkout)
 app.command(name="delete")(lifecycle.delete)
 app.command(name="archive")(lifecycle.archive)
+app.command(name="agents")(agents.agents)
 
 
 @app.command()  # type: ignore[misc]
