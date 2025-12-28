@@ -42,7 +42,7 @@ Goal: Full support for the 5-Agent Roster and MRP.
 
 [ ] Add pact mrp command validation.
 
-[ ] Add "Multi-Lock" support (Locking specs AND plans separately).
+[ ] Implement a Trinity-lock system.
 
 [ ] Enhance MPR: add MPR guidelines and an MPR trust score.
 
