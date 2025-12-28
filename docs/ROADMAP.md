@@ -14,7 +14,7 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [x] Add 'req' as a valid target to 'pact seal'
 
-[ ] Implement `pact agents`-like feature set to enable read of the agents configuration.
+[x] Implement `pact agents`-like feature set to enable read of the agents configuration.
 
 [x] Implement pact checkout `<bolt-name>` (Context switching).
 
@@ -28,9 +28,9 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [x] Setup pre-commit hooks and GitHub Actions for CI.
 
-[ ] Update `developer` and `qa_engineer` descriptions to integrate tests effectively.
+[x] Update `developer` and `qa_engineer` descriptions to integrate tests effectively.
 
-[ ] Add tests for CI
+[x] Add tests for CI
 
 [ ] Publish to PyPI + Add Release pipeline to GitHub Actions
 
