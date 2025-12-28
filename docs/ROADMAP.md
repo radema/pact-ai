@@ -30,8 +30,6 @@ Goal: A stable CLI that manages the .pacts folder structure and configuration.
 
 [ ] Update `developer` and `qa_engineer` descriptions to integrate tests effectively.
 
-[ ] Enhance MPR: add MPR guidelines and an MPR trust score.
-
 [ ] Add tests for CI
 
 [ ] Publish to PyPI.
@@ -43,6 +41,10 @@ Goal: Full support for the 5-Agent Roster and MRP.
 [ ] Add pact mrp command validation.
 
 [ ] Add "Multi-Lock" support (Locking specs AND plans separately).
+
+[ ] Enhance MPR: add MPR guidelines and an MPR trust score.
+
+[ ] Redesign agents.yaml to be more atomic (one file per agent).
 
 ## Phase 3: The Ecosystem (v0.3)
 
