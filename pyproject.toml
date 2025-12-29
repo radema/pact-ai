@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
-    { name = "Raul De Maio", email = "raul.demaio@openeconomics.eu" }
+    { name = "Raul De Maio", email = "rauldemaio@gmail.com" }
 ]
 requires-python = ">=3.13"
 dependencies = [
