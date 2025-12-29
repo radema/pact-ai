@@ -3,7 +3,7 @@ import typer
 from datetime import datetime
 from rich.console import Console
 from rich.panel import Panel
-from pact_cli import utils
+from pact_ai import utils
 
 console = Console()
 

@@ -4,9 +4,9 @@ import typer
 from datetime import datetime
 from rich.console import Console
 from rich.panel import Panel
-from pact_cli import utils
-from pact_cli.core import content
-from pact_cli.commands.verify import verify as run_verify
+from pact_ai import utils
+from pact_ai.core import content
+from pact_ai.commands.verify import verify as run_verify
 
 console = Console()
 

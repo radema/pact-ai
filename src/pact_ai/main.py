@@ -1,10 +1,10 @@
 import typer
-from pact_cli.commands.init import init
-from pact_cli.commands import seal
-from pact_cli.commands import status
-from pact_cli.commands import verify
-from pact_cli.commands import lifecycle
-from pact_cli.commands import agents
+from pact_ai.commands.init import init
+from pact_ai.commands import seal
+from pact_ai.commands import status
+from pact_ai.commands import verify
+from pact_ai.commands import lifecycle
+from pact_ai.commands import agents
 
 app = typer.Typer(
     name="pact",
