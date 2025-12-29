@@ -1,6 +1,6 @@
 [project]
 name = "pact-ai"
-version = "0.1.0"
+version = "0.1.1"
 readme = "README.md"
 authors = [
     { name = "Raul De Maio"}
@@ -11,6 +11,9 @@ dependencies = [
     "rich>=14.2.0",
     "typer>=0.21.0",
 ]
+
+[project.urls]
+Documentation = "https://radema.github.io/pact-ai/"
 
 [project.scripts]
 pact = "pact_ai.main:main"

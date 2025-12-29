@@ -39,9 +39,10 @@ jobs:
         # Deploys to a version named 'dev' without updating 'latest'
         run: uv run mike deploy dev --push
 
-      - name: Deploy Release Docs (Tags)
+      - name: Deploy Release Documentation (Tags)
         if: startsWith(github.ref, 'refs/tags/v')
-        # Extracts tag (e.g., v1.0), deploys it, and updates 'latest' pointer
+        # Deploy the tag, alias it to 'latest', AND make 'latest' the default landing page
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
           uv run mike deploy $TAG_NAME latest --update-aliases --push
+          uv run mike set-default latest --push
