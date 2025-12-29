@@ -1,4 +1,4 @@
-from pact_cli.main import app
+from pact_ai.main import app
 import os
 import yaml
 

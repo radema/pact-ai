@@ -3,7 +3,7 @@ import typer
 from typing import Optional
 from rich.console import Console
 from rich.table import Table
-from pact_cli import utils
+from pact_ai import utils
 
 console = Console()
 
