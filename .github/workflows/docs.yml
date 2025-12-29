@@ -27,7 +27,7 @@ jobs:
           python-version-file: "pyproject.toml"
 
       - name: Install Dependencies
-        run: uv sync --all-extras --docs
+        run: uv sync --all-extras --group docs
 
       - name: Configure Git User
         run: |
