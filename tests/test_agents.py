@@ -1,4 +1,4 @@
-from pact_cli.main import app
+from pact_ai.main import app
 
 
 def test_agents_command_global(runner, setup_pact_environment):

@@ -1,7 +1,7 @@
 import yaml
 import typer
 from rich.table import Table
-from pact_cli import utils
+from pact_ai import utils
 
 
 def agents() -> None:

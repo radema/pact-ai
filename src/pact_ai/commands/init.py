@@ -2,7 +2,7 @@ import os
 import typer
 from rich.console import Console
 from rich.panel import Panel
-from pact_cli.core import content
+from pact_ai.core import content
 
 console = Console()
 
