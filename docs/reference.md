@@ -4,21 +4,21 @@ This section provides technical documentation for the internal PACT-AI modules, 
 
 ## Core Commands
 
-::: pact_cli.commands.init
+::: pact_ai.commands.init
     options:
         show_root_heading: true
-::: pact_cli.commands.lifecycle
+::: pact_ai.commands.lifecycle
     options:
         show_root_heading: true
-::: pact_cli.commands.seal
+::: pact_ai.commands.seal
     options:
         show_root_heading: true
-::: pact_cli.commands.status
+::: pact_ai.commands.status
     options:
         show_root_heading: true
-::: pact_cli.commands.verify
+::: pact_ai.commands.verify
     options:
         show_root_heading: true
-::: pact_cli.commands.agents
+::: pact_ai.commands.agents
     options:
         show_root_heading: true
