@@ -188,6 +188,7 @@ name = "geas-ai"
 version = "0.1.1"
 source = { editable = "." }
 dependencies = [
+    { name = "pre-commit" },
     { name = "pyyaml" },
     { name = "rich" },
     { name = "typer" },
@@ -209,6 +210,7 @@ docs = [
 
 [package.metadata]
 requires-dist = [
+    { name = "pre-commit", specifier = ">=4.5.1" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "rich", specifier = ">=14.2.0" },
     { name = "typer", specifier = ">=0.21.0" },
