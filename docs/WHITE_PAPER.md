@@ -1,16 +1,16 @@
-# PACT-AI Whitepaper
+# GEAS-AI Whitepaper
 
 Protocol for Agent Control & Trust
 
 ## Executive Summary
 
-PACT-AI is a repository-native governance protocol designed for Software Engineering 3.0 (SE 3.0). As development shifts from human-authored code to AI-generated implementation, the critical bottleneck moves from "Writing Speed" to "Trust & Verification."
+GEAS-AI is a repository-native governance protocol designed for Software Engineering 3.0 (SE 3.0). As development shifts from human-authored code to AI-generated implementation, the critical bottleneck moves from "Writing Speed" to "Trust & Verification."
 
-PACT goal is to implement a strict AI-DLC (AI Development Life Cycle) by enforcing a "Filesystem Sovereignty" model. It prevents "Agent Drift"—where AI diverts from the original intent—by requiring cryptographic seals on specifications before any implementation occurs.
+GEAS goal is to implement a strict AI-DLC (AI Development Life Cycle) by enforcing a "Filesystem Sovereignty" model. It prevents "Agent Drift"—where AI diverts from the original intent—by requiring cryptographic seals on specifications before any implementation occurs.
 
 ## The Role Architecture
 
-Aligning with modern Agentic patterns, PACT defines a default team of five specialized agents to ensure separation of concerns:
+Aligning with modern Agentic patterns, GEAS defines a default team of five specialized agents to ensure separation of concerns:
 
 * The Spec Writer (Requirement Engineering): Translates ambiguity into rigid Gherkin-style intent.
 
@@ -24,7 +24,7 @@ Aligning with modern Agentic patterns, PACT defines a default team of five speci
 
 ## The Core Axioms
 
-1. **Protocol over Platform**: PACT is not a SaaS. It is a local protocol defined by file structures (.pacts/).
+1. **Protocol over Platform**: GEAS-AI is not a SaaS. It is a local protocol defined by file structures (.geas/).
 
 2. **No Action Without Seal**: Execution is cryptographically blocked until the Blueprint (02_specs.md) is approved.
 
@@ -32,12 +32,12 @@ Aligning with modern Agentic patterns, PACT defines a default team of five speci
 
 ## The Architecture
 
-PACT operates on a "Steering & Engine" model:
+GEAS-AI operates on a "Steering & Engine" model:
 
-1. The Steering (PACT CLI): A Python-based governance tool that manages the lifecycle of "Bolts" (Units of Work).
+1. The Steering (GEAS CLI): A Python-based governance tool that manages the lifecycle of "Bolts" (Units of Work).
 
-2. The Engine (IDE Agent): Your existing AI tool (Antigravity, Cursor, Jules, etc.) acts as the runtime, reading PACT's state to determine its allowed actions.
+2. The Engine (IDE Agent): Your existing AI tool (Antigravity, Cursor, Jules, etc.) acts as the runtime, reading GEAS-AI's state to determine its allowed actions.
 
 ## Conclusion
 
-PACT provides the "Guardrails" for the AI era. It allows organizations to adopt autonomous agents while maintaining the strict auditability and quality standards required by enterprise software engineering.
+GEAS-AI provides the "Guardrails" for the AI era. It allows organizations to adopt autonomous agents while maintaining the strict auditability and quality standards required by enterprise software engineering.
