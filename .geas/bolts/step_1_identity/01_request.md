@@ -1,6 +1,6 @@
 # Request: Identity & Keyring (Phase 1)
 
-**Status:** PENDING
+**Status:** APPROVE
 **Source:** [TRINITY_LOCK.md](../../../docs/TRINITY_LOCK.md) (Phase 1)
 **Related:** [WHITE_PAPER.md](../../../docs/WHITE_PAPER.md) (Phase 1)
 
