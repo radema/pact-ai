@@ -114,3 +114,95 @@ def list_identities():
         )
 
     console.print(table)
+
+@app.command("show")
+def show_identity(name: str):
+    """
+    Show details of a specific identity.
+    """
+    manager = IdentityManager()
+    try:
+        store = manager.load()
+    except Exception as e:
+        console.print(f"[bold red]Error loading identities:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+    identity = store.get_by_name(name)
+    if not identity:
+        console.print(f"[bold red]Error:[/bold red] Identity '{name}' not found.")
+        raise typer.Exit(code=1)
+
+    console.print(f"[bold cyan]Identity: {identity.name}[/bold cyan]")
+    console.print(f"  Role: {identity.role.value}")
+    if identity.persona:
+        console.print(f"  Persona: {identity.persona}")
+    if identity.model:
+        console.print(f"  Model: {identity.model}")
+    console.print(f"  Created At: {identity.created_at}")
+    console.print(f"  Active Key: [yellow]{identity.active_key}[/yellow]")
+    if identity.revoked_keys:
+        console.print(f"  Revoked Keys ({len(identity.revoked_keys)}):")
+        for k in identity.revoked_keys:
+            console.print(f"    - [red]{k}[/red]")
+    else:
+         console.print("  Revoked Keys: None")
+
+@app.command("revoke")
+def revoke_identity(
+    name: str,
+    confirm: bool = typer.Option(False, "--yes", "-y", help="Skip confirmation prompt.")
+):
+    """
+    Revoke the current key for an identity and rotate to a new one.
+    """
+    manager = IdentityManager()
+    try:
+        store = manager.load()
+    except Exception as e:
+        console.print(f"[bold red]Error loading identities:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+    identity = store.get_by_name(name)
+    if not identity:
+        console.print(f"[bold red]Error:[/bold red] Identity '{name}' not found.")
+        raise typer.Exit(code=1)
+
+    if not confirm:
+        if not typer.confirm(f"Are you sure you want to revoke and rotate the key for '{name}'?"):
+             raise typer.Abort()
+
+    try:
+        # 1. Archive current key
+        old_key = identity.active_key
+        identity.revoked_keys.append(old_key)
+
+        # 2. Generate new key
+        private_bytes, public_str = generate_keypair()
+        identity.active_key = public_str
+
+        # 3. Save new private key
+        keys_dir = Path(os.path.expanduser("~/.geas/keys"))
+        keys_dir.mkdir(parents=True, exist_ok=True)
+        key_path = keys_dir / f"{name}.key"
+
+        # Overwrite existing key file (rotation)
+        fd = os.open(str(key_path), os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        with os.fdopen(fd, 'wb') as f:
+            f.write(private_bytes)
+
+        # 4. Save Identity Update
+        manager.save(store)
+
+        console.print(f"[bold green]Success![/bold green] Key for '{name}' rotated.")
+        console.print(f"New private key saved to: [blue]{key_path}[/blue]")
+
+        if identity.role == IdentityRole.AGENT:
+            import base64
+            b64_key = base64.b64encode(private_bytes).decode('utf-8')
+            env_var = f"GEAS_KEY_{name.upper().replace('-', '_')}"
+            console.print("\n[yellow]For Agent usage, UPDATE this environment variable:[/yellow]")
+            console.print(f"export {env_var}=\"{b64_key}\"")
+
+    except Exception as e:
+        console.print(f"[bold red]Error during revocation:[/bold red] {e}")
+        raise typer.Exit(code=1)
