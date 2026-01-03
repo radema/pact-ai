@@ -1,11 +1,12 @@
 import os
 import shutil
 import typer
+from pathlib import Path
 from datetime import datetime
 from rich.console import Console
 from rich.panel import Panel
 from geas_ai import utils
-from geas_ai.core import content
+from geas_ai.core import content, ledger
 from geas_ai.commands.verify import verify as run_verify
 
 console = Console()
@@ -37,12 +38,16 @@ def new(name: str) -> None:
         # 3. Create Structure
         os.makedirs(bolt_dir)
 
-        # 4. Create Request File
+        # 4. Initialize Ledger (lock.json)
+        genesis = ledger.LedgerManager.create_genesis_ledger(bolt_id=name)
+        ledger.LedgerManager.save_lock(Path(bolt_dir), genesis)
+
+        # 5. Create Request File
         req_path = os.path.join(bolt_dir, "01_request.md")
         with open(req_path, "w") as f:
             f.write(content.REQUEST_TEMPLATE.format(bolt_name=name))
 
-        # 5. Update Context
+        # 6. Update Context
         ctx_path = os.path.join(".geas", "active_context.md")
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(ctx_path, "w") as f:
@@ -50,10 +55,10 @@ def new(name: str) -> None:
                 content.CONTEXT_TEMPLATE.format(bolt_name=name, timestamp=timestamp)
             )
 
-        # 6. Success Output
+        # 7. Success Output
         console.print(
             Panel(
-                f"[bold green]Bolt Started![/bold green]\n\nWorkspace: [blue]{bolt_dir}[/blue]\nContext: [yellow]Updated[/yellow]",
+                f"[bold green]Bolt Started![/bold green]\n\nWorkspace: [blue]{bolt_dir}[/blue]\nContext: [yellow]Updated[/yellow]\nLedger: [yellow]Initialized[/yellow]",
                 title=f"Bolt: {name}",
             )
         )
