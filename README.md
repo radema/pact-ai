@@ -52,13 +52,36 @@ This:
 5. **Code**: The Developer executes the plan.
 6. **MRP**: QA verifies the output.
 
+### Identity Management (New v0.1.1)
+
+GEAS enforces strict identity verification for all actors (Human or Agent).
+
+1. **Create an Identity**:
+
+   ```bash
+   uv run geas identity add --name alice --role human
+   uv run geas identity add --name bot-dev --role agent --persona "Senior Dev" --model "gpt-4"
+   ```
+
+2. **List Identities**:
+
+   ```bash
+   uv run geas identity list
+   ```
+
+3. **Show Details**:
+
+   ```bash
+   uv run geas identity show bot-dev
+   ```
+
+4. **Key Rotation**:
+   Securely revoke and rotate keys for compromised identities:
+
+   ```bash
+   uv run geas identity revoke bot-dev
+   ```
+
 ## 🤝 Contributing
 
-See `CONTRIBUTING.md` for development instructions.
-
-## 📄 License
-
-GEAS-AI is dual-licensed under the **MIT License** and the **Apache License 2.0**.
-
-* See [LICENSE-MIT](LICENSE-MIT) for details.
 * See [LICENSE-APACHE](LICENSE-APACHE) for details.

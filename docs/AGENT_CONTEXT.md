@@ -638,24 +638,21 @@ Defined in `.geas/config/agents.yaml`:
 - [x] `geas delete` - Delete bolt
 - [x] `geas archive` - Archive completed bolt
 - [x] `geas agents` - List personas
+- [x] `geas identity` - Manage cryptographic identities (add, list, show, revoke)
 
-### In Progress (Phase 1: Identity)
+### In Progress (Phase 2: Intent Engine)
 
-See `.geas/bolts/step_1_identity/01_request.md` for details:
+See `.geas/bolts/step_2_manifest/01_request.md` for details:
 
-- [ ] Ed25519 key generation (SSH format)
-- [ ] `geas identity add` - Register identities
-- [ ] `geas identity list` - List identities
-- [ ] `geas identity show` - Show identity details
-- [ ] `geas identity revoke` - Revoke keys
-- [ ] Sign/verify functions
-- [ ] Key resolution (env var → local keyring)
+- [ ] `geas seal intent` - Sign intent documents with Identity keys
+- [ ] Requirements/Specs/Plan signature linkage
+- [ ] Manifest generation
 
 ### Roadmap
 
 | Phase | Objective |
 |-------|-----------|
-| **Phase 1** | Identity & Keyring (`geas identity`) |
+| **Phase 1** | Identity & Keyring (`geas identity`) - **COMPLETE** |
 | **Phase 2** | Intent Engine (`geas seal intent` with signatures) |
 | **Phase 3** | Proof Engine (`geas prove` - test + manifest + MRP) |
 | **Phase 4** | Verification Engine (workflow-based validation) |
