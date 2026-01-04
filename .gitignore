@@ -11,8 +11,9 @@ wheels/
 # Virtual environments
 .venv
 
-# PACT config
-.pacts/config/*
+# GEAS config
+.geas/config/*
+.geas_legacy/config/*
 
 # Antigravity
 .agent
