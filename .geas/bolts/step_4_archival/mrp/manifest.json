@@ -1,0 +1,22 @@
+{
+    "bolt_id": "step_4_archival",
+    "files": [
+        "src/geas_ai/core/verification.py",
+        "src/geas_ai/core/workflow.py",
+        "src/geas_ai/schemas/verification.py",
+        "src/geas_ai/schemas/workflow.py",
+        "src/geas_ai/commands/status.py",
+        "src/geas_ai/commands/verify.py",
+        "src/geas_ai/commands/approve.py",
+        "src/geas_ai/commands/init.py",
+        "tests/core/test_verification.py",
+        "tests/commands/test_status_verify_approve.py",
+        "tests/commands/test_init_workflow.py",
+        "tests/commands/test_lifecycle.py"
+    ],
+    "sealed_artifacts": [
+        "01_request.md",
+        "02_specs.md",
+        "03_plan.md"
+    ]
+}

@@ -146,6 +146,7 @@ def _seal_intent(
         raise typer.Exit(code=1)
 
     # 2. Validation: Files Exist
+    # TODO(Phase 5): Read required files from workflow configuration (workflow.yaml)
     required_files = ["01_request.md", "02_specs.md", "03_plan.md"]
     file_hashes = {}
 

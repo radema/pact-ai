@@ -3,6 +3,7 @@ from geas_ai.commands.init import init
 from geas_ai.commands import seal
 from geas_ai.commands import status
 from geas_ai.commands import verify
+from geas_ai.commands import approve
 from geas_ai.commands import lifecycle
 from geas_ai.commands import agents
 from geas_ai.commands import identity
@@ -20,6 +21,7 @@ app.command(name="new")(lifecycle.new)
 app.command(name="seal")(seal.seal)
 app.command(name="status")(status.status)
 app.command(name="verify")(verify.verify)
+app.command(name="approve")(approve.approve)
 app.command(name="prove")(prove.prove)
 app.command(name="checkout")(lifecycle.checkout)
 app.command(name="delete")(lifecycle.delete)

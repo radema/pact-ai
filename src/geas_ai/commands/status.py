@@ -1,12 +1,11 @@
-import yaml
 import typer
 from typing import Optional
 from rich.console import Console
 from rich.table import Table
 from geas_ai import utils
+from geas_ai.core.ledger import LedgerManager
 
 console = Console()
-
 
 def status(
     bolt: Optional[str] = typer.Option(
@@ -29,29 +28,42 @@ def status(
     else:
         bolt_path = utils.get_active_bolt_path()
 
-    lock_file = bolt_path / "approved.lock"
+    # Load Ledger
+    ledger = LedgerManager.load_lock(bolt_path)
 
-    if not lock_file.exists():
+    if not ledger or not ledger.events:
         console.print(
-            f"[yellow]No approved.lock found for bolt '{bolt_path.name}'.[/yellow]"
+            f"[yellow]No ledger (lock.json) found or empty for bolt '{bolt_path.name}'. Not Sealed.[/yellow]"
         )
         return
 
-    try:
-        with open(lock_file) as f:
-            data = yaml.safe_load(f) or {}
+    # Display Header
+    console.print(f"[bold]Bolt:[/bold] {ledger.bolt_id}")
+    console.print(f"[bold]Created:[/bold] {ledger.created_at}")
 
-        table = Table(title=f"Seal Status: {bolt_path.name}")
-        table.add_column("Artifact", style="cyan")
-        table.add_column("Sealed At", style="green")
-        table.add_column("Hash (Prefix)", style="dim")
+    # Determine State (Last Event)
+    last_event = ledger.events[-1]
+    state_display = f"[cyan]{last_event.action.value}[/cyan]"
+    console.print(f"[bold]Current State:[/bold] {state_display}")
+    console.print()
 
-        for key in ["req", "specs", "plan", "mrp"]:
-            ts = data.get(f"{key}_sealed_at", "-")
-            h = data.get(f"{key}_hash", "")
-            table.add_row(key, ts, h[:8] if h else "-")
+    # Events Table
+    table = Table(title=f"Event History: {bolt_path.name}")
+    table.add_column("Seq", style="dim", justify="right")
+    table.add_column("Timestamp", style="green")
+    table.add_column("Action", style="cyan")
+    table.add_column("Signer", style="magenta")
 
-        console.print(table)
-    except Exception as e:
-        console.print(f"[bold red]Error reading lock file:[/bold red] {e}")
-        raise typer.Exit(code=1)
+    for event in ledger.events:
+        signer = "-"
+        if event.identity:
+            signer = f"{event.identity.signer_id}"
+
+        table.add_row(
+            str(event.sequence),
+            event.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            event.action.value,
+            signer
+        )
+
+    console.print(table)

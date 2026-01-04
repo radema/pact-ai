@@ -2,7 +2,7 @@
   "version": "3.1",
   "bolt_id": "step_4_archival",
   "created_at": "2026-01-04T15:51:09.030850",
-  "head_hash": "sha256:a9cf1fdde0e7fadcb26f57572cf31b41aba805bf327c575aab4d47ad6f08f652",
+  "head_hash": "sha256:39c8a3cbb68fc0d9a0c6ce587f9ac049e9b7161a633d2c7d55d54edeb068de3b",
   "events": [
     {
       "sequence": 1,
@@ -57,6 +57,40 @@
         "signature": "a1Y03lI6pZIUUoVSvAHwQAy+b4BZxcwz0dwg11Jm8YymbUq9fm43eNr2gw3y5mErOjOfVsn9AODJmKY90JKPDw=="
       },
       "event_hash": "sha256:a9cf1fdde0e7fadcb26f57572cf31b41aba805bf327c575aab4d47ad6f08f652"
+    },
+    {
+      "sequence": 4,
+      "timestamp": "2026-01-04T21:49:36.761555",
+      "action": "SEAL_MRP",
+      "payload": {
+        "target": "mrp",
+        "file": "mrp/summary.md",
+        "hash": "sha256:f44b0773fa79a25b7e18f0126aec619d3795960a8719118473ab353c8805e44d",
+        "context": "Phase 4 Verified and Tested"
+      },
+      "prev_hash": "sha256:a9cf1fdde0e7fadcb26f57572cf31b41aba805bf327c575aab4d47ad6f08f652",
+      "identity": {
+        "signer_id": "qa-agent",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOad/t4HpLTHmy5Ie2GYNBVwrygoooEO2Ws0fZmKgCDv",
+        "signature": "mLJjm4KriJLL8kO3iG+PgRNkDmSWDoobfS5DRcqN2WhZUkvbDiCnhzEguiK4ghSIu2/DdTa8d1iqryedJgMpCA=="
+      },
+      "event_hash": "sha256:a72d5f557ccfb50579826ff7155109a4238f674e68c6f452d66c4443ebcde063"
+    },
+    {
+      "sequence": 5,
+      "timestamp": "2026-01-04T21:49:52.531257Z",
+      "action": "APPROVE",
+      "payload": {
+        "mrp_event_hash": "sha256:a72d5f557ccfb50579826ff7155109a4238f674e68c6f452d66c4443ebcde063",
+        "comment": "Phase 4 Verification Engine Approved for Merge"
+      },
+      "prev_hash": "sha256:a72d5f557ccfb50579826ff7155109a4238f674e68c6f452d66c4443ebcde063",
+      "identity": {
+        "signer_id": "coordinator",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID88dhsx2z9dNTm2yMz6aAKEh9vIUFnjHYdyLayQlzS5",
+        "signature": "uuNObhna0FtIH9idlYsEylqTi82KxF9M3tubLZLr3OqxB4vIy6k61in8B0UwxI0+UleTImodnXnb6RHKt1UeCw=="
+      },
+      "event_hash": "sha256:39c8a3cbb68fc0d9a0c6ce587f9ac049e9b7161a633d2c7d55d54edeb068de3b"
     }
   ]
 }
