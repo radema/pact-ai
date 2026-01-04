@@ -1,6 +1,6 @@
-# Contributing to PACT-AI
+# Contributing to GEAS-AI
 
-Thank you for your interest in PACT-AI! We follow a strict protocol-driven development process to ensure reliability and trust in our agentic workflows.
+Thank you for your interest in GEAS-AI! We follow a strict protocol-driven development process to ensure reliability and trust in our agentic workflows.
 
 ## 🛠 Local Setup
 
@@ -9,8 +9,8 @@ We use `uv` for lightning-fast dependency management and project isolation.
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/your-username/pact-ai.git
-    cd pact-ai
+    git clone https://github.com/your-username/geas-ai.git
+    cd geas-ai
     ```
 
 2. **Synchronize environment**:
@@ -25,14 +25,14 @@ We use `uv` for lightning-fast dependency management and project isolation.
     uv run pre-commit install
     ```
 
-## 🔄 The PACT Workflow
+## 🔄 The GEAS Workflow
 
-All contributions must follow the PACT (Protocol for Agent Control & Trust) lifecycle.
+All contributions must follow the GEAS lifecycle.
 
 1. **Initialize a Bolt**: Create a new unit of work.
 
     ```bash
-    uv run pact new <bolt-name>
+    uv run geas new <bolt-name>
     ```
 
 2. **Define Requests**: Elaborate the `01_request.md`.
@@ -41,15 +41,15 @@ All contributions must follow the PACT (Protocol for Agent Control & Trust) life
 5. **Seal Artifacts**: Cryptographically lock the specs and plan.
 
     ```bash
-    uv run pact seal specs
-    uv run pact seal plan
+    uv run geas seal specs
+    uv run geas seal plan
     ```
 
 6. **Implement**: Write the code in `src/`.
 7. **QA & MRP**: Generate the Merge Readiness Pack.
 
     ```bash
-    uv run pact mrp
+    uv run geas mrp
     ```
 
 ## 🧪 Testing & Quality
@@ -58,6 +58,7 @@ All contributions must follow the PACT (Protocol for Agent Control & Trust) life
 * **Coverage**: Aim for **>85%** test coverage.
 * **Linting**: We use `ruff` for formatting and `mypy` for type checking.
 * **CI**: Every Pull Request is automatically vetted via GitHub Actions.
+* **Testing**: We use `pytest` for testing.
 
 ## 📄 Pull Request Process
 

@@ -31,7 +31,8 @@ geas init
 
 This command creates a `.geas/` directory containing:
 
-- `config/agents.yaml`: Defines your AI team personas (Architect, Developer, QA, etc.) and their public keys.
+- `config/identities.yaml`: Registry of authorized Ed25519 public keys.
+- `config/agents.yaml`: Defines your AI team personas (Architect, Developer, QA, etc.).
 - `config/models.yaml`: Configures your LLM providers.
 - `bolts/`: The directory where all units of work (Bolts) will reside.
 - `active_context.md`: A pointer file indicating the current active Bolt.
@@ -48,7 +49,7 @@ Start a new unit of work:
 geas new feature-name
 ```
 
-This creates a folder in `.geas/bolts/feature-name/` and sets it as the active context.
+This creates a folder in `.geas/bolts/feature-name/`, initializes the `lock.json` ledger, and sets it as the active context.
 
 ### 2. The Blueprinting Process
 
@@ -58,21 +59,35 @@ Every Bolt follows a standard sequence:
 2. **Specs (`02_specs.md`)**: The **Spec Writer** agent translates the request into technical requirements.
 3. **Plan (`03_plan.md`)**: The **Architect** agent designs the implementation plan.
 
-### 3. Sealing the Blueprint
+### 3. Sealing the Intent
 
-Before any code is written, the artifacts must be "sealed" to ensure integrity:
+Before any code is written, the artifacts must be "sealed". You can seal them individually or as a complete Intent package.
+
+**The Intent Seal** requires a Human signature and locks all three documents (`req`, `specs`, `plan`):
 
 ```bash
-geas seal specs
-geas seal plan
+geas seal intent --identity my-username
 ```
 
-Sealing hashes the content and records it in `approved.lock`. Once sealed, GEAS enforces that these files cannot be modified without being explicitly unsealed.
+This creates a `SEAL_INTENT` event in the `lock.json` ledger, cryptographically linking your identity to the approved plan.
 
 ### 4. Implementation and Verification
 
 1. **Code**: The **Developer** executes the approved plan.
-2. **MRP (`mrp/summary.md`)**: The **QA Engineer** verifies the output against the specs and seals the Master Release Plan.
+2. **Prove**: Generate the **Evidence**:
+
+   ```bash
+   geas prove
+   ```
+
+   This runs your tests and creates the `mrp/manifest.json` (Code Snapshot) and `mrp/tests.log`.
+
+3. **MRP (`mrp/summary.md`)**: The **QA Engineer** reviews the evidence and writes the summary.
+4. **Seal MRP**: The QA Engineer (or Agent) seals the evidence:
+
+   ```bash
+   geas seal mrp
+   ```
 
 ## 🛡 Verification and Status
 
@@ -82,7 +97,7 @@ At any point, you can check the status of your current Bolt:
 geas status
 ```
 
-Or verify the cryptographic integrity of all sealed artifacts:
+Or verify the cryptographic integrity of all sealed artifacts and the hash chain:
 
 ```bash
 geas verify
