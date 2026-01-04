@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional
 from ruamel.yaml import YAML
-from geas_ai.schemas.workflow import WorkflowConfig, WorkflowStage
+from geas_ai.schemas.workflow import WorkflowConfig, WorkflowStage, IntentConfig
 
 class WorkflowManager:
     """Manages workflow configuration loading and validation."""
@@ -9,10 +9,10 @@ class WorkflowManager:
     DEFAULT_WORKFLOW = WorkflowConfig(
         name="standard_dev",
         version="1.0",
-        intent_documents={
-            "required": ["01_request.md", "02_specs.md"],
-            "optional": ["03_plan.md"]
-        },
+        intent_documents=IntentConfig(
+            required=["01_request.md", "02_specs.md"],
+            optional=["03_plan.md"]
+        ),
         stages=[
             WorkflowStage(
                 id="req",
