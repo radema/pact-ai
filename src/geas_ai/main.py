@@ -35,7 +35,7 @@ def version() -> None:
     Usage:
         $ geas version
     """
-    print("0.1.0")
+    print("0.1.3")
 
 
 def main() -> None:

@@ -2,25 +2,28 @@ import typer
 from datetime import datetime
 from rich.console import Console
 from rich.panel import Panel
-from typing import Optional
+from typing import Optional, Dict, Any
 
 from pathlib import Path
 from geas_ai import utils
-from geas_ai.core import ledger, hashing, workflow, identity
+from geas_ai.core import ledger, hashing, identity
 from geas_ai.schemas import ledger as ledger_schemas
 from geas_ai.utils import crypto
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 console = Console()
 
+
 def seal(
-    target: str = typer.Argument(..., help="Target to seal [req, specs, plan, mrp, intent]"),
+    target: str = typer.Argument(
+        ..., help="Target to seal [req, specs, plan, mrp, intent]"
+    ),
     identity_name: Optional[str] = typer.Option(
         None, "--identity", "-i", help="Identity to sign with (required for intent)"
     ),
     context: Optional[str] = typer.Option(
         None, "--context", "-c", help="Context message for the event"
-    )
+    ),
 ) -> None:
     """Cryptographically seal the current Bolt's artifacts.
 
@@ -39,12 +42,16 @@ def seal(
     # Load Ledger
     ledger_obj = ledger.LedgerManager.load_lock(bolt_path)
     if not ledger_obj:
-        console.print("[bold red]Error:[/bold red] lock.json not found. Is this a valid bolt?")
+        console.print(
+            "[bold red]Error:[/bold red] lock.json not found. Is this a valid bolt?"
+        )
         raise typer.Exit(code=1)
 
     # Verify Chain Integrity before appending
     if not ledger.LedgerManager.verify_chain_integrity(ledger_obj):
-        console.print("[bold red]CRITICAL:[/bold red] Ledger integrity check failed! The chain is broken.")
+        console.print(
+            "[bold red]CRITICAL:[/bold red] Ledger integrity check failed! The chain is broken."
+        )
         raise typer.Exit(code=1)
 
     # Dispatch Logic
@@ -66,23 +73,26 @@ def seal(
         )
     )
 
+
 def _seal_artifact(
     bolt_path: Path,
     ledger_obj: ledger_schemas.Ledger,
     target: str,
     identity_name: Optional[str],
-    context: Optional[str]
+    context: Optional[str],
 ) -> None:
     # 1. Map Target to File and Action
     mapping = {
         "req": ("01_request.md", ledger_schemas.LedgerAction.SEAL_REQ),
         "specs": ("02_specs.md", ledger_schemas.LedgerAction.SEAL_SPECS),
         "plan": ("03_plan.md", ledger_schemas.LedgerAction.SEAL_PLAN),
-        "mrp": ("mrp/summary.md", ledger_schemas.LedgerAction.SEAL_MRP)
+        "mrp": ("mrp/summary.md", ledger_schemas.LedgerAction.SEAL_MRP),
     }
 
     if target not in mapping:
-        console.print(f"[bold red]Error:[/bold red] Invalid target '{target}'. Use: req, specs, plan, mrp, intent")
+        console.print(
+            f"[bold red]Error:[/bold red] Invalid target '{target}'. Use: req, specs, plan, mrp, intent"
+        )
         raise typer.Exit(code=1)
 
     # Mypy doesn't infer tuple unpacking from dict union safely enough here?
@@ -107,29 +117,32 @@ def _seal_artifact(
         "target": target,
         "file": filename,
         "hash": file_hash,
-        "context": context or ""
+        "context": context or "",
     }
 
     event = ledger_schemas.LedgerEvent(
-        sequence=0, # Will be set by append_event
+        sequence=0,  # Will be set by append_event
         timestamp=datetime.utcnow(),
         action=action,
         payload=payload,
         identity=event_identity,
-        event_hash="" # Will be set by append_event
+        event_hash="",  # Will be set by append_event
     )
 
     ledger.LedgerManager.append_event(ledger_obj, event)
+
 
 def _seal_intent(
     bolt_path: Path,
     ledger_obj: ledger_schemas.Ledger,
     identity_name: Optional[str],
-    context: Optional[str]
+    context: Optional[str],
 ) -> None:
     # 1. Validation: Identity Required
     if not identity_name:
-        console.print("[bold red]Error:[/bold red] --identity is required for sealing intent.")
+        console.print(
+            "[bold red]Error:[/bold red] --identity is required for sealing intent."
+        )
         raise typer.Exit(code=1)
 
     # 2. Validation: Files Exist
@@ -139,17 +152,15 @@ def _seal_intent(
     for filename in required_files:
         path = bolt_path / filename
         if not path.exists():
-            console.print(f"[bold red]Error:[/bold red] Required document '{filename}' not found.")
+            console.print(
+                f"[bold red]Error:[/bold red] Required document '{filename}' not found."
+            )
             raise typer.Exit(code=1)
         file_hashes[filename] = hashing.file_sha256(path)
 
     # 3. Create Payload for Signing
     # We sign the hashes of the documents
-    payload = {
-        "action": "SEAL_INTENT",
-        "hashes": file_hashes,
-        "context": context or ""
-    }
+    payload = {"action": "SEAL_INTENT", "hashes": file_hashes, "context": context or ""}
 
     # 4. Sign
     event_identity = _create_event_signature_from_payload(identity_name, payload)
@@ -161,26 +172,29 @@ def _seal_intent(
         action=ledger_schemas.LedgerAction.SEAL_INTENT,
         payload=payload,
         identity=event_identity,
-        event_hash=""
+        event_hash="",
     )
 
     ledger.LedgerManager.append_event(ledger_obj, event)
 
-def _create_event_signature(identity_name: str, action: str, content_hash: str) -> ledger_schemas.EventIdentity:
+
+def _create_event_signature(
+    identity_name: str, action: str, content_hash: str
+) -> ledger_schemas.EventIdentity:
     # Simple signature on action + hash
-    data_to_sign = {
-        "action": action,
-        "hash": content_hash
-    }
+    data_to_sign = {"action": action, "hash": content_hash}
     return _create_event_signature_from_payload(identity_name, data_to_sign)
 
-def _create_event_signature_from_payload(identity_name: str, payload: dict) -> ledger_schemas.EventIdentity:
+
+def _create_event_signature_from_payload(
+    identity_name: str, payload: Dict[str, Any]
+) -> ledger_schemas.EventIdentity:
     try:
         # Load Private Key
         # KeyManager.load_private_key returns `object`, but we know it's Ed25519PrivateKey
         private_key_obj = identity.KeyManager.load_private_key(identity_name)
         if not isinstance(private_key_obj, ed25519.Ed25519PrivateKey):
-             raise TypeError("Loaded key is not an Ed25519PrivateKey")
+            raise TypeError("Loaded key is not an Ed25519PrivateKey")
 
         private_key: ed25519.Ed25519PrivateKey = private_key_obj
 
@@ -195,7 +209,9 @@ def _create_event_signature_from_payload(identity_name: str, payload: dict) -> l
         stored_identity = id_store.get_by_name(identity_name)
 
         if not stored_identity:
-            console.print(f"[bold red]Error:[/bold red] Identity '{identity_name}' not found in registry.")
+            console.print(
+                f"[bold red]Error:[/bold red] Identity '{identity_name}' not found in registry."
+            )
             raise typer.Exit(code=1)
 
         # Canonicalize and Sign
@@ -205,11 +221,13 @@ def _create_event_signature_from_payload(identity_name: str, payload: dict) -> l
         return ledger_schemas.EventIdentity(
             signer_id=identity_name,
             public_key=stored_identity.active_key,
-            signature=signature
+            signature=signature,
         )
 
     except identity.KeyNotFoundError:
-        console.print(f"[bold red]Error:[/bold red] Private key for '{identity_name}' not found.")
+        console.print(
+            f"[bold red]Error:[/bold red] Private key for '{identity_name}' not found."
+        )
         raise typer.Exit(code=1)
     except Exception as e:
         console.print(f"[bold red]Error:[/bold red] Signing failed: {e}")

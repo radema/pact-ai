@@ -1,9 +1,5 @@
 import typer
 import hashlib
-import json
-import logging
-from typing import Optional
-from pathlib import Path
 from datetime import datetime, timezone
 from rich import print
 from rich.panel import Panel
@@ -16,13 +12,16 @@ from geas_ai.core.manifest import generate_manifest
 
 app = typer.Typer()
 
+
 @app.command()
 def prove(
-    scope: str = typer.Option("src,tests", help="Comma-separated directories to include in proof"),
+    scope: str = typer.Option(
+        "src,tests", help="Comma-separated directories to include in proof"
+    ),
     skip_tests: bool = typer.Option(False, help="Skip running tests (debugging only)"),
     command: str = typer.Option("uv run pytest", help="Command to run tests"),
-    timeout: int = typer.Option(300, help="Test timeout in seconds")
-):
+    timeout: int = typer.Option(300, help="Test timeout in seconds"),
+) -> None:
     """
     Generates a cryptographic proof of the codebase (Code Merkle Tree) and binds it to test results.
     Does NOT seal the MRP (that happens after manual summary).
@@ -36,35 +35,39 @@ def prove(
         ledger = LedgerManager.load_lock(bolt_path)
 
         if not ledger:
-            print(f"[bold red]Error:[/bold red] Ledger not found for bolt '[cyan]{bolt_id}[/cyan]'.")
+            print(
+                f"[bold red]Error:[/bold red] Ledger not found for bolt '[cyan]{bolt_id}[/cyan]'."
+            )
             raise typer.Exit(code=1)
 
-        has_sealed_intent = any(
-            e.action == "SEAL_INTENT"
-            for e in ledger.events
-        )
+        has_sealed_intent = any(e.action == "SEAL_INTENT" for e in ledger.events)
 
         if not has_sealed_intent:
-            print(f"[bold red]Error:[/bold red] Intent not sealed for bolt '[cyan]{bolt_id}[/cyan]'. Cannot proceed to Prove phase.")
+            print(
+                f"[bold red]Error:[/bold red] Intent not sealed for bolt '[cyan]{bolt_id}[/cyan]'. Cannot proceed to Prove phase."
+            )
             raise typer.Exit(code=1)
 
         # 2. Testing
         if skip_tests:
             print("[yellow]Skipping tests as requested.[/yellow]")
             from geas_ai.core.manifest import TestResultInfo
+
             test_result = TestResultInfo(
-                passed=True, # Tentatively true if skipped? Or should be marked specially?
-                             # Specs say "Skip tests (Flag) For manual override/debugging".
+                passed=True,  # Tentatively true if skipped? Or should be marked specially?
+                # Specs say "Skip tests (Flag) For manual override/debugging".
                 exit_code=0,
                 duration_seconds=0.0,
-                timestamp=datetime.now(timezone.utc)
+                timestamp=datetime.now(timezone.utc),
             )
         else:
             print(f"[bold blue]Running tests...[/bold blue] ({command})")
             test_result = run_tests(command, timeout)
 
             if not test_result.passed:
-                print(f"[bold red]Tests Failed![/bold red] (Exit Code: {test_result.exit_code})")
+                print(
+                    f"[bold red]Tests Failed![/bold red] (Exit Code: {test_result.exit_code})"
+                )
                 # We can write the log but we should exit and NOT generate manifest?
                 # Specs: "If fail -> Exit."
                 # But we might want to see the logs.
@@ -74,7 +77,9 @@ def prove(
                 print("[red]Aborting proof generation due to test failure.[/red]")
                 raise typer.Exit(code=1)
             else:
-                print(f"[bold green]Tests Passed![/bold green] ({test_result.duration_seconds:.2f}s)")
+                print(
+                    f"[bold green]Tests Passed![/bold green] ({test_result.duration_seconds:.2f}s)"
+                )
 
         # 3. Manifesting
         scope_list = [s.strip() for s in scope.split(",")]
@@ -126,7 +131,7 @@ def prove(
         # Let's verify the `TestResultInfo` definition I created.
 
         with open(tests_log_path, "w") as f:
-            f.write(f"Test Execution Log\n")
+            f.write("Test Execution Log\n")
             f.write(f"Timestamp: {test_result.timestamp}\n")
             f.write(f"Command: {command}\n")
             f.write(f"Passed: {test_result.passed}\n")
@@ -136,15 +141,18 @@ def prove(
             f.write(test_result.output)
 
         # 5. Output
-        print(Panel(
-            f"[green]Proof Generated Successfully![/green]\n\n"
-            f"Manifest: [bold]{manifest_path}[/bold]\n"
-            f"Root Hash: [cyan]{manifest.root_hash}[/cyan]\n\n"
-            "Next Steps:\n"
-            "1. Review the proof artifacts in [bold]mrp/[/bold].\n"
-            "2. Write a qualitative report in [bold]mrp/summary.md[/bold].\n"
-            "3. Run [bold]geas seal mrp[/bold] to finalize."
-        , title="GEAS Proof Engine"))
+        print(
+            Panel(
+                f"[green]Proof Generated Successfully![/green]\n\n"
+                f"Manifest: [bold]{manifest_path}[/bold]\n"
+                f"Root Hash: [cyan]{manifest.root_hash}[/cyan]\n\n"
+                "Next Steps:\n"
+                "1. Review the proof artifacts in [bold]mrp/[/bold].\n"
+                "2. Write a qualitative report in [bold]mrp/summary.md[/bold].\n"
+                "3. Run [bold]geas seal mrp[/bold] to finalize.",
+                title="GEAS Proof Engine",
+            )
+        )
 
     except Exception as e:
         if isinstance(e, typer.Exit):

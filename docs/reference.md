@@ -25,6 +25,9 @@ This section provides technical documentation for the internal GEAS-AI modules, 
 ::: geas_ai.commands.identity
     options:
         show_root_heading: true
+::: geas_ai.commands.prove
+    options:
+        show_root_heading: true
 
 ## Core Logic
 
@@ -38,6 +41,15 @@ This section provides technical documentation for the internal GEAS-AI modules, 
     options:
         show_root_heading: true
 ::: geas_ai.core.hashing
+    options:
+        show_root_heading: true
+::: geas_ai.core.manifest
+    options:
+        show_root_heading: true
+::: geas_ai.core.walker
+    options:
+        show_root_heading: true
+::: geas_ai.core.testing
     options:
         show_root_heading: true
 

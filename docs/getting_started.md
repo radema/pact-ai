@@ -74,8 +74,16 @@ This creates a `SEAL_INTENT` event in the `lock.json` ledger, cryptographically 
 ### 4. Implementation and Verification
 
 1. **Code**: The **Developer** executes the approved plan.
-2. **MRP (`mrp/summary.md`)**: The **QA Engineer** verifies the output against the specs.
-3. **Seal MRP**: The QA Engineer (or Agent) seals the evidence:
+2. **Prove**: Generate the **Evidence**:
+
+   ```bash
+   geas prove
+   ```
+
+   This runs your tests and creates the `mrp/manifest.json` (Code Snapshot) and `mrp/tests.log`.
+
+3. **MRP (`mrp/summary.md`)**: The **QA Engineer** reviews the evidence and writes the summary.
+4. **Seal MRP**: The QA Engineer (or Agent) seals the evidence:
 
    ```bash
    geas seal mrp

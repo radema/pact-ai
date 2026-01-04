@@ -56,7 +56,17 @@ This:
    ```
 
 5. **Code**: The Developer executes the plan.
-6. **MRP**: QA verifies the output and seals the Merge Readiness Pack.
+6. **Prove**: Generate cryptographic evidence (Manifest + Test Logs):
+
+   ```bash
+   geas prove
+   ```
+
+7. **MRP**: QA verifies the evidence, writes the summary, and seals the package:
+
+   ```bash
+   geas seal mrp
+   ```
 
 ### Identity Management
 
