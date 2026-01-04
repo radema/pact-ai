@@ -6,6 +6,7 @@ from geas_ai.commands import verify
 from geas_ai.commands import lifecycle
 from geas_ai.commands import agents
 from geas_ai.commands import identity
+from geas_ai.commands import prove
 
 app = typer.Typer(
     name="geas",
@@ -19,6 +20,7 @@ app.command(name="new")(lifecycle.new)
 app.command(name="seal")(seal.seal)
 app.command(name="status")(status.status)
 app.command(name="verify")(verify.verify)
+app.command(name="prove")(prove.prove)
 app.command(name="checkout")(lifecycle.checkout)
 app.command(name="delete")(lifecycle.delete)
 app.command(name="archive")(lifecycle.archive)
