@@ -1,0 +1,118 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-9.0.2, pluggy-1.6.0 -- /root/geas-ai/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /root/geas-ai
+configfile: pyproject.toml
+collecting ... collected 72 items
+
+tests/commands/test_cli_identity.py::test_init_creates_identities_yaml PASSED [  1%]
+tests/commands/test_cli_identity.py::test_init_clean PASSED              [  2%]
+tests/commands/test_cli_identity.py::test_identity_add_human PASSED      [  4%]
+tests/commands/test_cli_identity.py::test_identity_add_agent PASSED      [  5%]
+tests/commands/test_cli_identity.py::test_identity_add_duplicate PASSED  [  6%]
+tests/commands/test_cli_identity.py::test_identity_list PASSED           [  8%]
+tests/commands/test_cli_identity.py::test_identity_show PASSED           [  9%]
+tests/commands/test_cli_identity.py::test_identity_revoke PASSED         [ 11%]
+tests/commands/test_cli_identity_edge.py::test_show_non_existent PASSED  [ 12%]
+tests/commands/test_cli_identity_edge.py::test_revoke_non_existent PASSED [ 13%]
+tests/commands/test_cli_identity_edge.py::test_revoke_abort PASSED       [ 15%]
+tests/commands/test_cli_identity_edge.py::test_add_permission_error PASSED [ 16%]
+tests/commands/test_cli_identity_edge.py::test_load_corrupted_key_file PASSED [ 18%]
+tests/commands/test_init_workflow.py::test_init_creates_workflow PASSED  [ 19%]
+tests/commands/test_lifecycle.py::test_new_bolt_command PASSED           [ 20%]
+tests/commands/test_lifecycle.py::test_checkout_command PASSED           [ 22%]
+tests/commands/test_prove.py::test_prove_command_success PASSED          [ 23%]
+tests/commands/test_prove.py::test_prove_command_test_failure PASSED     [ 25%]
+tests/commands/test_prove.py::test_prove_command_unsealed_intent PASSED  [ 26%]
+tests/commands/test_prove.py::test_prove_command_skip_tests PASSED       [ 27%]
+tests/commands/test_seal_ledger.py::test_seal_flow_new_ledger PASSED     [ 29%]
+tests/commands/test_seal_ledger.py::test_seal_intent_missing_docs PASSED [ 30%]
+tests/commands/test_seal_ledger.py::test_seal_intent_no_identity PASSED  [ 31%]
+tests/commands/test_status_verify_approve.py::test_status_no_bolt PASSED [ 33%]
+tests/commands/test_status_verify_approve.py::test_status_with_events PASSED [ 34%]
+tests/commands/test_status_verify_approve.py::test_verify_success PASSED [ 36%]
+tests/commands/test_status_verify_approve.py::test_verify_fail PASSED    [ 37%]
+tests/commands/test_status_verify_approve.py::test_verify_json PASSED    [ 38%]
+tests/commands/test_status_verify_approve.py::test_approve_success PASSED [ 40%]
+tests/commands/test_status_verify_approve.py::test_approve_fail_no_mrp PASSED [ 41%]
+tests/commands/test_status_verify_approve.py::test_approve_fail_wrong_role PASSED [ 43%]
+tests/core/test_identity.py::test_key_generation PASSED                  [ 44%]
+tests/core/test_identity.py::test_sign_verify PASSED                     [ 45%]
+tests/core/test_identity.py::test_sign_verify_tampered PASSED            [ 47%]
+tests/core/test_identity.py::test_canonicalize_json PASSED               [ 48%]
+tests/core/test_identity.py::test_identity_model_valid PASSED            [ 50%]
+tests/core/test_identity.py::test_identity_model_agent_validation PASSED [ 51%]
+tests/core/test_identity.py::test_identity_store PASSED                  [ 52%]
+tests/core/test_identity.py::test_resolution_env_priority PASSED         [ 54%]
+tests/core/test_identity.py::test_resolution_local_file PASSED           [ 55%]
+tests/core/test_identity.py::test_resolution_missing PASSED              [ 56%]
+tests/core/test_identity.py::test_identity_manager_load_save PASSED      [ 58%]
+tests/core/test_identity.py::test_identity_manager_duplicate PASSED      [ 59%]
+tests/core/test_intent_engine.py::test_canonicalize_json PASSED          [ 61%]
+tests/core/test_intent_engine.py::test_calculate_event_hash PASSED       [ 62%]
+tests/core/test_intent_engine.py::test_ledger_integrity PASSED           [ 63%]
+tests/core/test_manifest.py::test_merkle_root_empty PASSED               [ 65%]
+tests/core/test_manifest.py::test_merkle_root_single_file PASSED         [ 66%]
+tests/core/test_manifest.py::test_merkle_root_two_files PASSED           [ 68%]
+tests/core/test_manifest.py::test_merkle_root_three_files PASSED         [ 69%]
+tests/core/test_manifest.py::test_generate_manifest PASSED               [ 70%]
+tests/core/test_testing.py::test_run_tests_success PASSED                [ 72%]
+tests/core/test_testing.py::test_run_tests_failure PASSED                [ 73%]
+tests/core/test_testing.py::test_run_tests_timeout PASSED                [ 75%]
+tests/core/test_verification.py::test_chain_integrity_valid PASSED       [ 76%]
+tests/core/test_verification.py::test_chain_integrity_broken_link PASSED [ 77%]
+tests/core/test_verification.py::test_chain_integrity_tampered_event PASSED [ 79%]
+tests/core/test_verification.py::test_signatures_valid PASSED            [ 80%]
+tests/core/test_verification.py::test_signatures_invalid PASSED          [ 81%]
+tests/core/test_verification.py::test_signatures_revoked_key PASSED      [ 83%]
+tests/core/test_verification.py::test_workflow_compliance_valid PASSED   [ 84%]
+tests/core/test_verification.py::test_workflow_missing_stage PASSED      [ 86%]
+tests/core/test_verification.py::test_workflow_role_violation PASSED     [ 87%]
+tests/core/test_verification.py::test_workflow_prerequisite_missing PASSED [ 88%]
+tests/core/test_verification.py::test_content_integrity PASSED           [ 90%]
+tests/core/test_verification.py::test_chain_sequence_gap PASSED          [ 91%]
+tests/core/test_verification.py::test_signature_identity_not_found PASSED [ 93%]
+tests/core/test_walker.py::test_load_gitignore PASSED                    [ 94%]
+tests/core/test_walker.py::test_walker_basic PASSED                      [ 95%]
+tests/core/test_walker.py::test_walker_missing_scope PASSED              [ 97%]
+tests/test_agents.py::test_agents_command_global PASSED                  [ 98%]
+tests/test_agents.py::test_agents_command_no_geas PASSED                 [100%]
+
+=============================== warnings summary ===============================
+src/geas_ai/core/manifest.py:7
+  /root/geas-ai/src/geas_ai/core/manifest.py:7: PytestCollectionWarning: cannot collect test class 'TestResultInfo' because it has a __init__ constructor (from: tests/commands/test_prove.py)
+    class TestResultInfo(BaseModel):
+
+src/geas_ai/core/manifest.py:7
+  /root/geas-ai/src/geas_ai/core/manifest.py:7: PytestCollectionWarning: cannot collect test class 'TestResultInfo' because it has a __init__ constructor (from: tests/core/test_manifest.py)
+    class TestResultInfo(BaseModel):
+
+tests/core/test_verification.py:23
+  /root/geas-ai/tests/core/test_verification.py:23: PytestCollectionWarning: cannot collect test class 'TestContext' because it has a __init__ constructor (from: tests/core/test_verification.py)
+    @dataclass
+
+tests/commands/test_lifecycle.py::test_new_bolt_command
+tests/commands/test_lifecycle.py::test_checkout_command
+tests/commands/test_lifecycle.py::test_checkout_command
+tests/commands/test_seal_ledger.py::test_seal_flow_new_ledger
+tests/commands/test_seal_ledger.py::test_seal_intent_missing_docs
+tests/commands/test_seal_ledger.py::test_seal_intent_no_identity
+tests/core/test_intent_engine.py::test_ledger_integrity
+  /root/geas-ai/src/geas_ai/core/ledger.py:47: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    created_at=datetime.utcnow(),
+
+tests/commands/test_seal_ledger.py::test_seal_flow_new_ledger
+tests/commands/test_seal_ledger.py::test_seal_flow_new_ledger
+  /root/geas-ai/src/geas_ai/commands/seal.py:125: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/core/test_intent_engine.py::test_ledger_integrity
+  /root/geas-ai/tests/core/test_intent_engine.py:30: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sequence=0, timestamp=datetime.utcnow(), action=LedgerAction.SEAL_REQ,
+
+tests/core/test_intent_engine.py::test_ledger_integrity
+  /root/geas-ai/tests/core/test_intent_engine.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sequence=0, timestamp=datetime.utcnow(), action=LedgerAction.SEAL_SPECS,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 72 passed, 14 warnings in 1.16s ========================
