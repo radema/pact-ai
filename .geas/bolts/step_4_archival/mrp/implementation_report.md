@@ -1,12 +1,12 @@
 # Implementation Report: Verification Engine
 
 **Bolt:** step_4_archival
-**Status:** COMPLETE (Steps 1, 2, & 3)
+**Status:** COMPLETE (Steps 1, 2, 3, & 4)
 **Date:** 2025-01-04
 
 ## Overview
 
-This report details the implementation of the Verification Engine for GEAS. The work covers Step 1 (Foundations), Step 2 (Core Verification Logic), and Step 3 (CLI Commands) of the implementation plan.
+This report details the implementation of the Verification Engine for GEAS. The work covers Step 1 (Foundations), Step 2 (Core Verification Logic), Step 3 (CLI Commands), and Step 4 (Configuration & Cleanup) of the implementation plan.
 
 ## Implemented Components
 
@@ -33,7 +33,7 @@ Implemented the four pillars of verification:
 2.  **Signature Verification (`validate_signatures`)**:
     -   Verifies Ed25519 signatures for all events.
     -   **Dynamic Payload Reconstruction**: Correctly handles different signing strategies:
-        -   `SEAL_INTENT`: Signs the full payload.
+        -   `SEAL_INTENT`: Signs the full payload (which aggregates hashes of Req, Specs, and Plan).
         -   Artifacts (`SEAL_REQ`, `SEAL_MRP`, etc.): Signs `{"action": ..., "hash": ...}`.
     -   **Security Checks**:
         -   Verifies key against the identity's `active_key`.
@@ -44,6 +44,7 @@ Implemented the four pillars of verification:
     -   Verifies all required stages are present.
     -   Enforces role requirements (Human vs Agent).
     -   Validates stage prerequisites (e.g., Specs must precede Plan).
+    -   **Note**: The default workflow includes `intent` (SEAL_INTENT) which cryptographically binds the Requirement, Specification, and Plan documents before the implementation (MRP) phase begins.
 
 4.  **Content Integrity (`validate_content_integrity`)**:
     -   Verifies that sealed files on disk match the hashes stored in the ledger.
@@ -63,6 +64,7 @@ Implemented the four pillars of verification:
     -   Validates the signer is a `HUMAN` identity.
     -   Ensures `SEAL_MRP` exists in the ledger.
     -   Appends a signed `APPROVE` event to `lock.json`.
+-   **`init.py`**: Updated to bootstrap the `workflow.yaml` configuration using the default workflow policy.
 
 ## Testing
 
@@ -71,11 +73,12 @@ A comprehensive test suite was implemented.
 -   **Unit Tests (`tests/core/test_verification.py`)**:
     -   Coverage: 100% of core logic.
     -   Scenarios: Valid/Invalid Chain, Signatures, Workflow, Content.
--   **Integration Tests (`tests/commands/test_status_verify_approve.py`)**:
+-   **Integration Tests (`tests/commands/test_status_verify_approve.py`, `tests/commands/test_init_workflow.py`)**:
     -   Tested `geas status` with empty and populated ledgers.
     -   Tested `geas verify` with passing and failing checks, and JSON output.
     -   Tested `geas approve` success flow, missing MRP failure, and agent role failure.
+    -   Tested `geas init` workflow generation.
 
 ## Conclusion
 
-The Verification Engine is fully implemented, allowing users to verify the integrity of their Bolts and formally approve them for merge, strictly adhering to the governance policies defined in `workflow.yaml`.
+The Verification Engine is fully implemented, allowing users to verify the integrity of their Bolts and formally approve them for merge, strictly adhering to the governance policies defined in `workflow.yaml`. The system correctly enforces that `INTENT` (comprising Req, Specs, Plan) is sealed before code implementation (MRP) and final approval.
