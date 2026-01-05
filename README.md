@@ -1,8 +1,10 @@
 # GEAS-AI: Protocol for Agent Control & Trust
 
-**Status**: v0.1.2 (Alpha)
+**Status**: v0.1.3 (Alpha)
 
 GEAS is a repository-native governance protocol designed for **Software Engineering 3.0**. It enforces a strict "Spec-First" workflow for AI Agents, ensuring that no code is written without a cryptographically sealed Blueprint.
+
+> **Note**: While GEAS provides a default "Spec-First" workflow, the protocol is theoretically configurable. It can be used as a standalone tool to drive agents during coding sessions, ensuring cryptographic provenance even without a full governance team.
 
 ## 🚀 Getting Started
 
@@ -66,6 +68,12 @@ This:
 
    ```bash
    geas seal mrp
+   ```
+
+8. **Approve**: A Human identity (e.g., Tech Lead) signs off on the sealed package for merge:
+
+   ```bash
+   geas approve --identity tech-lead --comment "LGTM"
    ```
 
 ### Identity Management

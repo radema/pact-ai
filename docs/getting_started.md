@@ -29,7 +29,7 @@ To bootstrap GEAS in your repository, run:
 geas init
 ```
 
-This command creates a `.geas/` directory containing:
+This creates a `.geas/` directory containing:
 
 - `config/identities.yaml`: Registry of authorized Ed25519 public keys.
 - `config/agents.yaml`: Defines your AI team personas (Architect, Developer, QA, etc.).
@@ -37,9 +37,32 @@ This command creates a `.geas/` directory containing:
 - `bolts/`: The directory where all units of work (Bolts) will reside.
 - `active_context.md`: A pointer file indicating the current active Bolt.
 
+## 🔑 Identity Setup
+
+Before you can seal any critical documents (like the Intent or MRP), you need a cryptographic identity. GEAS uses Ed25519 keys to sign your actions.
+
+1. **Create your identity**:
+   ```bash
+   uv run geas identity add --name my-username --role human
+   ```
+   This generates a keypair. The private key is stored securely in `~/.geas/keys/` (0600 permissions), and the public key is added to the project's registry.
+
+2. **Verify it exists**:
+   ```bash
+   uv run geas identity list
+   ```
+
 ## ⚡️ The GEAS Workflow
 
 GEAS enforces a rigorous lifecycle for every feature or bug fix, organized as a **Bolt**.
+
+```mermaid
+graph TD
+    Request --> Specs --> Plan --> SealIntent((Seal Intent))
+    SealIntent --> Code --> Prove((Prove))
+    Prove --> MRP --> SealMRP((Seal MRP))
+    SealMRP --> Approve((Approve))
+```
 
 ### 1. Create a New Bolt
 
@@ -88,6 +111,14 @@ This creates a `SEAL_INTENT` event in the `lock.json` ledger, cryptographically 
    ```bash
    geas seal mrp
    ```
+
+### 5. Approval
+
+Finally, a Human identity (usually a Tech Lead or Maintainer) reviews the sealed package and provides final approval for the merge.
+
+```bash
+geas approve --identity my-username --comment "Verified and ready to merge."
+```
 
 ## 🛡 Verification and Status
 

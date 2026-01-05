@@ -1,6 +1,6 @@
 # GEAS-AI Repository Context for Agents
 
-**Document Version:** 2.0
+**Document Version:** 3.0
 **Last Updated:** 2026-01-03
 **Purpose:** Provide comprehensive context for AI agents working on the GEAS-AI codebase.
 
@@ -68,7 +68,7 @@ Git provides versioning, but Git authorship is **trivially spoofable**. GEAS add
 | Attribute | Value |
 |-----------|-------|
 | **Package Name** | `geas-ai` |
-| **Current Version** | `0.1.1` (Alpha) |
+| **Current Version** | `0.1.3` (Alpha) |
 | **Python Version** | `>=3.10` |
 | **License** | Dual MIT / Apache-2.0 |
 | **Package Manager** | `uv` |
@@ -98,6 +98,32 @@ The cryptographic engine binds three pillars:
 | **Physical Integrity** | "The content hasn't changed." | SHA-256 hashes / Merkle Trees |
 | **Identity** | "We know who authorized this." | Ed25519 Signatures (SSH format) |
 | **Audit History** | "We know the sequence of events." | Hash-Chain Ledger (`lock.json`) |
+
+### Lifecycle Diagram
+
+```mermaid
+graph TD
+    subgraph Intent ["Intent Phase"]
+        Req[01_request.md] --> Specs[02_specs.md]
+        Specs --> Plan[03_plan.md]
+        Plan --> SealIntent((Seal Intent))
+    end
+
+    subgraph Implementation ["Code Phase"]
+        SealIntent --> Code[Source Code]
+        Code --> Tests{Pass Tests?}
+        Tests -- No --> Code
+        Tests -- Yes --> Prove((Prove))
+    end
+
+    subgraph Verification ["MRP Phase"]
+        Prove --> Artifacts[Manifest + Logs]
+        Artifacts --> MRP[mrp/summary.md]
+        MRP --> SealMRP((Seal MRP))
+        SealMRP --> Verify{Verify Chain}
+        Verify -- Valid --> Approve((Approve))
+    end
+```
 
 ### Locking Scope
 
@@ -129,8 +155,8 @@ geas-ai/
 │   └── config/
 │       ├── agents.yaml             # Agent persona definitions
 │       ├── models.yaml             # LLM provider configs
-│       ├── identities.yaml         # Cryptographic identities (planned)
-│       └── workflow.yaml           # Governance rules (planned)
+│       ├── identities.yaml         # Cryptographic identities
+│       └── workflow.yaml           # Governance rules
 │
 ├── src/geas_ai/                    # Source Code
 │   ├── __init__.py
@@ -141,6 +167,8 @@ geas-ai/
 │   │   ├── init.py                 # `geas init`
 │   │   ├── lifecycle.py            # `geas new`, `checkout`, `delete`, `archive`
 │   │   ├── seal.py                 # `geas seal`
+│   │   ├── prove.py                # `geas prove`
+│   │   ├── approve.py              # `geas approve`
 │   │   ├── status.py               # `geas status`
 │   │   ├── verify.py               # `geas verify`
 │   │   └── agents.py               # `geas agents`
@@ -191,7 +219,7 @@ geas-ai/
 | **Testing** | `pytest` | Test framework |
 | **Pre-commit** | `pre-commit` | Git hook management |
 | **Documentation** | `mkdocs-material` | Documentation site |
-| **Cryptography** (planned) | `cryptography` | Ed25519 signatures |
+| **Cryptography** | `cryptography` | Ed25519 signatures |
 
 ### Dependency Groups
 
@@ -340,12 +368,13 @@ Extract repeated logic immediately. Use utility functions from `src/geas_ai/util
 5. geas seal specs            # Seal specs
 6. Create 03_plan.md          # Define implementation plan
 7. geas seal plan             # Seal plan
-8. Implement in src/          # Write code (mutable)
-9. Run tests                  # Validate
-10. Create MRP                # Generate evidence
+8. geas seal intent           # Sign full intent (optional/required by policy)
+9. Implement in src/          # Write code (mutable)
+10. geas prove                # Run tests & generate manifest
 11. geas seal mrp             # Seal MRP
 12. geas verify               # Validate chain
-13. geas archive <bolt-name>  # Archive completed bolt
+13. geas approve              # Approve for merge
+14. geas archive <bolt-name>  # Archive completed bolt
 ```
 
 ### Seal Sequence Enforcement
@@ -456,9 +485,11 @@ def test_init_command(runner, tmp_path):
 | `geas init` | Initialize GEAS in repository | `geas init` |
 | `geas new <name>` | Create new bolt workspace | `geas new feature-login` |
 | `geas checkout <name>` | Switch active bolt context | `geas checkout feature-login` |
-| `geas seal <target>` | Seal artifact (req/specs/plan/mrp) | `geas seal specs` |
+| `geas seal <target>` | Seal artifact (req, specs, plan, mrp, intent) | `geas seal specs` |
+| `geas prove` | Run tests and generate Code Manifest | `geas prove` |
 | `geas status` | Display current bolt status | `geas status` |
 | `geas verify` | Verify bolt integrity & sequence | `geas verify` |
+| `geas approve` | Approve a sealed MRP for merge | `geas approve --identity lead` |
 | `geas delete <name>` | Delete a bolt | `geas delete old-feature` |
 | `geas archive <name>` | Archive completed bolt | `geas archive feature-login` |
 | `geas agents` | List available agent personas | `geas agents` |
@@ -472,6 +503,7 @@ def test_init_command(runner, tmp_path):
 | `specs` | `02_specs.md` |
 | `plan` | `03_plan.md` |
 | `mrp` | `mrp/summary.md` |
+| `intent`| All 3 documents (sealed together) |
 
 ### Command Exit Codes
 
@@ -491,13 +523,14 @@ def test_init_command(runner, tmp_path):
 | **MRP** | Merge Request Package - post-code evidence proving implementation validity. |
 | **Trinity Lock** | The cryptographic engine binding Identity, Integrity, and Audit. |
 | **Seal** | Cryptographic lock operation that hashes content and records it in the ledger. |
+| **Prove** | The process of running tests and generating a cryptographic manifest of the codebase. |
 | **Active Context** | The currently selected bolt (tracked in `.geas/active_context.md`). |
 | **Persona** | Behavioral template for agents (defined in `agents.yaml`). |
 | **Identity** | Cryptographic identity with Ed25519 keys (stored in `identities.yaml`). |
 | **Drift** | Unauthorized modification of sealed content (detected by hash mismatch). |
 | **Geas** | A magical obligation/vow (the protocol's namesake metaphor). |
 | **Manifest** | Cryptographic fingerprint (Merkle Tree) of source code at proof time. |
-| **Workflow** | Governance policy defining required seals and role constraints. |
+| **Workflow** | Governance policy defining required seals and role constraints. Note: Workflows are configurable via `workflow.yaml`, allowing GEAS to be used by solo agents or large teams. |
 
 ---
 
@@ -627,37 +660,31 @@ Defined in `.geas/config/agents.yaml`:
 
 ## Current Development Status
 
-### Implemented (v0.1.x)
+### Implemented (v0.1.3)
 
 - [x] `geas init` - Initialize GEAS directory structure
 - [x] `geas new` - Create bolt workspace
 - [x] `geas checkout` - Switch bolt context
-- [x] `geas seal` - Hash and lock artifacts
+- [x] `geas seal` - Hash and lock artifacts (req/specs/plan/mrp/intent)
+- [x] `geas prove` - Test execution and Manifest generation
 - [x] `geas status` - Display seal status
 - [x] `geas verify` - Verify integrity and sequence
+- [x] `geas approve` - Human approval of MRP
 - [x] `geas delete` - Delete bolt
 - [x] `geas archive` - Archive completed bolt
 - [x] `geas agents` - List personas
 - [x] `geas identity` - Manage cryptographic identities (add, list, show, revoke)
 
-### In Progress (Phase 2: Intent Engine)
-
-See `.geas/bolts/step_2_manifest/01_request.md` for details:
-
-- [ ] `geas seal intent` - Sign intent documents with Identity keys
-- [ ] Requirements/Specs/Plan signature linkage
-- [ ] Manifest generation
-
 ### Roadmap
 
-| Phase | Objective |
-|-------|-----------|
-| **Phase 1** | Identity & Keyring (`geas identity`) - **COMPLETE** |
-| **Phase 2** | Intent Engine (`geas seal intent` with signatures) |
-| **Phase 3** | Proof Engine (`geas prove` - test + manifest + MRP) |
-| **Phase 4** | Verification Engine (workflow-based validation) |
-| **Phase 5** | Lifecycle Management (enhanced `archive`/`delete`) |
-| **Phase 6** | CI/CD Integration (GitHub Actions/GitLab CI templates) |
+| Phase | Objective | Status |
+|-------|-----------|--------|
+| **Phase 1** | Identity & Keyring (`geas identity`) | **COMPLETE** |
+| **Phase 2** | Intent Engine (`geas seal intent`) | **COMPLETE** |
+| **Phase 3** | Proof Engine (`geas prove`, `geas approve`) | **COMPLETE** |
+| **Phase 4** | Verification Engine (workflow-based validation) | *In Progress* |
+| **Phase 5** | Lifecycle Management (enhanced `archive`/`delete`) | *In Progress* |
+| **Phase 6** | CI/CD Integration (GitHub Actions/GitLab CI templates) | *Planned* |
 
 ---
 
@@ -721,8 +748,10 @@ Before submitting any code:
 │   geas init               │ Initialize GEAS                     │
 │   geas new <name>         │ Create bolt                         │
 │   geas seal <target>      │ Seal artifact (req/specs/plan/mrp)  │
+│   geas prove              │ Run tests & generate manifest       │
 │   geas status             │ Show status                         │
 │   geas verify             │ Verify integrity                    │
+│   geas approve            │ Approve sealed MRP                  │
 │   geas checkout <name>    │ Switch context                      │
 │   geas archive <name>     │ Archive bolt                        │
 ├─────────────────────────────────────────────────────────────────┤
