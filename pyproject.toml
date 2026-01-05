@@ -7,8 +7,13 @@ authors = [
 ]
 requires-python = ">=3.10"
 dependencies = [
+    "cryptography>=46.0.3",
+    "pathspec>=0.12.1",
+    "pre-commit>=4.5.1",
+    "pydantic>=2.12.5",
     "pyyaml>=6.0.3",
     "rich>=14.2.0",
+    "ruamel-yaml>=0.19.1",
     "typer>=0.21.0",
 ]
 
@@ -34,8 +39,17 @@ docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.7.1",
     "mkdocstrings[python]>=1.0.0",
+    "pydantic>=2.12.5",
 ]
 
 [[tool.mypy.overrides]]
 module = "yaml"
 ignore_missing_imports = true
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = "geas_ai.commands.*"
+disallow_untyped_decorators = false

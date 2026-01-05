@@ -67,6 +67,9 @@ DEFAULT_MODELS_YAML = """models:
     model_name: "mistral"
 """
 
+DEFAULT_IDENTITIES_YAML = """identities: []
+"""
+
 MANIFESTO_CONTENT = """# GEAS_MANIFESTO.md
 
 ## Protocol for Agent Control & Trust
