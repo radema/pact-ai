@@ -385,6 +385,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#identity-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔑 Identity Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-geas-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -434,6 +445,17 @@
     <span class="md-ellipsis">
       
         4. Implementation and Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Approval
       
     </span>
   </a>
@@ -551,6 +573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#identity-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔑 Identity Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-geas-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -600,6 +633,17 @@
     <span class="md-ellipsis">
       
         4. Implementation and Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Approval
       
     </span>
   </a>
@@ -657,7 +701,7 @@
 <p>To bootstrap GEAS in your repository, run:</p>
 <pre><code class="language-bash">geas init
 </code></pre>
-<p>This command creates a <code>.geas/</code> directory containing:</p>
+<p>This creates a <code>.geas/</code> directory containing:</p>
 <ul>
 <li><code>config/identities.yaml</code>: Registry of authorized Ed25519 public keys.</li>
 <li><code>config/agents.yaml</code>: Defines your AI team personas (Architect, Developer, QA, etc.).</li>
@@ -665,8 +709,29 @@
 <li><code>bolts/</code>: The directory where all units of work (Bolts) will reside.</li>
 <li><code>active_context.md</code>: A pointer file indicating the current active Bolt.</li>
 </ul>
+<h2 id="identity-setup">🔑 Identity Setup</h2>
+<p>Before you can seal any critical documents (like the Intent or MRP), you need a cryptographic identity. GEAS uses Ed25519 keys to sign your actions.</p>
+<ol>
+<li>
+<p><strong>Create your identity</strong>:
+   <code>bash
+   uv run geas identity add --name my-username --role human</code>
+   This generates a keypair. The private key is stored securely in <code>~/.geas/keys/</code> (0600 permissions), and the public key is added to the project's registry.</p>
+</li>
+<li>
+<p><strong>Verify it exists</strong>:
+   <code>bash
+   uv run geas identity list</code></p>
+</li>
+</ol>
 <h2 id="the-geas-workflow">⚡️ The GEAS Workflow</h2>
 <p>GEAS enforces a rigorous lifecycle for every feature or bug fix, organized as a <strong>Bolt</strong>.</p>
+<pre><code class="language-mermaid">graph TD
+    Request --&gt; Specs --&gt; Plan --&gt; SealIntent((Seal Intent))
+    SealIntent --&gt; Code --&gt; Prove((Prove))
+    Prove --&gt; MRP --&gt; SealMRP((Seal MRP))
+    SealMRP --&gt; Approve((Approve))
+</code></pre>
 <h3 id="1-create-a-new-bolt">1. Create a New Bolt</h3>
 <p>Start a new unit of work:</p>
 <pre><code class="language-bash">geas new feature-name
@@ -699,6 +764,10 @@
 </ol>
 <p><code>bash
    geas seal mrp</code></p>
+<h3 id="5-approval">5. Approval</h3>
+<p>Finally, a Human identity (usually a Tech Lead or Maintainer) reviews the sealed package and provides final approval for the merge.</p>
+<pre><code class="language-bash">geas approve --identity my-username --comment &quot;Verified and ready to merge.&quot;
+</code></pre>
 <h2 id="verification-and-status">🛡 Verification and Status</h2>
 <p>At any point, you can check the status of your current Bolt:</p>
 <pre><code class="language-bash">geas status

@@ -457,6 +457,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#lifecycle-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#locking-scope" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -979,21 +990,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#implemented-v01x" class="md-nav__link">
+  <a href="#implemented-v013" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implemented (v0.1.x)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#in-progress-phase-2-intent-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In Progress (Phase 2: Intent Engine)
+        Implemented (v0.1.3)
       
     </span>
   </a>
@@ -1117,7 +1117,7 @@
 
 
 <h1 id="geas-ai-repository-context-for-agents">GEAS-AI Repository Context for Agents</h1>
-<p><strong>Document Version:</strong> 2.0
+<p><strong>Document Version:</strong> 3.0
 <strong>Last Updated:</strong> 2026-01-03
 <strong>Purpose:</strong> Provide comprehensive context for AI agents working on the GEAS-AI codebase.</p>
 <hr />
@@ -1230,7 +1230,7 @@
 </tr>
 <tr>
 <td><strong>Current Version</strong></td>
-<td><code>0.1.1</code> (Alpha)</td>
+<td><code>0.1.3</code> (Alpha)</td>
 </tr>
 <tr>
 <td><strong>Python Version</strong></td>
@@ -1311,6 +1311,29 @@
 </tr>
 </tbody>
 </table>
+<h3 id="lifecycle-diagram">Lifecycle Diagram</h3>
+<pre><code class="language-mermaid">graph TD
+    subgraph Intent [&quot;Intent Phase&quot;]
+        Req[01_request.md] --&gt; Specs[02_specs.md]
+        Specs --&gt; Plan[03_plan.md]
+        Plan --&gt; SealIntent((Seal Intent))
+    end
+
+    subgraph Implementation [&quot;Code Phase&quot;]
+        SealIntent --&gt; Code[Source Code]
+        Code --&gt; Tests{Pass Tests?}
+        Tests -- No --&gt; Code
+        Tests -- Yes --&gt; Prove((Prove))
+    end
+
+    subgraph Verification [&quot;MRP Phase&quot;]
+        Prove --&gt; Artifacts[Manifest + Logs]
+        Artifacts --&gt; MRP[mrp/summary.md]
+        MRP --&gt; SealMRP((Seal MRP))
+        SealMRP --&gt; Verify{Verify Chain}
+        Verify -- Valid --&gt; Approve((Approve))
+    end
+</code></pre>
 <h3 id="locking-scope">Locking Scope</h3>
 <table>
 <thead>
@@ -1357,8 +1380,8 @@
 │   └── config/
 │       ├── agents.yaml             # Agent persona definitions
 │       ├── models.yaml             # LLM provider configs
-│       ├── identities.yaml         # Cryptographic identities (planned)
-│       └── workflow.yaml           # Governance rules (planned)
+│       ├── identities.yaml         # Cryptographic identities
+│       └── workflow.yaml           # Governance rules
 │
 ├── src/geas_ai/                    # Source Code
 │   ├── __init__.py
@@ -1369,6 +1392,8 @@
 │   │   ├── init.py                 # `geas init`
 │   │   ├── lifecycle.py            # `geas new`, `checkout`, `delete`, `archive`
 │   │   ├── seal.py                 # `geas seal`
+│   │   ├── prove.py                # `geas prove`
+│   │   ├── approve.py              # `geas approve`
 │   │   ├── status.py               # `geas status`
 │   │   ├── verify.py               # `geas verify`
 │   │   └── agents.py               # `geas agents`
@@ -1464,7 +1489,7 @@
 <td>Documentation site</td>
 </tr>
 <tr>
-<td><strong>Cryptography</strong> (planned)</td>
+<td><strong>Cryptography</strong></td>
 <td><code>cryptography</code></td>
 <td>Ed25519 signatures</td>
 </tr>
@@ -1690,12 +1715,13 @@ docs = [&quot;mike&gt;=2.1.3&quot;, &quot;mkdocs&gt;=1.6.1&quot;, &quot;mkdocs-m
 5. geas seal specs            # Seal specs
 6. Create 03_plan.md          # Define implementation plan
 7. geas seal plan             # Seal plan
-8. Implement in src/          # Write code (mutable)
-9. Run tests                  # Validate
-10. Create MRP                # Generate evidence
+8. geas seal intent           # Sign full intent (optional/required by policy)
+9. Implement in src/          # Write code (mutable)
+10. geas prove                # Run tests &amp; generate manifest
 11. geas seal mrp             # Seal MRP
 12. geas verify               # Validate chain
-13. geas archive &lt;bolt-name&gt;  # Archive completed bolt
+13. geas approve              # Approve for merge
+14. geas archive &lt;bolt-name&gt;  # Archive completed bolt
 </code></pre>
 <h3 id="seal-sequence-enforcement">Seal Sequence Enforcement</h3>
 <p>The <code>geas verify</code> command enforces this seal order:</p>
@@ -1825,8 +1851,13 @@ def test_init_command(runner, tmp_path):
 </tr>
 <tr>
 <td><code>geas seal &lt;target&gt;</code></td>
-<td>Seal artifact (req/specs/plan/mrp)</td>
+<td>Seal artifact (req, specs, plan, mrp, intent)</td>
 <td><code>geas seal specs</code></td>
+</tr>
+<tr>
+<td><code>geas prove</code></td>
+<td>Run tests and generate Code Manifest</td>
+<td><code>geas prove</code></td>
 </tr>
 <tr>
 <td><code>geas status</code></td>
@@ -1837,6 +1868,11 @@ def test_init_command(runner, tmp_path):
 <td><code>geas verify</code></td>
 <td>Verify bolt integrity &amp; sequence</td>
 <td><code>geas verify</code></td>
+</tr>
+<tr>
+<td><code>geas approve</code></td>
+<td>Approve a sealed MRP for merge</td>
+<td><code>geas approve --identity lead</code></td>
 </tr>
 <tr>
 <td><code>geas delete &lt;name&gt;</code></td>
@@ -1884,6 +1920,10 @@ def test_init_command(runner, tmp_path):
 <tr>
 <td><code>mrp</code></td>
 <td><code>mrp/summary.md</code></td>
+</tr>
+<tr>
+<td><code>intent</code></td>
+<td>All 3 documents (sealed together)</td>
 </tr>
 </tbody>
 </table>
@@ -1937,6 +1977,10 @@ def test_init_command(runner, tmp_path):
 <td>Cryptographic lock operation that hashes content and records it in the ledger.</td>
 </tr>
 <tr>
+<td><strong>Prove</strong></td>
+<td>The process of running tests and generating a cryptographic manifest of the codebase.</td>
+</tr>
+<tr>
 <td><strong>Active Context</strong></td>
 <td>The currently selected bolt (tracked in <code>.geas/active_context.md</code>).</td>
 </tr>
@@ -1962,7 +2006,7 @@ def test_init_command(runner, tmp_path):
 </tr>
 <tr>
 <td><strong>Workflow</strong></td>
-<td>Governance policy defining required seals and role constraints.</td>
+<td>Governance policy defining required seals and role constraints. Note: Workflows are configurable via <code>workflow.yaml</code>, allowing GEAS to be used by solo agents or large teams.</td>
 </tr>
 </tbody>
 </table>
@@ -2114,25 +2158,20 @@ mrp_sealed_at: &quot;2025-01-02T14:00:00&quot;
 </ul>
 <hr />
 <h2 id="current-development-status">Current Development Status</h2>
-<h3 id="implemented-v01x">Implemented (v0.1.x)</h3>
+<h3 id="implemented-v013">Implemented (v0.1.3)</h3>
 <ul>
 <li>[x] <code>geas init</code> - Initialize GEAS directory structure</li>
 <li>[x] <code>geas new</code> - Create bolt workspace</li>
 <li>[x] <code>geas checkout</code> - Switch bolt context</li>
-<li>[x] <code>geas seal</code> - Hash and lock artifacts</li>
+<li>[x] <code>geas seal</code> - Hash and lock artifacts (req/specs/plan/mrp/intent)</li>
+<li>[x] <code>geas prove</code> - Test execution and Manifest generation</li>
 <li>[x] <code>geas status</code> - Display seal status</li>
 <li>[x] <code>geas verify</code> - Verify integrity and sequence</li>
+<li>[x] <code>geas approve</code> - Human approval of MRP</li>
 <li>[x] <code>geas delete</code> - Delete bolt</li>
 <li>[x] <code>geas archive</code> - Archive completed bolt</li>
 <li>[x] <code>geas agents</code> - List personas</li>
 <li>[x] <code>geas identity</code> - Manage cryptographic identities (add, list, show, revoke)</li>
-</ul>
-<h3 id="in-progress-phase-2-intent-engine">In Progress (Phase 2: Intent Engine)</h3>
-<p>See <code>.geas/bolts/step_2_manifest/01_request.md</code> for details:</p>
-<ul>
-<li>[ ] <code>geas seal intent</code> - Sign intent documents with Identity keys</li>
-<li>[ ] Requirements/Specs/Plan signature linkage</li>
-<li>[ ] Manifest generation</li>
 </ul>
 <h3 id="roadmap">Roadmap</h3>
 <table>
@@ -2140,32 +2179,39 @@ mrp_sealed_at: &quot;2025-01-02T14:00:00&quot;
 <tr>
 <th>Phase</th>
 <th>Objective</th>
+<th>Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Phase 1</strong></td>
-<td>Identity &amp; Keyring (<code>geas identity</code>) - <strong>COMPLETE</strong></td>
+<td>Identity &amp; Keyring (<code>geas identity</code>)</td>
+<td><strong>COMPLETE</strong></td>
 </tr>
 <tr>
 <td><strong>Phase 2</strong></td>
-<td>Intent Engine (<code>geas seal intent</code> with signatures)</td>
+<td>Intent Engine (<code>geas seal intent</code>)</td>
+<td><strong>COMPLETE</strong></td>
 </tr>
 <tr>
 <td><strong>Phase 3</strong></td>
-<td>Proof Engine (<code>geas prove</code> - test + manifest + MRP)</td>
+<td>Proof Engine (<code>geas prove</code>, <code>geas approve</code>)</td>
+<td><strong>COMPLETE</strong></td>
 </tr>
 <tr>
 <td><strong>Phase 4</strong></td>
 <td>Verification Engine (workflow-based validation)</td>
+<td><em>In Progress</em></td>
 </tr>
 <tr>
 <td><strong>Phase 5</strong></td>
 <td>Lifecycle Management (enhanced <code>archive</code>/<code>delete</code>)</td>
+<td><em>In Progress</em></td>
 </tr>
 <tr>
 <td><strong>Phase 6</strong></td>
 <td>CI/CD Integration (GitHub Actions/GitLab CI templates)</td>
+<td><em>Planned</em></td>
 </tr>
 </tbody>
 </table>
@@ -2243,8 +2289,10 @@ mrp_sealed_at: &quot;2025-01-02T14:00:00&quot;
 │   geas init               │ Initialize GEAS                     │
 │   geas new &lt;name&gt;         │ Create bolt                         │
 │   geas seal &lt;target&gt;      │ Seal artifact (req/specs/plan/mrp)  │
+│   geas prove              │ Run tests &amp; generate manifest       │
 │   geas status             │ Show status                         │
 │   geas verify             │ Verify integrity                    │
+│   geas approve            │ Approve sealed MRP                  │
 │   geas checkout &lt;name&gt;    │ Switch context                      │
 │   geas archive &lt;name&gt;     │ Archive bolt                        │
 ├─────────────────────────────────────────────────────────────────┤
