@@ -419,10 +419,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-sealing-the-blueprint" class="md-nav__link">
+  <a href="#3-sealing-the-intent" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Sealing the Blueprint
+        3. Sealing the Intent
       
     </span>
   </a>
@@ -585,10 +585,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-sealing-the-blueprint" class="md-nav__link">
+  <a href="#3-sealing-the-intent" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Sealing the Blueprint
+        3. Sealing the Intent
       
     </span>
   </a>
@@ -659,7 +659,8 @@
 </code></pre>
 <p>This command creates a <code>.geas/</code> directory containing:</p>
 <ul>
-<li><code>config/agents.yaml</code>: Defines your AI team personas (Architect, Developer, QA, etc.) and their public keys.</li>
+<li><code>config/identities.yaml</code>: Registry of authorized Ed25519 public keys.</li>
+<li><code>config/agents.yaml</code>: Defines your AI team personas (Architect, Developer, QA, etc.).</li>
 <li><code>config/models.yaml</code>: Configures your LLM providers.</li>
 <li><code>bolts/</code>: The directory where all units of work (Bolts) will reside.</li>
 <li><code>active_context.md</code>: A pointer file indicating the current active Bolt.</li>
@@ -670,7 +671,7 @@
 <p>Start a new unit of work:</p>
 <pre><code class="language-bash">geas new feature-name
 </code></pre>
-<p>This creates a folder in <code>.geas/bolts/feature-name/</code> and sets it as the active context.</p>
+<p>This creates a folder in <code>.geas/bolts/feature-name/</code>, initializes the <code>lock.json</code> ledger, and sets it as the active context.</p>
 <h3 id="2-the-blueprinting-process">2. The Blueprinting Process</h3>
 <p>Every Bolt follows a standard sequence:</p>
 <ol>
@@ -678,22 +679,31 @@
 <li><strong>Specs (<code>02_specs.md</code>)</strong>: The <strong>Spec Writer</strong> agent translates the request into technical requirements.</li>
 <li><strong>Plan (<code>03_plan.md</code>)</strong>: The <strong>Architect</strong> agent designs the implementation plan.</li>
 </ol>
-<h3 id="3-sealing-the-blueprint">3. Sealing the Blueprint</h3>
-<p>Before any code is written, the artifacts must be "sealed" to ensure integrity:</p>
-<pre><code class="language-bash">geas seal specs
-geas seal plan
+<h3 id="3-sealing-the-intent">3. Sealing the Intent</h3>
+<p>Before any code is written, the artifacts must be "sealed". You can seal them individually or as a complete Intent package.</p>
+<p><strong>The Intent Seal</strong> requires a Human signature and locks all three documents (<code>req</code>, <code>specs</code>, <code>plan</code>):</p>
+<pre><code class="language-bash">geas seal intent --identity my-username
 </code></pre>
-<p>Sealing hashes the content and records it in <code>approved.lock</code>. Once sealed, GEAS enforces that these files cannot be modified without being explicitly unsealed.</p>
+<p>This creates a <code>SEAL_INTENT</code> event in the <code>lock.json</code> ledger, cryptographically linking your identity to the approved plan.</p>
 <h3 id="4-implementation-and-verification">4. Implementation and Verification</h3>
 <ol>
 <li><strong>Code</strong>: The <strong>Developer</strong> executes the approved plan.</li>
-<li><strong>MRP (<code>mrp/summary.md</code>)</strong>: The <strong>QA Engineer</strong> verifies the output against the specs and seals the Master Release Plan.</li>
+<li><strong>Prove</strong>: Generate the <strong>Evidence</strong>:</li>
 </ol>
+<p><code>bash
+   geas prove</code></p>
+<p>This runs your tests and creates the <code>mrp/manifest.json</code> (Code Snapshot) and <code>mrp/tests.log</code>.</p>
+<ol>
+<li><strong>MRP (<code>mrp/summary.md</code>)</strong>: The <strong>QA Engineer</strong> reviews the evidence and writes the summary.</li>
+<li><strong>Seal MRP</strong>: The QA Engineer (or Agent) seals the evidence:</li>
+</ol>
+<p><code>bash
+   geas seal mrp</code></p>
 <h2 id="verification-and-status">🛡 Verification and Status</h2>
 <p>At any point, you can check the status of your current Bolt:</p>
 <pre><code class="language-bash">geas status
 </code></pre>
-<p>Or verify the cryptographic integrity of all sealed artifacts:</p>
+<p>Or verify the cryptographic integrity of all sealed artifacts and the hash chain:</p>
 <pre><code class="language-bash">geas verify
 </code></pre>
 
