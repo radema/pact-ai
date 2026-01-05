@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel, Field
 
+
 class LedgerAction(str, Enum):
     SEAL_REQ = "SEAL_REQ"
     SEAL_SPECS = "SEAL_SPECS"
@@ -11,10 +12,12 @@ class LedgerAction(str, Enum):
     SEAL_INTENT = "SEAL_INTENT"
     APPROVE = "APPROVE"
 
+
 class EventIdentity(BaseModel):
     signer_id: str
     public_key: str
     signature: str
+
 
 class LedgerEvent(BaseModel):
     sequence: int
@@ -24,6 +27,7 @@ class LedgerEvent(BaseModel):
     prev_hash: Optional[str] = None
     identity: Optional[EventIdentity] = None
     event_hash: str
+
 
 class Ledger(BaseModel):
     version: str = "3.1"

@@ -30,7 +30,7 @@ app.command(name="agents")(agents.agents)
 app.add_typer(identity.app, name="identity")
 
 
-@app.command()  # type: ignore[misc]
+@app.command()
 def version() -> None:
     """Show the currently installed GEAS version.
 

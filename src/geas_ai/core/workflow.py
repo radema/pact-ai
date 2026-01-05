@@ -3,6 +3,7 @@ from typing import Optional
 from ruamel.yaml import YAML
 from geas_ai.schemas.workflow import WorkflowConfig, WorkflowStage, IntentConfig
 
+
 class WorkflowManager:
     """Manages workflow configuration loading and validation."""
 
@@ -10,52 +11,51 @@ class WorkflowManager:
         name="standard_dev",
         version="1.0",
         intent_documents=IntentConfig(
-            required=["01_request.md", "02_specs.md"],
-            optional=["03_plan.md"]
+            required=["01_request.md", "02_specs.md"], optional=["03_plan.md"]
         ),
         stages=[
             WorkflowStage(
                 id="req",
                 action="SEAL_REQ",
                 required_role="human",
-                description="Seal Requirements"
+                description="Seal Requirements",
             ),
             WorkflowStage(
                 id="specs",
                 action="SEAL_SPECS",
                 required_role="human",
                 prerequisite="req",
-                description="Seal Specifications"
+                description="Seal Specifications",
             ),
             WorkflowStage(
                 id="plan",
                 action="SEAL_PLAN",
                 required_role="agent",
                 prerequisite="specs",
-                description="Seal Implementation Plan"
+                description="Seal Implementation Plan",
             ),
             WorkflowStage(
                 id="intent",
                 action="SEAL_INTENT",
                 required_role="human",
                 prerequisite="plan",
-                description="Seal Intent (Req + Specs + Plan)"
+                description="Seal Intent (Req + Specs + Plan)",
             ),
             WorkflowStage(
                 id="mrp",
                 action="SEAL_MRP",
                 required_role="agent",
                 prerequisite="intent",
-                description="Seal Merge Request Package"
+                description="Seal Merge Request Package",
             ),
             WorkflowStage(
                 id="approve",
                 action="APPROVE",
                 required_role="human",
                 prerequisite="mrp",
-                description="Approve for Merge"
-            )
-        ]
+                description="Approve for Merge",
+            ),
+        ],
     )
 
     @staticmethod

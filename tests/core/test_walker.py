@@ -1,6 +1,5 @@
-import os
-from pathlib import Path
 from geas_ai.core.walker import walk_source_files, load_gitignore_patterns
+
 
 def test_load_gitignore(tmp_path):
     (tmp_path / ".gitignore").write_text("*.log\nnode_modules/")
@@ -8,8 +7,9 @@ def test_load_gitignore(tmp_path):
 
     assert spec.match_file("test.log")
     assert spec.match_file("node_modules/package.json")
-    assert spec.match_file(".geas/config.yaml") # Default ignore
+    assert spec.match_file(".geas/config.yaml")  # Default ignore
     assert not spec.match_file("src/main.py")
+
 
 def test_walker_basic(tmp_path):
     # Setup structure
@@ -36,6 +36,7 @@ def test_walker_basic(tmp_path):
     assert "tests/test_main.py" in files
     assert "src/ignored.log" not in files
     assert "src/.geas/file" not in files
+
 
 def test_walker_missing_scope(tmp_path):
     (tmp_path / "src").mkdir()

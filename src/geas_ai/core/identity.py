@@ -6,9 +6,12 @@ from geas_ai.schemas.identity import Identity, IdentityStore
 from geas_ai.utils.crypto import load_private_key_from_bytes, CryptoError
 from geas_ai.utils import get_geas_root
 
+
 class KeyNotFoundError(Exception):
     """Raised when a private key cannot be resolved."""
+
     pass
+
 
 class KeyManager:
     """Handles resolution and loading of private keys."""
@@ -37,10 +40,11 @@ class KeyManager:
                 # Handle Base64 encoded or direct PEM content
                 # If it looks like PEM (starts with -----BEGIN), use as is
                 if env_val.strip().startswith("-----BEGIN"):
-                     key_bytes = env_val.encode("utf-8")
+                    key_bytes = env_val.encode("utf-8")
                 else:
                     # Assume base64
                     import base64
+
                     key_bytes = base64.b64decode(env_val)
                 return load_private_key_from_bytes(key_bytes)
             except Exception as e:
@@ -48,7 +52,9 @@ class KeyManager:
                 # Spec says "Decode value... Parse... Return". If fail, maybe raise?
                 # Spec says "Error State: Raise KeyNotFoundError" if *not found*.
                 # If found but invalid, CryptoError seems appropriate.
-                raise CryptoError(f"Invalid key in environment variable {env_var_name}: {e}")
+                raise CryptoError(
+                    f"Invalid key in environment variable {env_var_name}: {e}"
+                )
 
         # 2. Local File Check
         key_path = Path(os.path.expanduser(f"~/.geas/keys/{identity_name}.key"))
@@ -60,7 +66,10 @@ class KeyManager:
                 raise CryptoError(f"Invalid key in file {key_path}: {e}")
 
         # 3. Not Found
-        raise KeyNotFoundError(f"Private key for '{identity_name}' not found in env ({env_var_name}) or local storage ({key_path}).")
+        raise KeyNotFoundError(
+            f"Private key for '{identity_name}' not found in env ({env_var_name}) or local storage ({key_path})."
+        )
+
 
 class IdentityManager:
     """Manages reading and writing identities to identities.yaml."""
@@ -103,7 +112,7 @@ class IdentityManager:
         self.config_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Dump to dict
-        data = store.model_dump(mode='json')
+        data = store.model_dump(mode="json")
 
         with open(self.config_path, "w") as f:
             self.yaml.dump(data, f)

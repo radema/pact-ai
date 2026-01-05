@@ -4,6 +4,7 @@ from typing import Any, Dict
 
 from geas_ai.utils.crypto import canonicalize_json
 
+
 def file_sha256(file_path: Path) -> str:
     """Computes SHA256 hash of the file content (normalized to UTF-8 text if possible)."""
     sha256 = hashlib.sha256()
@@ -12,6 +13,7 @@ def file_sha256(file_path: Path) -> str:
         for chunk in iter(lambda: f.read(4096), b""):
             sha256.update(chunk)
     return f"sha256:{sha256.hexdigest()}"
+
 
 def calculate_event_hash(event_data: Dict[str, Any]) -> str:
     """

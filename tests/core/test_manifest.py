@@ -1,11 +1,17 @@
 import hashlib
-import pytest
 from datetime import datetime, timezone
-from geas_ai.core.manifest import calculate_merkle_root, generate_manifest, TestResultInfo, Manifest
+from geas_ai.core.manifest import (
+    calculate_merkle_root,
+    generate_manifest,
+    TestResultInfo,
+    Manifest,
+)
+
 
 def test_merkle_root_empty():
     """Test Merkle Root calculation with empty input."""
     assert calculate_merkle_root({}) == hashlib.sha256(b"").hexdigest()
+
 
 def test_merkle_root_single_file():
     """Test Merkle Root with a single file."""
@@ -16,6 +22,7 @@ def test_merkle_root_single_file():
     # With 1 leaf, it is the root
     assert calculate_merkle_root(files) == content_hash
 
+
 def test_merkle_root_two_files():
     """Test Merkle Root with two files."""
     h1 = hashlib.sha256(b"A").hexdigest()
@@ -25,6 +32,7 @@ def test_merkle_root_two_files():
     # Expected: SHA256(h1 + h2) because "a.txt" < "b.txt"
     expected = hashlib.sha256((h1 + h2).encode()).hexdigest()
     assert calculate_merkle_root(files) == expected
+
 
 def test_merkle_root_three_files():
     """Test Merkle Root with three files (odd number logic)."""
@@ -46,12 +54,13 @@ def test_merkle_root_three_files():
 
     assert calculate_merkle_root(files) == expected
 
+
 def test_generate_manifest():
     test_result = TestResultInfo(
         passed=True,
         exit_code=0,
         duration_seconds=1.0,
-        timestamp=datetime.now(timezone.utc)
+        timestamp=datetime.now(timezone.utc),
     )
     files = {"file1.txt": "abc"}
     m = generate_manifest("bolt-123", ["src"], files, test_result)
@@ -61,4 +70,4 @@ def test_generate_manifest():
     assert m.scope == ["src"]
     assert m.files == files
     assert m.test_result == test_result
-    assert m.root_hash == "abc" # Single file
+    assert m.root_hash == "abc"  # Single file

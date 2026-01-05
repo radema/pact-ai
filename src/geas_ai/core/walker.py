@@ -1,7 +1,8 @@
 import os
 import pathspec
-from typing import List, Set
+from typing import List
 from pathlib import Path
+
 
 def load_gitignore_patterns(root_dir: Path) -> pathspec.PathSpec:
     """
@@ -20,6 +21,7 @@ def load_gitignore_patterns(root_dir: Path) -> pathspec.PathSpec:
             patterns.extend(f.readlines())
 
     return pathspec.PathSpec.from_lines("gitwildmatch", patterns)
+
 
 def walk_source_files(root_dir: Path, scope_dirs: List[str]) -> List[str]:
     """
@@ -63,7 +65,8 @@ def walk_source_files(root_dir: Path, scope_dirs: List[str]) -> List[str]:
             # We must check each dir against the spec.
             # The spec expects paths relative to the root of the gitignore context (project root)
             dirs[:] = [
-                d for d in dirs
+                d
+                for d in dirs
                 if not spec.match_file(str(rel_root / d) + "/")
                 # appending "/" helps pathspec identify it as directory if the pattern ends with /
             ]

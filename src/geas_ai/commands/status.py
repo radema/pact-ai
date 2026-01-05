@@ -7,6 +7,7 @@ from geas_ai.core.ledger import LedgerManager
 
 console = Console()
 
+
 def status(
     bolt: Optional[str] = typer.Option(
         None, "--bolt", "-b", help="Name of the bolt to check status for"
@@ -63,7 +64,7 @@ def status(
             str(event.sequence),
             event.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
             event.action.value,
-            signer
+            signer,
         )
 
     console.print(table)

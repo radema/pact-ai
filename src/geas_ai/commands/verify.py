@@ -8,9 +8,15 @@ from geas_ai import utils
 from geas_ai.core import verification, workflow as workflow_core
 from geas_ai.core.ledger import LedgerManager
 from geas_ai.core.identity import IdentityManager
-from geas_ai.schemas.verification import ValidationStatus, Violation
+from geas_ai.schemas.verification import (
+    ChainValidationResult,
+    SignatureValidationResult,
+    WorkflowValidationResult,
+    ContentValidationResult,
+)
 
 console = Console()
+
 
 def verify(
     bolt: Optional[str] = typer.Option(
@@ -19,9 +25,7 @@ def verify(
     check_content: bool = typer.Option(
         False, "--content", help="Also verify sealed file contents match hashes"
     ),
-    json_output: bool = typer.Option(
-        False, "--json", help="Output results as JSON"
-    ),
+    json_output: bool = typer.Option(False, "--json", help="Output results as JSON"),
 ) -> None:
     """Verify the cryptographic integrity and governance compliance of a bolt.
 
@@ -50,7 +54,9 @@ def verify(
             console.print(f"[bold red]Fail:[/bold red] {msg}")
         raise typer.Exit(code=1)
 
-    workflow_config = workflow_core.WorkflowManager.load_workflow() # Loads default if missing
+    workflow_config = (
+        workflow_core.WorkflowManager.load_workflow()
+    )  # Loads default if missing
 
     id_manager = IdentityManager()
     identities = id_manager.load()
@@ -58,7 +64,9 @@ def verify(
     # 2. Run Validations
     chain_res = verification.validate_chain_integrity(ledger)
     sig_res = verification.validate_signatures(ledger, identities)
-    flow_res = verification.validate_workflow_compliance(ledger, workflow_config, identities)
+    flow_res = verification.validate_workflow_compliance(
+        ledger, workflow_config, identities
+    )
 
     content_res = None
     if check_content:
@@ -74,20 +82,30 @@ def verify(
         output = {
             "bolt": bolt_path.name,
             "valid": overall_valid,
-            "chain": chain_res.model_dump(mode='json'),
-            "signatures": sig_res.model_dump(mode='json'),
-            "workflow": flow_res.model_dump(mode='json'),
+            "chain": chain_res.model_dump(mode="json"),
+            "signatures": sig_res.model_dump(mode="json"),
+            "workflow": flow_res.model_dump(mode="json"),
         }
         if content_res:
-            output["content"] = content_res.model_dump(mode='json')
+            output["content"] = content_res.model_dump(mode="json")
         print(json.dumps(output, indent=2))
     else:
-        _print_report(bolt_path.name, overall_valid, chain_res, sig_res, flow_res, content_res)
+        _print_report(
+            bolt_path.name, overall_valid, chain_res, sig_res, flow_res, content_res
+        )
 
     if not overall_valid:
         raise typer.Exit(code=1)
 
-def _print_report(bolt_name, valid, chain, sig, flow, content):
+
+def _print_report(
+    bolt_name: str,
+    valid: bool,
+    chain: ChainValidationResult,
+    sig: SignatureValidationResult,
+    flow: WorkflowValidationResult,
+    content: Optional[ContentValidationResult],
+) -> None:
     console.print(Panel(f"[bold]Verification Report:[/bold] {bolt_name}", expand=False))
 
     # Summary Table
@@ -96,15 +114,27 @@ def _print_report(bolt_name, valid, chain, sig, flow, content):
     table.add_column("Status")
     table.add_column("Details")
 
-    def status_style(is_valid):
+    def status_style(is_valid: bool) -> str:
         return "[green]PASS[/green]" if is_valid else "[red]FAIL[/red]"
 
-    table.add_row("Chain Integrity", status_style(chain.valid), f"{chain.event_count} events")
-    table.add_row("Signatures", status_style(sig.valid), f"{sig.verified_count} verified")
-    table.add_row("Workflow", status_style(flow.valid), f"Stages: {', '.join(flow.completed_stages)}")
+    table.add_row(
+        "Chain Integrity", status_style(chain.valid), f"{chain.event_count} events"
+    )
+    table.add_row(
+        "Signatures", status_style(sig.valid), f"{sig.verified_count} verified"
+    )
+    table.add_row(
+        "Workflow",
+        status_style(flow.valid),
+        f"Stages: {', '.join(flow.completed_stages)}",
+    )
 
     if content:
-        table.add_row("Content", status_style(content.valid), f"{content.checked_files} files checked")
+        table.add_row(
+            "Content",
+            status_style(content.valid),
+            f"{content.checked_files} files checked",
+        )
 
     console.print(table)
     console.print()

@@ -1,8 +1,7 @@
-import json
-import pytest
 from datetime import datetime
 from geas_ai.core import hashing, ledger
-from geas_ai.schemas.ledger import LedgerEvent, LedgerAction, EventIdentity, Ledger
+from geas_ai.schemas.ledger import LedgerEvent, LedgerAction
+
 
 def test_canonicalize_json():
     data = {"b": 2, "a": 1}
@@ -10,25 +9,26 @@ def test_canonicalize_json():
     expected = b'{"a":1,"b":2}'
     assert hashing.canonicalize_json(data) == expected
 
+
 def test_calculate_event_hash():
-    event_data = {
-        "sequence": 1,
-        "action": "SEAL_REQ",
-        "payload": {"foo": "bar"}
-    }
+    event_data = {"sequence": 1, "action": "SEAL_REQ", "payload": {"foo": "bar"}}
     h = hashing.calculate_event_hash(event_data)
     assert h.startswith("sha256:")
 
+
 def test_ledger_integrity():
     # 1. Create Ledger
-    l = ledger.LedgerManager.create_genesis_ledger("test-bolt")
+    l = ledger.LedgerManager.create_genesis_ledger("test-bolt")  # noqa: E741
     assert l.head_hash is None
     assert len(l.events) == 0
 
     # 2. Add Event 1
     ev1 = LedgerEvent(
-        sequence=0, timestamp=datetime.utcnow(), action=LedgerAction.SEAL_REQ,
-        payload={"data": "1"}, event_hash=""
+        sequence=0,
+        timestamp=datetime.utcnow(),
+        action=LedgerAction.SEAL_REQ,
+        payload={"data": "1"},
+        event_hash="",
     )
     ledger.LedgerManager.append_event(l, ev1)
 
@@ -38,8 +38,11 @@ def test_ledger_integrity():
 
     # 3. Add Event 2
     ev2 = LedgerEvent(
-        sequence=0, timestamp=datetime.utcnow(), action=LedgerAction.SEAL_SPECS,
-        payload={"data": "2"}, event_hash=""
+        sequence=0,
+        timestamp=datetime.utcnow(),
+        action=LedgerAction.SEAL_SPECS,
+        payload={"data": "2"},
+        event_hash="",
     )
     ledger.LedgerManager.append_event(l, ev2)
 

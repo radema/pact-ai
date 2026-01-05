@@ -2,7 +2,7 @@ from typing import List, Dict
 from datetime import datetime, timezone
 from pydantic import BaseModel
 import hashlib
-from pathlib import Path
+
 
 class TestResultInfo(BaseModel):
     passed: bool
@@ -11,6 +11,7 @@ class TestResultInfo(BaseModel):
     timestamp: datetime
     output: str = ""
 
+
 class Manifest(BaseModel):
     bolt_id: str
     generated_at: datetime
@@ -18,6 +19,7 @@ class Manifest(BaseModel):
     files: Dict[str, str]  # Path -> SHA256
     root_hash: str
     test_result: TestResultInfo
+
 
 def calculate_merkle_root(files: Dict[str, str]) -> str:
     """
@@ -48,20 +50,23 @@ def calculate_merkle_root(files: Dict[str, str]) -> str:
         for i in range(0, len(current_level), 2):
             left = current_level[i]
             if i + 1 < len(current_level):
-                right = current_level[i+1]
+                right = current_level[i + 1]
             else:
                 # Odd count, duplicate last
                 right = left
 
             # Combine hashes and hash again
-            combined = (left + right).encode('utf-8')
+            combined = (left + right).encode("utf-8")
             parent_hash = hashlib.sha256(combined).hexdigest()
             next_level.append(parent_hash)
         current_level = next_level
 
     return current_level[0]
 
-def generate_manifest(bolt_id: str, scope: List[str], files: Dict[str, str], test_result: TestResultInfo) -> Manifest:
+
+def generate_manifest(
+    bolt_id: str, scope: List[str], files: Dict[str, str], test_result: TestResultInfo
+) -> Manifest:
     """Generates the Manifest object."""
     root_hash = calculate_merkle_root(files)
 
@@ -71,5 +76,5 @@ def generate_manifest(bolt_id: str, scope: List[str], files: Dict[str, str], tes
         scope=scope,
         files=files,
         root_hash=root_hash,
-        test_result=test_result
+        test_result=test_result,
     )

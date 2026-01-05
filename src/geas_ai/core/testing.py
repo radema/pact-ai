@@ -4,6 +4,7 @@ import time
 from datetime import datetime, timezone
 from geas_ai.core.manifest import TestResultInfo
 
+
 def run_tests(command: str = "uv run pytest", timeout: int = 300) -> TestResultInfo:
     """
     Executes the test command and captures the result.
@@ -23,10 +24,7 @@ def run_tests(command: str = "uv run pytest", timeout: int = 300) -> TestResultI
         # capture_output=True captures stdout and stderr
         # text=True decodes output as string
         result = subprocess.run(
-            shlex.split(command),
-            timeout=timeout,
-            capture_output=True,
-            text=True
+            shlex.split(command), timeout=timeout, capture_output=True, text=True
         )
 
         duration = time.time() - start_time
@@ -37,7 +35,7 @@ def run_tests(command: str = "uv run pytest", timeout: int = 300) -> TestResultI
             exit_code=result.returncode,
             duration_seconds=duration,
             timestamp=datetime.now(timezone.utc),
-            output=result.stdout + "\n" + result.stderr
+            output=result.stdout + "\n" + result.stderr,
         )
 
     except subprocess.TimeoutExpired as e:
@@ -47,10 +45,10 @@ def run_tests(command: str = "uv run pytest", timeout: int = 300) -> TestResultI
         output += f"\nTimeout expired after {timeout} seconds."
         return TestResultInfo(
             passed=False,
-            exit_code=124, # Standard timeout exit code
+            exit_code=124,  # Standard timeout exit code
             duration_seconds=duration,
             timestamp=datetime.now(timezone.utc),
-            output=output
+            output=output,
         )
     except Exception as e:
         # Fallback for other errors (e.g. command not found)
@@ -60,5 +58,5 @@ def run_tests(command: str = "uv run pytest", timeout: int = 300) -> TestResultI
             exit_code=1,
             duration_seconds=duration,
             timestamp=datetime.now(timezone.utc),
-            output=str(e)
+            output=str(e),
         )

@@ -3,15 +3,17 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from geas_ai.schemas.ledger import Ledger, LedgerEvent, LedgerAction
+from geas_ai.schemas.ledger import Ledger, LedgerEvent
 from geas_ai.core.hashing import calculate_event_hash
-from geas_ai.utils import get_active_bolt_name
 
 LOCK_FILE_NAME = "lock.json"
 
+
 class LedgerIntegrityError(Exception):
     """Raised when ledger chain verification fails."""
+
     pass
+
 
 class LedgerManager:
     """Manages lock.json operations."""
@@ -42,11 +44,7 @@ class LedgerManager:
     @staticmethod
     def create_genesis_ledger(bolt_id: str) -> Ledger:
         """Creates a new empty ledger."""
-        return Ledger(
-            bolt_id=bolt_id,
-            created_at=datetime.utcnow(),
-            events=[]
-        )
+        return Ledger(bolt_id=bolt_id, created_at=datetime.utcnow(), events=[])
 
     @staticmethod
     def append_event(ledger: Ledger, event_data: LedgerEvent) -> Ledger:
@@ -77,9 +75,9 @@ class LedgerManager:
 
         # 4. Calculate Event Hash
         # Convert to dict, exclude 'event_hash' for calculation
-        event_dict = event_data.model_dump(mode='json')
-        if 'event_hash' in event_dict:
-            del event_dict['event_hash']
+        event_dict = event_data.model_dump(mode="json")
+        if "event_hash" in event_dict:
+            del event_dict["event_hash"]
 
         event_hash = calculate_event_hash(event_dict)
         event_data.event_hash = event_hash
@@ -107,9 +105,9 @@ class LedgerManager:
                 return False
 
             # Check event hash
-            event_dict = event.model_dump(mode='json')
-            if 'event_hash' in event_dict:
-                del event_dict['event_hash']
+            event_dict = event.model_dump(mode="json")
+            if "event_hash" in event_dict:
+                del event_dict["event_hash"]
 
             calculated_hash = calculate_event_hash(event_dict)
             if calculated_hash != event.event_hash:

@@ -1,10 +1,10 @@
 import os
-import pytest
 from typer.testing import CliRunner
 from geas_ai.main import app
 from ruamel.yaml import YAML
 
 runner = CliRunner()
+
 
 def test_init_creates_workflow(tmp_path):
     """Test that geas init creates the workflow.yaml file with correct content."""

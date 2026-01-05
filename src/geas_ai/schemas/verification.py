@@ -2,10 +2,12 @@ from enum import Enum
 from typing import List, Optional, Any
 from pydantic import BaseModel
 
+
 class ValidationStatus(str, Enum):
     PASS = "PASS"
     FAIL = "FAIL"
     WARN = "WARN"
+
 
 class ViolationCode(str, Enum):
     CHAIN_BROKEN = "CHAIN_BROKEN"
@@ -22,25 +24,31 @@ class ViolationCode(str, Enum):
     FILE_MISSING = "FILE_MISSING"
     SEQUENCE_GAP = "SEQUENCE_GAP"
 
+
 class Violation(BaseModel):
     code: ViolationCode
     message: str
     event_sequence: Optional[int] = None
     details: Optional[dict[str, Any]] = None
 
+
 class ValidationResult(BaseModel):
     valid: bool
     violations: List[Violation]
 
+
 class ChainValidationResult(ValidationResult):
     event_count: int
+
 
 class SignatureValidationResult(ValidationResult):
     verified_count: int
 
+
 class WorkflowValidationResult(ValidationResult):
     completed_stages: List[str]
     missing_stages: List[str]
+
 
 class ContentValidationResult(ValidationResult):
     checked_files: int

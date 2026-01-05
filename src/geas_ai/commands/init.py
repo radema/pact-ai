@@ -53,7 +53,9 @@ def init() -> None:
 
         # Convert Pydantic model to dict, handling enums if necessary (mode='json')
         # However, we want clean YAML.
-        workflow_data = WorkflowManager.DEFAULT_WORKFLOW.model_dump(mode='json', exclude_none=True)
+        workflow_data = WorkflowManager.DEFAULT_WORKFLOW.model_dump(
+            mode="json", exclude_none=True
+        )
 
         with open(workflow_path, "w") as f:
             yaml.dump(workflow_data, f)
