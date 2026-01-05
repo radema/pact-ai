@@ -32,6 +32,12 @@ class KeyManager:
             KeyNotFoundError: If no key is found.
             CryptoError: If the key is invalid.
         """
+        # Validate identity_name to prevent path traversal
+        if any(sep in identity_name for sep in [os.sep, os.altsep] if sep):
+            raise ValueError(
+                f"Invalid identity name: '{identity_name}'. Must not contain path separators."
+            )
+
         # 1. Environment Variable Check
         env_var_name = f"GEAS_KEY_{identity_name.upper().replace('-', '_')}"
         env_val = os.getenv(env_var_name)
