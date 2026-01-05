@@ -65,7 +65,8 @@ class WorkflowManager:
         Returns hardcoded default if file is missing.
         """
         if config_path and config_path.exists():
-            yaml = YAML()
+            # Use 'safe' loading to prevent arbitrary code execution from untrusted configs
+            yaml = YAML(typ='safe')
             try:
                 with open(config_path, "r") as f:
                     data = yaml.load(f)
