@@ -15,6 +15,16 @@ app = typer.Typer(
     add_completion=False,
 )
 
+
+def version() -> None:
+    """Show the currently installed GEAS version.
+
+    Usage:
+        $ geas version
+    """
+    print("0.1.3")
+
+
 # Register commands
 app.command(name="init")(init)
 app.command(name="new")(lifecycle.new)
@@ -26,18 +36,10 @@ app.command(name="prove")(prove.prove)
 app.command(name="checkout")(lifecycle.checkout)
 app.command(name="delete")(lifecycle.delete)
 app.command(name="archive")(lifecycle.archive)
+app.command(name="list")(lifecycle.list_bolts)
 app.command(name="agents")(agents.agents)
+app.command(name="version")(version)
 app.add_typer(identity.app, name="identity")
-
-
-@app.command()
-def version() -> None:
-    """Show the currently installed GEAS version.
-
-    Usage:
-        $ geas version
-    """
-    print("0.1.3")
 
 
 def main() -> None:

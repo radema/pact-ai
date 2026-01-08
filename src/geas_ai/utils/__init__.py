@@ -57,24 +57,20 @@ def compute_sha256(file_path: Path) -> str:
 
 def get_active_bolt_path() -> Path:
     """
-    Reads .geas/active_context.md to find the current bolt path.
+    Returns the Path to the current active bolt directory.
+    Uses StateManager (state.json) as source of truth.
     """
-    ctx_file = Path(".geas/active_context.md")
-    if not ctx_file.exists():
-        console.print("[bold red]Error:[/bold red] No active context found.")
+    from geas_ai.state import StateManager
+
+    manager = StateManager()
+    active = manager.get_active_bolt()
+
+    if not active:
+        console.print("[bold red]Error:[/bold red] No active bolt selected.")
         raise typer.Exit(code=1)
 
-    content = ctx_file.read_text(encoding="utf-8")
-    match = re.search(r"\*\*Path:\*\* (.*)", content)
-    if not match:
-        console.print(
-            "[bold red]Error:[/bold red] Could not parse Active Bolt Path from context."
-        )
-        raise typer.Exit(code=1)
-
-    bolt_path = Path(match.group(1).strip())
+    bolt_path = get_geas_root() / "bolts" / active
     if not bolt_path.exists():
-        # Handle the spec requirement 'Active Bolt not found'
         console.print(
             f"[bold red]Error:[/bold red] Active Bolt directory not found: {bolt_path}"
         )
@@ -84,18 +80,14 @@ def get_active_bolt_path() -> Path:
 
 
 def get_active_bolt_name() -> str:
-    """Reads .geas/active_context.md to find the current bolt name."""
-    ctx_file = Path(".geas/active_context.md")
-    if not ctx_file.exists():
-        console.print("[bold red]Error:[/bold red] No active context found.")
+    """Returns the name of the current active bolt."""
+    from geas_ai.state import StateManager
+
+    manager = StateManager()
+    active = manager.get_active_bolt()
+
+    if not active:
+        console.print("[bold red]Error:[/bold red] No active bolt selected.")
         raise typer.Exit(code=1)
 
-    content = ctx_file.read_text(encoding="utf-8")
-    match = re.search(r"\*\*Current Bolt:\*\* (.*)", content)
-    if not match:
-        console.print(
-            "[bold red]Error:[/bold red] Could not parse Active Bolt Name from context."
-        )
-        raise typer.Exit(code=1)
-
-    return match.group(1).strip()
+    return active

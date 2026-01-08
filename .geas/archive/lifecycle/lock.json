@@ -1,0 +1,105 @@
+{
+  "version": "3.1",
+  "bolt_id": "lifecycle",
+  "created_at": "2026-01-05T15:02:37.595625",
+  "head_hash": "sha256:b8da1e0c5949bb280a53b022ff6483f83304d6821c62acf0dab834ed864a30f7",
+  "events": [
+    {
+      "sequence": 1,
+      "timestamp": "2026-01-05T15:21:10.260344",
+      "action": "SEAL_REQ",
+      "payload": {
+        "target": "req",
+        "file": "01_request.md",
+        "hash": "sha256:8b18fb7c428bf673511e38c896ea384fda20395b06d4a7c9a43e8e4462c2d850",
+        "context": ""
+      },
+      "prev_hash": null,
+      "identity": null,
+      "event_hash": "sha256:1574881ca86de80539afa5d51e9ade4e58153d53d3f9a10219f086f793d21841"
+    },
+    {
+      "sequence": 2,
+      "timestamp": "2026-01-05T15:21:10.439516",
+      "action": "SEAL_SPECS",
+      "payload": {
+        "target": "specs",
+        "file": "02_specs.md",
+        "hash": "sha256:2bc181e1488952b3a07284909605addcbd66a409f5f852eb4278ee5be8d2f957",
+        "context": ""
+      },
+      "prev_hash": "sha256:1574881ca86de80539afa5d51e9ade4e58153d53d3f9a10219f086f793d21841",
+      "identity": null,
+      "event_hash": "sha256:dfb2359b55d3e94d8c0a6f83993f072f57f59b14fcc27694a43f83d9a67dce5f"
+    },
+    {
+      "sequence": 3,
+      "timestamp": "2026-01-05T15:21:10.613569",
+      "action": "SEAL_PLAN",
+      "payload": {
+        "target": "plan",
+        "file": "03_plan.md",
+        "hash": "sha256:7d5ce9e4a64f33105e750cf725d12db67945690760d6e556aa2d2f7f3abba2c0",
+        "context": ""
+      },
+      "prev_hash": "sha256:dfb2359b55d3e94d8c0a6f83993f072f57f59b14fcc27694a43f83d9a67dce5f",
+      "identity": null,
+      "event_hash": "sha256:03e9856003252011905ba5f9a0a765cba09730b67b9a41c78f48e6ab979c4613"
+    },
+    {
+      "sequence": 4,
+      "timestamp": "2026-01-05T15:26:33.026116",
+      "action": "SEAL_INTENT",
+      "payload": {
+        "action": "SEAL_INTENT",
+        "hashes": {
+          "01_request.md": "sha256:8b18fb7c428bf673511e38c896ea384fda20395b06d4a7c9a43e8e4462c2d850",
+          "02_specs.md": "sha256:cd06c62b16956b4986272ac05096b565fe65748917a37cacb5e82aaeb1e25d87",
+          "03_plan.md": "sha256:7d5ce9e4a64f33105e750cf725d12db67945690760d6e556aa2d2f7f3abba2c0"
+        },
+        "context": ""
+      },
+      "prev_hash": "sha256:03e9856003252011905ba5f9a0a765cba09730b67b9a41c78f48e6ab979c4613",
+      "identity": {
+        "signer_id": "coordinator",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID88dhsx2z9dNTm2yMz6aAKEh9vIUFnjHYdyLayQlzS5",
+        "signature": "3OZkSYq9dhlq8nG9tx5xxhB9Psf0ts0e1UXIpGmXDlB+sKZqHq2B0Mg5wYLi/+bNt9h/soNOkVUvpIQGOhBqCg=="
+      },
+      "event_hash": "sha256:e85ea1be2adcbe429fe5d7c9570e8b6cd39886ce805656330d67ac3ce436b69e"
+    },
+    {
+      "sequence": 5,
+      "timestamp": "2026-01-05T15:28:22.419153",
+      "action": "SEAL_MRP",
+      "payload": {
+        "target": "mrp",
+        "file": "mrp/summary.md",
+        "hash": "sha256:569027fd5ab1b9dd95cf901a1ca5bfc06991b5ef76628158f0912be60ae14ffd",
+        "context": ""
+      },
+      "prev_hash": "sha256:e85ea1be2adcbe429fe5d7c9570e8b6cd39886ce805656330d67ac3ce436b69e",
+      "identity": {
+        "signer_id": "qa-agent",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOad/t4HpLTHmy5Ie2GYNBVwrygoooEO2Ws0fZmKgCDv",
+        "signature": "Uh1QCtvMHOQnwoeVMc4eEoR95L5Dd7LGMWzBUTAQPkrMzCIcOmIw5Iz7h36iFbUOzVKAXdbyOQcooBWY4zM9Cg=="
+      },
+      "event_hash": "sha256:32fe8b3f38ac2e18b92234cdf6b0c78deb05d7e9637c42c050e30093a27ad95d"
+    },
+    {
+      "sequence": 6,
+      "timestamp": "2026-01-05T15:29:59.304501Z",
+      "action": "APPROVE",
+      "payload": {
+        "mrp_event_hash": "sha256:32fe8b3f38ac2e18b92234cdf6b0c78deb05d7e9637c42c050e30093a27ad95d",
+        "comment": ""
+      },
+      "prev_hash": "sha256:32fe8b3f38ac2e18b92234cdf6b0c78deb05d7e9637c42c050e30093a27ad95d",
+      "identity": {
+        "signer_id": "coordinator",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID88dhsx2z9dNTm2yMz6aAKEh9vIUFnjHYdyLayQlzS5",
+        "signature": "6Sh/nQu6NsjdhSLXIsXjmwA7jQMoQSlGurOm2ohxe7Z4WaD1/yvQfduzH3ZFmsU0/HuIv0Q5TZKDGE72cIAMBQ=="
+      },
+      "event_hash": "sha256:b8da1e0c5949bb280a53b022ff6483f83304d6821c62acf0dab834ed864a30f7"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+Test Execution Log
+Timestamp: 2026-01-05 15:26:44.612916+00:00
+Command: uv run pytest
+Passed: True
+Exit Code: 0
+Duration: 0.8537206649780273s
+----------------------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-9.0.2, pluggy-1.6.0
+rootdir: /root/geas-ai
+configfile: pyproject.toml
+collected 80 items
+
+tests/commands/test_cli_identity.py ........                             [ 10%]
+tests/commands/test_cli_identity_edge.py .....                           [ 16%]
+tests/commands/test_init_workflow.py .                                   [ 17%]
+tests/commands/test_lifecycle.py ..                                      [ 20%]
+tests/commands/test_prove.py ....                                        [ 25%]
+tests/commands/test_seal_ledger.py ...                                   [ 28%]
+tests/commands/test_status_verify_approve.py ........                    [ 38%]
+tests/core/test_bolt.py ....                                             [ 43%]
+tests/core/test_identity.py ............                                 [ 58%]
+tests/core/test_intent_engine.py ...                                     [ 62%]
+tests/core/test_manifest.py .....                                        [ 68%]
+tests/core/test_state.py ....                                            [ 73%]
+tests/core/test_testing.py ...                                           [ 77%]
+tests/core/test_verification.py .............                            [ 93%]
+tests/core/test_walker.py ...                                            [ 97%]
+tests/test_agents.py ..                                                  [100%]
+
+=============================== warnings summary ===============================
+src/geas_ai/core/manifest.py:7
+  /root/geas-ai/src/geas_ai/core/manifest.py:7: PytestCollectionWarning: cannot collect test class 'TestResultInfo' because it has a __init__ constructor (from: tests/commands/test_prove.py)
+    class TestResultInfo(BaseModel):
+
+src/geas_ai/core/manifest.py:7
+  /root/geas-ai/src/geas_ai/core/manifest.py:7: PytestCollectionWarning: cannot collect test class 'TestResultInfo' because it has a __init__ constructor (from: tests/core/test_manifest.py)
+    class TestResultInfo(BaseModel):
+
+tests/core/test_verification.py:21
+  /root/geas-ai/tests/core/test_verification.py:21: PytestCollectionWarning: cannot collect test class 'TestContext' because it has a __init__ constructor (from: tests/core/test_verification.py)
+    @dataclass
+
+tests/commands/test_lifecycle.py: 3 warnings
+tests/commands/test_seal_ledger.py: 3 warnings
+tests/core/test_bolt.py: 3 warnings
+tests/core/test_intent_engine.py: 1 warning
+  /root/geas-ai/src/geas_ai/core/ledger.py:47: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return Ledger(bolt_id=bolt_id, created_at=datetime.utcnow(), events=[])
+
+tests/commands/test_lifecycle.py: 2 warnings
+tests/commands/test_seal_ledger.py: 3 warnings
+tests/core/test_bolt.py: 4 warnings
+tests/core/test_state.py: 4 warnings
+  /root/geas-ai/src/geas_ai/state.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "last_updated": datetime.utcnow().isoformat(),
+
+tests/commands/test_lifecycle.py: 9 warnings
+tests/commands/test_seal_ledger.py: 9 warnings
+tests/core/test_bolt.py: 11 warnings
+tests/core/test_state.py: 11 warnings
+  /root/geas-ai/src/geas_ai/state.py:43: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    state["last_updated"] = datetime.utcnow().isoformat()
+
+tests/commands/test_lifecycle.py: 3 warnings
+tests/commands/test_seal_ledger.py: 3 warnings
+tests/core/test_bolt.py: 3 warnings
+tests/core/test_state.py: 4 warnings
+  /root/geas-ai/src/geas_ai/state.py:98: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "created_at": datetime.utcnow().isoformat(),
+
+tests/commands/test_seal_ledger.py::test_seal_flow_new_ledger
+tests/commands/test_seal_ledger.py::test_seal_flow_new_ledger
+  /root/geas-ai/src/geas_ai/commands/seal.py:125: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/core/test_intent_engine.py::test_ledger_integrity
+  /root/geas-ai/tests/core/test_intent_engine.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/core/test_intent_engine.py::test_ledger_integrity
+  /root/geas-ai/tests/core/test_intent_engine.py:42: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 80 passed, 83 warnings in 0.49s ========================
