@@ -48,6 +48,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # Debug: print commands
-    # print("Registered commands:", [c.name for c in app.registered_commands])
     app()
