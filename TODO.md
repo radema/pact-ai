@@ -10,6 +10,7 @@
 - [ ] **CLI Configuration**: Verify that the workflow can be configured through CLI (and the same for required files).
 - [ ] **Decoupling**: Verify that required and optional files are not hardcoded.
 - [ ] **Archival**: Apply a signature also in case of archivation.
+- [ ] **Workflow**: define a system based on subworflows
 
 ## Documentation Updates
 
