@@ -40,8 +40,9 @@ def run_tests(command: str = "uv run pytest", timeout: int = 300) -> TestResultI
 
     except subprocess.TimeoutExpired as e:
         duration = time.time() - start_time
-        output = e.stdout.decode() if e.stdout else ""
-        output += "\n" + (e.stderr.decode() if e.stderr else "")
+        # Use errors="replace" to prevent crash on non-utf8 output
+        output = e.stdout.decode(errors="replace") if e.stdout else ""
+        output += "\n" + (e.stderr.decode(errors="replace") if e.stderr else "")
         output += f"\nTimeout expired after {timeout} seconds."
         return TestResultInfo(
             passed=False,

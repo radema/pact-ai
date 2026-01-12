@@ -45,3 +45,24 @@ def test_run_tests_timeout():
         assert result.exit_code == 124
         assert "Timeout expired" in result.output
         assert "Part" in result.output  # stdout decoded
+
+
+def test_run_tests_timeout_invalid_utf8():
+    with patch("subprocess.run") as mock_run:
+        # Simulate invalid UTF-8 in stdout/stderr during timeout
+        # \x80 is invalid start byte in UTF-8
+        mock_run.side_effect = subprocess.TimeoutExpired(
+            cmd="bad_output",
+            timeout=1,
+            output=b"Valid\n\x80Invalid",
+            stderr=b"Err\xff"
+        )
+
+        result = run_tests("bad_output", timeout=1)
+
+        assert result.passed is False
+        assert result.exit_code == 124
+        # Should contain replacement character
+        assert "Valid" in result.output
+        assert "\ufffd" in result.output  # Replacement char
+        assert "Timeout expired" in result.output
