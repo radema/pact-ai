@@ -52,10 +52,7 @@ def test_run_tests_timeout_invalid_utf8():
         # Simulate invalid UTF-8 in stdout/stderr during timeout
         # \x80 is invalid start byte in UTF-8
         mock_run.side_effect = subprocess.TimeoutExpired(
-            cmd="bad_output",
-            timeout=1,
-            output=b"Valid\n\x80Invalid",
-            stderr=b"Err\xff"
+            cmd="bad_output", timeout=1, output=b"Valid\n\x80Invalid", stderr=b"Err\xff"
         )
 
         result = run_tests("bad_output", timeout=1)
