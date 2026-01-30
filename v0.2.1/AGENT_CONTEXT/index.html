@@ -1,0 +1,2372 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>GEAS-AI Repository Context for Agents - GEAS AI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#geas-ai-repository-context-for-agents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="GEAS AI" class="md-header__button md-logo" aria-label="GEAS AI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GEAS AI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GEAS-AI Repository Context for Agents
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-2.69L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="GEAS AI" class="md-nav__button md-logo" aria-label="GEAS AI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GEAS AI
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WHITE_PAPER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executive Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Executive Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-geas-over-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why GEAS over Git?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-level-design-steering-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Level Design: "Steering &amp; Engine"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-trinity-lock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Trinity Lock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locking-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locking Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technology-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technology Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technology Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Naming Conventions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Naming Conventions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Naming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Naming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slug-validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slug Validation Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-quality-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Quality Standards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Quality Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-hints-strict-mandatory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type Hints (Strict - MANDATORY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docstrings-google-style-mandatory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docstrings (Google Style - MANDATORY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-commit-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-commit Hooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dry-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRY Principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geas-protocol-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GEAS Protocol Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seal-sequence-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seal Sequence Enforcement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-development-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Development Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Guidelines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Framework &amp; Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Target
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Categories
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tdd-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TDD Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-command-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Command Reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI Command Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seal-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seal Targets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-exit-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Exit Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-concepts-domain-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Concepts &amp; Domain Vocabulary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-templates-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Templates &amp; Schemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Templates &amp; Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request-template-01_requestmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request Template (01_request.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context-template-active_contextmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context Template (active_context.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-file-schema-approvedlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lock File Schema (approved.lock)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agents-yaml-schema-agentsyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agents YAML Schema (agents.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models-yaml-schema-modelsyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Models YAML Schema (models.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CI/CD Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-actions-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Actions Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-personas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Personas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agent Personas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-workflow-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Workflow Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-development-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Development Status
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current Development Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implemented-v013" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implemented (v0.1.3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#critical-rules-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critical Rules for Agents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Critical Rules for Agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-starting-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before Starting Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#during-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        During Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-files-to-understand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Files to Understand
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-quality-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Quality Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-reference-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Reference Card
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="geas-ai-repository-context-for-agents">GEAS-AI Repository Context for Agents</h1>
+<p><strong>Document Version:</strong> 3.0
+<strong>Last Updated:</strong> 2026-01-03
+<strong>Purpose:</strong> Provide comprehensive context for AI agents working on the GEAS-AI codebase.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#repository-overview">Repository Overview</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#directory-structure">Directory Structure</a></li>
+<li><a href="#technology-stack">Technology Stack</a></li>
+<li><a href="#naming-conventions">Naming Conventions</a></li>
+<li><a href="#code-quality-standards">Code Quality Standards</a></li>
+<li><a href="#development-workflow">Development Workflow</a></li>
+<li><a href="#testing-guidelines">Testing Guidelines</a></li>
+<li><a href="#cli-command-reference">CLI Command Reference</a></li>
+<li><a href="#key-concepts--domain-vocabulary">Key Concepts &amp; Domain Vocabulary</a></li>
+<li><a href="#file-templates--schemas">File Templates &amp; Schemas</a></li>
+<li><a href="#cicd-pipeline">CI/CD Pipeline</a></li>
+<li><a href="#agent-personas">Agent Personas</a></li>
+<li><a href="#current-development-status">Current Development Status</a></li>
+<li><a href="#critical-rules-for-agents">Critical Rules for Agents</a></li>
+</ol>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p><strong>GEAS-AI</strong> (Governance Enforcement for Agent Systems) is a <strong>repository-native governance protocol</strong> for AI-driven software development. It enforces a "Spec-First" workflow where:</p>
+<ul>
+<li><strong>Intent</strong> documents (specs, plans) are cryptographically sealed <em>before</em> code is written.</li>
+<li><strong>Code</strong> remains freely mutable during development.</li>
+<li><strong>Evidence</strong> (the MRP - Merge Request Package) is sealed <em>after</em> tests pass.</li>
+</ul>
+<p>The protocol creates <strong>non-repudiable, tamper-evident proof</strong> of the entire development lifecycle using Ed25519 cryptographic signatures.</p>
+<h3 id="core-philosophy">Core Philosophy</h3>
+<blockquote>
+<p><em>"A Geas is a magical obligation. If the hero breaks the vow, they lose their power."</em></p>
+</blockquote>
+<p>In GEAS:</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>The Hero</strong></td>
+<td>The AI Agent(s)</td>
+</tr>
+<tr>
+<td><strong>The Vow</strong></td>
+<td>The Intent Documents (requirements, specs, plan)</td>
+</tr>
+<tr>
+<td><strong>The Power</strong></td>
+<td>The ability to merge code</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-geas-over-git">Why GEAS over Git?</h3>
+<p>Git provides versioning, but Git authorship is <strong>trivially spoofable</strong>. GEAS adds cryptographic non-repudiation:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Git</th>
+<th>GEAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Track changes</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Author attribution</td>
+<td>⚠️ Spoofable</td>
+<td>✅ Ed25519 signatures</td>
+</tr>
+<tr>
+<td>Intent-to-code binding</td>
+<td>❌</td>
+<td>✅ Sealed specs → manifest</td>
+</tr>
+<tr>
+<td>Prove tests passed for code version X</td>
+<td>❌</td>
+<td>✅ MRP with test logs + code snapshot</td>
+</tr>
+<tr>
+<td>Role-based workflow enforcement</td>
+<td>❌</td>
+<td>✅ Configurable stages</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-overview">Repository Overview</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Package Name</strong></td>
+<td><code>geas-ai</code></td>
+</tr>
+<tr>
+<td><strong>Current Version</strong></td>
+<td><code>0.1.3</code> (Alpha)</td>
+</tr>
+<tr>
+<td><strong>Python Version</strong></td>
+<td><code>&gt;=3.10</code></td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>Dual MIT / Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>Package Manager</strong></td>
+<td><code>uv</code></td>
+</tr>
+<tr>
+<td><strong>CLI Entry Point</strong></td>
+<td><code>geas</code> (→ <code>geas_ai.main:main</code>)</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>MkDocs (Material theme)</td>
+</tr>
+<tr>
+<td><strong>Primary Author</strong></td>
+<td>Raul De Maio</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="architecture">Architecture</h2>
+<h3 id="high-level-design-steering-engine">High-Level Design: "Steering &amp; Engine"</h3>
+<p>GEAS consists of two components:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>The Steering</strong> (Protocol)</td>
+<td>The <code>geas</code> CLI manages Bolt lifecycles and acts as the notary.</td>
+<td><code>geas new</code>, <code>geas seal</code>, <code>geas prove</code></td>
+</tr>
+<tr>
+<td><strong>The Engine</strong> (Agent)</td>
+<td>Your existing AI tool acts as the runtime. It reads GEAS state to understand its boundaries.</td>
+<td>Cursor, Windsurf, Aider, Claude Code</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-trinity-lock">The Trinity Lock</h3>
+<p>The cryptographic engine binds three pillars:</p>
+<table>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>Concept</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Physical Integrity</strong></td>
+<td>"The content hasn't changed."</td>
+<td>SHA-256 hashes / Merkle Trees</td>
+</tr>
+<tr>
+<td><strong>Identity</strong></td>
+<td>"We know who authorized this."</td>
+<td>Ed25519 Signatures (SSH format)</td>
+</tr>
+<tr>
+<td><strong>Audit History</strong></td>
+<td>"We know the sequence of events."</td>
+<td>Hash-Chain Ledger (<code>lock.json</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lifecycle-diagram">Lifecycle Diagram</h3>
+<pre><code class="language-mermaid">graph TD
+    subgraph Intent [&quot;Intent Phase&quot;]
+        Req[01_request.md] --&gt; Specs[02_specs.md]
+        Specs --&gt; Plan[03_plan.md]
+        Plan --&gt; SealIntent((Seal Intent))
+    end
+
+    subgraph Implementation [&quot;Code Phase&quot;]
+        SealIntent --&gt; Code[Source Code]
+        Code --&gt; Tests{Pass Tests?}
+        Tests -- No --&gt; Code
+        Tests -- Yes --&gt; Prove((Prove))
+    end
+
+    subgraph Verification [&quot;MRP Phase&quot;]
+        Prove --&gt; Artifacts[Manifest + Logs]
+        Artifacts --&gt; MRP[mrp/summary.md]
+        MRP --&gt; SealMRP((Seal MRP))
+        SealMRP --&gt; Verify{Verify Chain}
+        Verify -- Valid --&gt; Approve((Approve))
+    end
+</code></pre>
+<h3 id="locking-scope">Locking Scope</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Content</th>
+<th>Lock State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>INTENT</strong></td>
+<td><code>01_request.md</code>, <code>02_specs.md</code>, <code>03_plan.md</code></td>
+<td><strong>Immutable</strong> after seal</td>
+</tr>
+<tr>
+<td><strong>CODE</strong></td>
+<td><code>src/</code>, <code>tests/</code></td>
+<td><strong>Mutable</strong> (evolves freely)</td>
+</tr>
+<tr>
+<td><strong>MRP</strong></td>
+<td><code>mrp/summary.md</code>, <code>mrp/tests.log</code>, <code>mrp/manifest.json</code></td>
+<td><strong>Immutable</strong> after seal</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="directory-structure">Directory Structure</h2>
+<pre><code>geas-ai/
+├── .geas/                          # GEAS Protocol Directory
+│   ├── active_context.md           # Current bolt pointer
+│   ├── archive/                    # Completed bolts
+│   ├── bolts/                      # Active work units
+│   │   └── &lt;bolt-name&gt;/
+│   │       ├── 01_request.md       # Feature request
+│   │       ├── 02_specs.md         # Specifications
+│   │       ├── 03_plan.md          # Implementation plan
+│   │       ├── approved.lock       # Cryptographic ledger (YAML)
+│   │       └── mrp/                # Merge Request Package
+│   │           ├── summary.md
+│   │           ├── tests.log
+│   │           └── manifest.json
+│   └── config/
+│       ├── agents.yaml             # Agent persona definitions
+│       ├── models.yaml             # LLM provider configs
+│       ├── identities.yaml         # Cryptographic identities
+│       └── workflow.yaml           # Governance rules
+│
+├── src/geas_ai/                    # Source Code
+│   ├── __init__.py
+│   ├── main.py                     # CLI entry point (Typer app)
+│   ├── utils.py                    # Utility functions
+│   ├── commands/                   # CLI command modules
+│   │   ├── __init__.py
+│   │   ├── init.py                 # `geas init`
+│   │   ├── lifecycle.py            # `geas new`, `checkout`, `delete`, `archive`
+│   │   ├── seal.py                 # `geas seal`
+│   │   ├── prove.py                # `geas prove`
+│   │   ├── approve.py              # `geas approve`
+│   │   ├── status.py               # `geas status`
+│   │   ├── verify.py               # `geas verify`
+│   │   └── agents.py               # `geas agents`
+│   └── core/
+│       ├── __init__.py
+│       └── content.py              # Templates and default content
+│
+├── tests/                          # Test Suite
+│   ├── conftest.py                 # Pytest fixtures
+│   ├── test_core.py                # Core CLI tests
+│   └── test_agents.py              # Agent-related tests
+│
+├── docs/                           # Documentation (MkDocs)
+│   ├── WHITE_PAPER.md              # Protocol specification
+│   ├── TRINITY_LOCK.md             # Cryptographic specification
+│   ├── AGENT_CONTEXT.md            # This document
+│   ├── getting_started.md          # User guide
+│   └── reference.md                # API reference
+│
+├── strategic_docs/                 # Strategic planning
+│   └── ROADMAP.md                  # Development roadmap
+│
+├── .github/workflows/              # CI/CD
+│   ├── ci.yml                      # Test &amp; lint pipeline
+│   ├── docs.yml                    # Documentation deployment
+│   └── publish.yml                 # PyPI publication
+│
+└── Configuration Files
+    ├── pyproject.toml              # Project metadata &amp; dependencies
+    ├── .pre-commit-config.yaml     # Pre-commit hooks
+    ├── mkdocs.yml                  # Documentation config
+    └── uv.lock                     # Dependency lock file
+</code></pre>
+<hr />
+<h2 id="technology-stack">Technology Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Language</strong></td>
+<td>Python 3.10+</td>
+<td>Core implementation</td>
+</tr>
+<tr>
+<td><strong>Package Manager</strong></td>
+<td><code>uv</code></td>
+<td>Fast dependency management</td>
+</tr>
+<tr>
+<td><strong>CLI Framework</strong></td>
+<td><code>typer</code></td>
+<td>Type-hinted CLI</td>
+</tr>
+<tr>
+<td><strong>Output Formatting</strong></td>
+<td><code>rich</code></td>
+<td>Terminal formatting &amp; tables</td>
+</tr>
+<tr>
+<td><strong>YAML Parsing</strong></td>
+<td><code>pyyaml</code></td>
+<td>Configuration parsing</td>
+</tr>
+<tr>
+<td><strong>Linting</strong></td>
+<td><code>ruff</code></td>
+<td>Fast Python linter/formatter</td>
+</tr>
+<tr>
+<td><strong>Type Checking</strong></td>
+<td><code>mypy</code> (strict mode)</td>
+<td>Static type analysis</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td><code>pytest</code></td>
+<td>Test framework</td>
+</tr>
+<tr>
+<td><strong>Pre-commit</strong></td>
+<td><code>pre-commit</code></td>
+<td>Git hook management</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td><code>mkdocs-material</code></td>
+<td>Documentation site</td>
+</tr>
+<tr>
+<td><strong>Cryptography</strong></td>
+<td><code>cryptography</code></td>
+<td>Ed25519 signatures</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependency-groups">Dependency Groups</h3>
+<pre><code class="language-toml">[project]
+dependencies = [
+    &quot;pre-commit&gt;=4.5.1&quot;,
+    &quot;pyyaml&gt;=6.0.3&quot;,
+    &quot;rich&gt;=14.2.0&quot;,
+    &quot;typer&gt;=0.21.0&quot;,
+]
+
+[dependency-groups]
+dev = [&quot;mypy&gt;=1.19.1&quot;, &quot;pre-commit&gt;=4.5.1&quot;, &quot;pytest&gt;=9.0.2&quot;, &quot;ruff&gt;=0.14.10&quot;]
+docs = [&quot;mike&gt;=2.1.3&quot;, &quot;mkdocs&gt;=1.6.1&quot;, &quot;mkdocs-material&gt;=9.7.1&quot;, &quot;mkdocstrings[python]&gt;=1.0.0&quot;]
+</code></pre>
+<hr />
+<h2 id="naming-conventions">Naming Conventions</h2>
+<h3 id="file-naming">File Naming</h3>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Convention</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python modules</td>
+<td><code>snake_case.py</code></td>
+<td><code>lifecycle.py</code>, <code>content.py</code></td>
+</tr>
+<tr>
+<td>Test files</td>
+<td><code>test_&lt;module&gt;.py</code></td>
+<td><code>test_core.py</code>, <code>test_agents.py</code></td>
+</tr>
+<tr>
+<td>Config files</td>
+<td><code>&lt;name&gt;.yaml</code></td>
+<td><code>agents.yaml</code>, <code>models.yaml</code></td>
+</tr>
+<tr>
+<td>Intent documents</td>
+<td><code>&lt;NN&gt;_&lt;name&gt;.md</code></td>
+<td><code>01_request.md</code>, <code>02_specs.md</code>, <code>03_plan.md</code></td>
+</tr>
+<tr>
+<td>Bolt folders</td>
+<td><code>kebab-case</code> or <code>snake_case</code></td>
+<td><code>feature-login</code>, <code>step_1_identity</code></td>
+</tr>
+<tr>
+<td>Lock files</td>
+<td><code>approved.lock</code> (YAML) or <code>lock.json</code> (JSON)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-naming">Python Naming</h3>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Convention</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variables</td>
+<td><code>snake_case</code></td>
+<td><code>bolt_path</code>, <code>lock_data</code></td>
+</tr>
+<tr>
+<td>Functions</td>
+<td><code>snake_case</code></td>
+<td><code>get_active_bolt_path()</code>, <code>compute_sha256()</code></td>
+</tr>
+<tr>
+<td>Classes</td>
+<td><code>PascalCase</code></td>
+<td><code>Console</code>, <code>Table</code></td>
+</tr>
+<tr>
+<td>Constants</td>
+<td><code>SCREAMING_SNAKE_CASE</code></td>
+<td><code>DEFAULT_AGENTS_YAML</code>, <code>REQUEST_TEMPLATE</code></td>
+</tr>
+<tr>
+<td>Type hints</td>
+<td><strong>Required on all functions</strong></td>
+<td><code>def new(name: str) -&gt; None:</code></td>
+</tr>
+<tr>
+<td>Private functions</td>
+<td><code>_leading_underscore</code></td>
+<td><code>_validate_config()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cli-commands">CLI Commands</h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Top-level verbs</td>
+<td><code>geas init</code>, <code>geas new</code>, <code>geas seal</code></td>
+</tr>
+<tr>
+<td>Kebab-case slugs</td>
+<td><code>geas new feature-login</code></td>
+</tr>
+<tr>
+<td>Flags with short forms</td>
+<td><code>--force/-f</code>, <code>--bolt/-b</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="slug-validation-rules">Slug Validation Rules</h3>
+<p>Bolt names must follow this regex pattern: <code>^[a-z0-9-_]+$</code></p>
+<ul>
+<li>Only lowercase letters, numbers, hyphens, and underscores</li>
+<li>No spaces or special characters</li>
+<li>Examples: <code>feature-login</code>, <code>step_1_identity</code>, <code>bugfix-auth</code></li>
+</ul>
+<hr />
+<h2 id="code-quality-standards">Code Quality Standards</h2>
+<h3 id="type-hints-strict-mandatory">Type Hints (Strict - MANDATORY)</h3>
+<p>All functions <strong>MUST</strong> have complete type annotations:</p>
+<pre><code class="language-python">def compute_sha256(file_path: Path) -&gt; str:
+    &quot;&quot;&quot;Computes SHA256 hash of the file content (normalized).&quot;&quot;&quot;
+    ...
+</code></pre>
+<h3 id="docstrings-google-style-mandatory">Docstrings (Google Style - MANDATORY)</h3>
+<p>All public functions require docstrings with:</p>
+<ul>
+<li>Description</li>
+<li>Args (if any)</li>
+<li>Returns (if applicable)</li>
+<li>Usage example (preferred)</li>
+</ul>
+<pre><code class="language-python">def new(name: str) -&gt; None:
+    &quot;&quot;&quot;Start a new GEAS Unit of Work (Bolt).
+
+    Creates .geas/bolts/&lt;name&gt;/ and updates .geas/active_context.md.
+
+    Args:
+        name: The name of the bolt (slugified).
+
+    Usage:
+        $ geas new feature-login
+    &quot;&quot;&quot;
+</code></pre>
+<h3 id="pre-commit-hooks">Pre-commit Hooks</h3>
+<p>The repository enforces these hooks automatically:</p>
+<pre><code class="language-yaml">hooks:
+  - id: trailing-whitespace     # Remove trailing whitespace
+  - id: end-of-file-fixer       # Ensure files end with newline
+  - id: check-yaml              # Validate YAML syntax
+  - id: check-added-large-files # Prevent large files
+  - id: ruff                    # Linting with --fix
+  - id: ruff-format             # Code formatting
+  - id: mypy                    # Type checking (--strict)
+</code></pre>
+<h3 id="error-handling-pattern">Error Handling Pattern</h3>
+<p>Use <code>typer.Exit(code=1)</code> for controlled CLI failures:</p>
+<pre><code class="language-python">if not bolt_dir.exists():
+    console.print(f&quot;[bold red]Error:[/bold red] Bolt '{name}' does not exist.&quot;)
+    raise typer.Exit(code=1)
+</code></pre>
+<h3 id="dry-principle">DRY Principle</h3>
+<p>Extract repeated logic immediately. Use utility functions from <code>src/geas_ai/utils.py</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_geas_root()</code></td>
+<td>Returns Path to <code>.geas</code> directory</td>
+</tr>
+<tr>
+<td><code>ensure_geas_root()</code></td>
+<td>Validates GEAS is initialized</td>
+</tr>
+<tr>
+<td><code>validate_slug(name)</code></td>
+<td>Validates bolt name format</td>
+</tr>
+<tr>
+<td><code>compute_sha256(file_path)</code></td>
+<td>Compute normalized SHA-256 hash</td>
+</tr>
+<tr>
+<td><code>get_active_bolt_path()</code></td>
+<td>Get current bolt's Path</td>
+</tr>
+<tr>
+<td><code>get_active_bolt_name()</code></td>
+<td>Get current bolt's name</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="geas-protocol-workflow">GEAS Protocol Workflow</h3>
+<pre><code>1. geas new &lt;bolt-name&gt;       # Create workspace
+2. Edit 01_request.md         # Define requirements
+3. geas seal req              # Seal request
+4. Create 02_specs.md         # Define specifications
+5. geas seal specs            # Seal specs
+6. Create 03_plan.md          # Define implementation plan
+7. geas seal plan             # Seal plan
+8. geas seal intent           # Sign full intent (optional/required by policy)
+9. Implement in src/          # Write code (mutable)
+10. geas prove                # Run tests &amp; generate manifest
+11. geas seal mrp             # Seal MRP
+12. geas verify               # Validate chain
+13. geas approve              # Approve for merge
+14. geas archive &lt;bolt-name&gt;  # Archive completed bolt
+</code></pre>
+<h3 id="seal-sequence-enforcement">Seal Sequence Enforcement</h3>
+<p>The <code>geas verify</code> command enforces this seal order:</p>
+<ol>
+<li><code>req</code> → <code>specs</code> → <code>plan</code> → <code>mrp</code></li>
+</ol>
+<p>A bolt cannot be archived unless all four artifacts are sealed AND verified.</p>
+<h3 id="git-workflow">Git Workflow</h3>
+<ol>
+<li>Create feature branch</li>
+<li>Follow GEAS lifecycle above</li>
+<li>Ensure all tests pass: <code>uv run pytest</code></li>
+<li>Ensure linting passes: <code>uv run ruff check .</code></li>
+<li>Submit PR</li>
+</ol>
+<h3 id="local-development-setup">Local Development Setup</h3>
+<pre><code class="language-bash"># Clone and setup
+git clone &lt;repo-url&gt;
+cd geas-ai
+
+# Sync environment
+uv sync
+
+# Install pre-commit hooks
+uv run pre-commit install
+
+# Run tests
+uv run pytest
+
+# Run linting
+uv run ruff check .
+uv run ruff format --check .
+uv run mypy src
+</code></pre>
+<hr />
+<h2 id="testing-guidelines">Testing Guidelines</h2>
+<h3 id="framework-structure">Framework &amp; Structure</h3>
+<ul>
+<li><strong>Framework:</strong> <code>pytest</code></li>
+<li><strong>Location:</strong> <code>tests/</code></li>
+<li><strong>Fixtures:</strong> <code>tests/conftest.py</code></li>
+</ul>
+<h3 id="coverage-target">Coverage Target</h3>
+<p><strong>&gt;85% code coverage</strong> is required.</p>
+<h3 id="test-patterns">Test Patterns</h3>
+<pre><code class="language-python"># Fixture for temporary GEAS environment
+@pytest.fixture
+def setup_geas_environment(tmp_path):
+    &quot;&quot;&quot;Sets up a temporary GEAS environment.&quot;&quot;&quot;
+    geas_dir = tmp_path / &quot;.geas&quot;
+    geas_dir.mkdir()
+    config_dir = geas_dir / &quot;config&quot;
+    config_dir.mkdir()
+    # ... setup ...
+    cwd = os.getcwd()
+    os.chdir(tmp_path)
+    yield tmp_path
+    os.chdir(cwd)
+</code></pre>
+<pre><code class="language-python"># CLI test using CliRunner
+def test_init_command(runner, tmp_path):
+    &quot;&quot;&quot;Test 'geas init' creates the necessary structure.&quot;&quot;&quot;
+    cwd = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        result = runner.invoke(app, [&quot;init&quot;])
+        assert result.exit_code == 0
+        assert &quot;Success! GEAS initialized&quot; in result.stdout
+        assert (tmp_path / &quot;.geas&quot;).exists()
+    finally:
+        os.chdir(cwd)
+</code></pre>
+<h3 id="test-categories">Test Categories</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unit tests</td>
+<td>Test individual functions/modules</td>
+</tr>
+<tr>
+<td>Integration tests</td>
+<td>Test CLI command workflows</td>
+</tr>
+<tr>
+<td>Seal/Verify tests</td>
+<td>Test cryptographic integrity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tdd-approach">TDD Approach</h3>
+<ol>
+<li>Write tests BEFORE implementation</li>
+<li>Tests must cover happy paths, edge cases, and failure modes</li>
+<li>Never commit code without passing tests</li>
+</ol>
+<hr />
+<h2 id="cli-command-reference">CLI Command Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>geas init</code></td>
+<td>Initialize GEAS in repository</td>
+<td><code>geas init</code></td>
+</tr>
+<tr>
+<td><code>geas new &lt;name&gt;</code></td>
+<td>Create new bolt workspace</td>
+<td><code>geas new feature-login</code></td>
+</tr>
+<tr>
+<td><code>geas checkout &lt;name&gt;</code></td>
+<td>Switch active bolt context</td>
+<td><code>geas checkout feature-login</code></td>
+</tr>
+<tr>
+<td><code>geas seal &lt;target&gt;</code></td>
+<td>Seal artifact (req, specs, plan, mrp, intent)</td>
+<td><code>geas seal specs</code></td>
+</tr>
+<tr>
+<td><code>geas prove</code></td>
+<td>Run tests and generate Code Manifest</td>
+<td><code>geas prove</code></td>
+</tr>
+<tr>
+<td><code>geas status</code></td>
+<td>Display current bolt status</td>
+<td><code>geas status</code></td>
+</tr>
+<tr>
+<td><code>geas verify</code></td>
+<td>Verify bolt integrity &amp; sequence</td>
+<td><code>geas verify</code></td>
+</tr>
+<tr>
+<td><code>geas approve</code></td>
+<td>Approve a sealed MRP for merge</td>
+<td><code>geas approve --identity lead</code></td>
+</tr>
+<tr>
+<td><code>geas delete &lt;name&gt;</code></td>
+<td>Delete a bolt</td>
+<td><code>geas delete old-feature</code></td>
+</tr>
+<tr>
+<td><code>geas archive &lt;name&gt;</code></td>
+<td>Archive completed bolt</td>
+<td><code>geas archive feature-login</code></td>
+</tr>
+<tr>
+<td><code>geas agents</code></td>
+<td>List available agent personas</td>
+<td><code>geas agents</code></td>
+</tr>
+<tr>
+<td><code>geas version</code></td>
+<td>Show GEAS version</td>
+<td><code>geas version</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="seal-targets">Seal Targets</h3>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>req</code></td>
+<td><code>01_request.md</code></td>
+</tr>
+<tr>
+<td><code>specs</code></td>
+<td><code>02_specs.md</code></td>
+</tr>
+<tr>
+<td><code>plan</code></td>
+<td><code>03_plan.md</code></td>
+</tr>
+<tr>
+<td><code>mrp</code></td>
+<td><code>mrp/summary.md</code></td>
+</tr>
+<tr>
+<td><code>intent</code></td>
+<td>All 3 documents (sealed together)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="command-exit-codes">Command Exit Codes</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Success</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Error (validation failed, file not found, etc.)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-concepts-domain-vocabulary">Key Concepts &amp; Domain Vocabulary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bolt</strong></td>
+<td>A unit of work (equivalent to a Sprint in Agile). Lives in <code>.geas/bolts/&lt;name&gt;/</code>.</td>
+</tr>
+<tr>
+<td><strong>Intent</strong></td>
+<td>Collection of preliminary documents (request, specs, plan) that define what to build.</td>
+</tr>
+<tr>
+<td><strong>MRP</strong></td>
+<td>Merge Request Package - post-code evidence proving implementation validity.</td>
+</tr>
+<tr>
+<td><strong>Trinity Lock</strong></td>
+<td>The cryptographic engine binding Identity, Integrity, and Audit.</td>
+</tr>
+<tr>
+<td><strong>Seal</strong></td>
+<td>Cryptographic lock operation that hashes content and records it in the ledger.</td>
+</tr>
+<tr>
+<td><strong>Prove</strong></td>
+<td>The process of running tests and generating a cryptographic manifest of the codebase.</td>
+</tr>
+<tr>
+<td><strong>Active Context</strong></td>
+<td>The currently selected bolt (tracked in <code>.geas/active_context.md</code>).</td>
+</tr>
+<tr>
+<td><strong>Persona</strong></td>
+<td>Behavioral template for agents (defined in <code>agents.yaml</code>).</td>
+</tr>
+<tr>
+<td><strong>Identity</strong></td>
+<td>Cryptographic identity with Ed25519 keys (stored in <code>identities.yaml</code>).</td>
+</tr>
+<tr>
+<td><strong>Drift</strong></td>
+<td>Unauthorized modification of sealed content (detected by hash mismatch).</td>
+</tr>
+<tr>
+<td><strong>Geas</strong></td>
+<td>A magical obligation/vow (the protocol's namesake metaphor).</td>
+</tr>
+<tr>
+<td><strong>Manifest</strong></td>
+<td>Cryptographic fingerprint (Merkle Tree) of source code at proof time.</td>
+</tr>
+<tr>
+<td><strong>Workflow</strong></td>
+<td>Governance policy defining required seals and role constraints. Note: Workflows are configurable via <code>workflow.yaml</code>, allowing GEAS to be used by solo agents or large teams.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="file-templates-schemas">File Templates &amp; Schemas</h2>
+<h3 id="request-template-01_requestmd">Request Template (<code>01_request.md</code>)</h3>
+<pre><code class="language-markdown"># Feature Request: {bolt_name}
+
+**Status:** PENDING
+
+## Instructions
+Describe your feature request here. The Spec Writer will use this to generate the specifications.
+</code></pre>
+<h3 id="context-template-active_contextmd">Context Template (<code>active_context.md</code>)</h3>
+<pre><code class="language-markdown"># Active Context
+
+**Current Bolt:** {bolt_name}
+**Path:** .geas/bolts/{bolt_name}
+**Started:** {timestamp}
+
+## Instructions for Agent
+You are currently working on the Bolt listed above.
+1. Read the `01_request.md` in the target directory.
+2. If strictly following GEAS, do not edit code until `03_plan.md` is sealed.
+</code></pre>
+<h3 id="lock-file-schema-approvedlock">Lock File Schema (<code>approved.lock</code>)</h3>
+<pre><code class="language-yaml">req_hash: &quot;abc123...&quot;
+req_sealed_at: &quot;2025-01-02T10:00:00&quot;
+specs_hash: &quot;def456...&quot;
+specs_sealed_at: &quot;2025-01-02T11:00:00&quot;
+plan_hash: &quot;ghi789...&quot;
+plan_sealed_at: &quot;2025-01-02T12:00:00&quot;
+mrp_hash: &quot;jkl012...&quot;
+mrp_sealed_at: &quot;2025-01-02T14:00:00&quot;
+</code></pre>
+<h3 id="agents-yaml-schema-agentsyaml">Agents YAML Schema (<code>agents.yaml</code>)</h3>
+<pre><code class="language-yaml">agents:
+  spec_writer:
+    role: &quot;Senior Product Owner&quot;
+    goal: &quot;Transform vague inputs into rigorous specifications.&quot;
+    backstory: |
+      You are a veteran Product Owner who adheres to INVEST...
+
+  developer:
+    role: &quot;Senior Implementation Specialist&quot;
+    goal: &quot;Execute the sealed plan into production-grade code.&quot;
+    backstory: |
+      You are a code craftsman. You value readability and type safety...
+</code></pre>
+<h3 id="models-yaml-schema-modelsyaml">Models YAML Schema (<code>models.yaml</code>)</h3>
+<pre><code class="language-yaml">models:
+  gpt4_turbo:
+    provider: &quot;openai&quot;
+    base_url: &quot;https://api.openai.com/v1&quot;
+    api_key: &quot;${OPENAI_API_KEY}&quot;
+    model_name: &quot;gpt-4-turbo&quot;
+
+  claude_sonnet:
+    provider: &quot;anthropic&quot;
+    base_url: &quot;https://api.anthropic.com&quot;
+    api_key: &quot;${ANTHROPIC_API_KEY}&quot;
+    model_name: &quot;claude-sonnet-4-20250514&quot;
+</code></pre>
+<hr />
+<h2 id="cicd-pipeline">CI/CD Pipeline</h2>
+<h3 id="github-actions-workflows">GitHub Actions Workflows</h3>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Trigger</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ci.yml</code></td>
+<td>Push/PR to <code>main</code></td>
+<td>Run tests, linting, type checking</td>
+</tr>
+<tr>
+<td><code>docs.yml</code></td>
+<td>Push to <code>main</code></td>
+<td>Build and deploy documentation</td>
+</tr>
+<tr>
+<td><code>publish.yml</code></td>
+<td>Release tag</td>
+<td>Publish to PyPI</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ci-steps">CI Steps</h3>
+<pre><code class="language-yaml">steps:
+  - uses: actions/checkout@v4
+  - name: Install uv
+  - name: Set up Python (3.12)
+  - name: Install dependencies (uv sync)
+  - name: Run Ruff Check
+  - name: Run Ruff Format Check
+  - name: Run MyPy
+  - name: Run Tests
+</code></pre>
+<hr />
+<h2 id="agent-personas">Agent Personas</h2>
+<p>Defined in <code>.geas/config/agents.yaml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Role</th>
+<th>Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spec_writer</code></td>
+<td>Senior Product Owner</td>
+<td>Transform vague inputs into rigorous specifications using INVEST &amp; Gherkin</td>
+</tr>
+<tr>
+<td><code>architect</code></td>
+<td>Chief Domain Architect</td>
+<td>Design scalable file structures enforcing DOMA boundaries and SOLID/DRY principles</td>
+</tr>
+<tr>
+<td><code>developer</code></td>
+<td>Senior Implementation Specialist</td>
+<td>Execute sealed plans into production-grade, typed, tested code (TDD)</td>
+</tr>
+<tr>
+<td><code>doc_writer</code></td>
+<td>Lead Technical Writer</td>
+<td>Maintain documentation following Diátaxis framework</td>
+</tr>
+<tr>
+<td><code>qa_engineer</code></td>
+<td>QA Automation Engineer</td>
+<td>Validate compliance with specs and generate MRP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agent-workflow-constraints">Agent Workflow Constraints</h3>
+<ul>
+<li><strong>spec_writer</strong>: Cannot start until <code>01_request.md</code> is sealed</li>
+<li><strong>architect</strong>: Cannot start until <code>02_specs.md</code> is sealed</li>
+<li><strong>developer</strong>: Cannot start until <code>03_plan.md</code> is sealed</li>
+<li><strong>qa_engineer</strong>: Validates against sealed specs and generates MRP</li>
+</ul>
+<hr />
+<h2 id="current-development-status">Current Development Status</h2>
+<h3 id="implemented-v013">Implemented (v0.1.3)</h3>
+<ul>
+<li>[x] <code>geas init</code> - Initialize GEAS directory structure</li>
+<li>[x] <code>geas new</code> - Create bolt workspace</li>
+<li>[x] <code>geas checkout</code> - Switch bolt context</li>
+<li>[x] <code>geas seal</code> - Hash and lock artifacts (req/specs/plan/mrp/intent)</li>
+<li>[x] <code>geas prove</code> - Test execution and Manifest generation</li>
+<li>[x] <code>geas status</code> - Display seal status</li>
+<li>[x] <code>geas verify</code> - Verify integrity and sequence</li>
+<li>[x] <code>geas approve</code> - Human approval of MRP</li>
+<li>[x] <code>geas delete</code> - Delete bolt</li>
+<li>[x] <code>geas archive</code> - Archive completed bolt</li>
+<li>[x] <code>geas agents</code> - List personas</li>
+<li>[x] <code>geas identity</code> - Manage cryptographic identities (add, list, show, revoke)</li>
+</ul>
+<h3 id="roadmap">Roadmap</h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Objective</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase 1</strong></td>
+<td>Identity &amp; Keyring (<code>geas identity</code>)</td>
+<td><strong>COMPLETE</strong></td>
+</tr>
+<tr>
+<td><strong>Phase 2</strong></td>
+<td>Intent Engine (<code>geas seal intent</code>)</td>
+<td><strong>COMPLETE</strong></td>
+</tr>
+<tr>
+<td><strong>Phase 3</strong></td>
+<td>Proof Engine (<code>geas prove</code>, <code>geas approve</code>)</td>
+<td><strong>COMPLETE</strong></td>
+</tr>
+<tr>
+<td><strong>Phase 4</strong></td>
+<td>Verification Engine (workflow-based validation)</td>
+<td><em>In Progress</em></td>
+</tr>
+<tr>
+<td><strong>Phase 5</strong></td>
+<td>Lifecycle Management (enhanced <code>archive</code>/<code>delete</code>)</td>
+<td><em>In Progress</em></td>
+</tr>
+<tr>
+<td><strong>Phase 6</strong></td>
+<td>CI/CD Integration (GitHub Actions/GitLab CI templates)</td>
+<td><em>Planned</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="critical-rules-for-agents">Critical Rules for Agents</h2>
+<h3 id="before-starting-work">Before Starting Work</h3>
+<ol>
+<li><strong>Read</strong> <code>.geas/active_context.md</code> to identify current bolt</li>
+<li><strong>Check</strong> the bolt's <code>approved.lock</code> for sealed artifacts</li>
+<li><strong>Follow</strong> the seal sequence: <code>req</code> → <code>specs</code> → <code>plan</code> → code → <code>mrp</code></li>
+<li><strong>Do NOT</strong> edit code until <code>03_plan.md</code> is sealed (if strictly following GEAS)</li>
+</ol>
+<h3 id="during-development">During Development</h3>
+<ul>
+<li><strong>Source code location:</strong> <code>src/geas_ai/</code></li>
+<li><strong>Tests location:</strong> <code>tests/</code></li>
+<li><strong>Run tests:</strong> <code>uv run pytest</code></li>
+<li><strong>Run linting:</strong> <code>uv run ruff check .</code></li>
+<li><strong>Type check:</strong> <code>uv run mypy src</code></li>
+</ul>
+<h3 id="key-files-to-understand">Key Files to Understand</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/geas_ai/main.py</code></td>
+<td>CLI entry point, command registration</td>
+</tr>
+<tr>
+<td><code>src/geas_ai/utils.py</code></td>
+<td>Shared utilities (hashing, path resolution)</td>
+</tr>
+<tr>
+<td><code>src/geas_ai/core/content.py</code></td>
+<td>Templates and default YAML content</td>
+</tr>
+<tr>
+<td><code>src/geas_ai/commands/*.py</code></td>
+<td>Individual CLI command implementations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="error-patterns">Error Patterns</h3>
+<ul>
+<li>Use <code>typer.Exit(code=1)</code> for controlled failures</li>
+<li>Use <code>console.print("[bold red]Error:[/bold red] ...")</code> for error messages</li>
+<li>Validate GEAS initialization with <code>utils.ensure_geas_root()</code></li>
+<li>Validate slugs with <code>utils.validate_slug(name)</code></li>
+</ul>
+<h3 id="code-quality-checklist">Code Quality Checklist</h3>
+<p>Before submitting any code:</p>
+<ul>
+<li>[ ] All functions have type hints</li>
+<li>[ ] All public functions have Google-style docstrings</li>
+<li>[ ] Tests cover happy paths, edge cases, and failure modes</li>
+<li>[ ] <code>uv run pytest</code> passes</li>
+<li>[ ] <code>uv run ruff check .</code> passes</li>
+<li>[ ] <code>uv run mypy src</code> passes</li>
+<li>[ ] No repeated logic (DRY principle applied)</li>
+</ul>
+<hr />
+<h2 id="quick-reference-card">Quick Reference Card</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                     GEAS-AI Quick Reference                      │
+├─────────────────────────────────────────────────────────────────┤
+│ Package: geas-ai          │ Python: &gt;=3.10                      │
+│ CLI: geas                 │ Manager: uv                         │
+├─────────────────────────────────────────────────────────────────┤
+│ GEAS COMMANDS                                                    │
+│   geas init               │ Initialize GEAS                     │
+│   geas new &lt;name&gt;         │ Create bolt                         │
+│   geas seal &lt;target&gt;      │ Seal artifact (req/specs/plan/mrp)  │
+│   geas prove              │ Run tests &amp; generate manifest       │
+│   geas status             │ Show status                         │
+│   geas verify             │ Verify integrity                    │
+│   geas approve            │ Approve sealed MRP                  │
+│   geas checkout &lt;name&gt;    │ Switch context                      │
+│   geas archive &lt;name&gt;     │ Archive bolt                        │
+├─────────────────────────────────────────────────────────────────┤
+│ DEV COMMANDS                                                     │
+│   uv sync                 │ Install dependencies                │
+│   uv run pytest           │ Run tests                           │
+│   uv run ruff check .     │ Lint code                          │
+│   uv run mypy src         │ Type check                          │
+├─────────────────────────────────────────────────────────────────┤
+│ SEAL SEQUENCE: req → specs → plan → [code] → mrp                 │
+├─────────────────────────────────────────────────────────────────┤
+│ PATHS                                                            │
+│   .geas/active_context.md │ Current bolt pointer                │
+│   .geas/bolts/&lt;name&gt;/     │ Bolt workspace                      │
+│   src/geas_ai/            │ Source code                         │
+│   tests/                  │ Test suite                          │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<p><em>This document should be read by any AI agent before contributing to the GEAS-AI repository.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
