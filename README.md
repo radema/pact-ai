@@ -18,7 +18,7 @@ Real-world experimentation with agentic systems revealed a different landscape t
 
 ### The Technical Realization
 
-The project's core technical insight came from understanding GPG (GNU Privacy Guard) - a battle-tested cryptographic system for digital signatures and encryption. GEAS was built around Ed25519 keys and GPG-like operations to ensure cryptographic provenance of all agent activities. However, a critical realization emerged: the project was over-engineered for the problem it试图解决. The complexity analysis revealed that most of the governance mechanisms being built were redundant, as existing tools like Git with GPG signatures already provided the cryptographic guarantees needed for trustworthy development workflows.
+The project's core technical insight came from understanding GPG (GNU Privacy Guard) - a battle-tested cryptographic system for digital signatures and encryption. GEAS was built around Ed25519 keys and GPG-like operations to ensure cryptographic provenance of all agent activities. However, a critical realization emerged: the project was over-engineered for the problem it. The complexity analysis revealed that most of the governance mechanisms being built were redundant, as existing tools like Git with GPG signatures already provided the cryptographic guarantees needed for trustworthy development workflows.
 
 ### The Conclusion - Project Closure
 
@@ -26,13 +26,9 @@ After months of development and experimentation, the decision was made to close 
 
 ### Lessons for Future Projects
 
-**MVP Testing Value**: Building a minimal viable product early would have revealed the redundancy of the solution much faster, saving significant development time.
+**MVP Testing Value**: Building a minimal viable product early has revealed the redundancy of the solution much faster, saving significant development time.
 
-**When to Innovate vs Leverage**: The project highlighted the critical importance of leveraging existing, battle-tested solutions rather than reinventing wheels, especially when security and cryptography are involved.
-
-**Importance of Honest Retrospectives**: Regular, honest reassessment of the project's value proposition versus complexity would have led to an earlier pivot or conclusion.
-
-**First-Principles Thinking Lessons**: The experience reinforced the value of questioning fundamental assumptions - in this case, whether the "agent trust" problem truly needed a new protocol or could be solved with existing tools.
+**Importance of Honest Retrospectives**: Regular, honest reassessment of the project's value proposition versus complexity has led to an earlier pivot or conclusion. This allow me to work on other ideas or projects knowing why this one failed.
 
 ---
 
