@@ -6,7 +6,7 @@ from typing import Optional, Dict, Any
 
 from pathlib import Path
 from geas_ai import utils
-from geas_ai.core import ledger, hashing, identity
+from geas_ai.core import ledger, hashing, identity, workflow
 from geas_ai.schemas import ledger as ledger_schemas
 from geas_ai.utils import crypto
 from cryptography.hazmat.primitives.asymmetric import ed25519
@@ -144,6 +144,17 @@ def _seal_intent(
             "[bold red]Error:[/bold red] --identity is required for sealing intent."
         )
         raise typer.Exit(code=1)
+
+    # 2. Load Workflow to get required files
+    # TODO: This assumes the workflow file is in the default location.
+    # We might need to make this path configurable in geas.toml
+    geas_root = utils.find_geas_root()
+    workflow_cfg = workflow.WorkflowManager.load_workflow(
+        geas_root / ".geas" / "config" / "workflow.yaml"
+    )
+    required_files = workflow_cfg.intent_documents.required
+    if workflow_cfg.intent_documents.optional:
+        required_files.extend(workflow_cfg.intent_documents.optional)
 
     # 2. Validation: Files Exist
     # TODO(Phase 5): Read required files from workflow configuration (workflow.yaml)
