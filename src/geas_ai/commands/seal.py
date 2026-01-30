@@ -148,7 +148,7 @@ def _seal_intent(
     # 2. Load Workflow to get required files
     # TODO: This assumes the workflow file is in the default location.
     # We might need to make this path configurable in geas.toml
-    geas_root = utils.find_geas_root()
+    geas_root = utils.get_geas_root()
     workflow_cfg = workflow.WorkflowManager.load_workflow(
         geas_root / ".geas" / "config" / "workflow.yaml"
     )
